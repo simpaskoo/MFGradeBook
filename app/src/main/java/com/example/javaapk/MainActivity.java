@@ -7,11 +7,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Open_activity_new_event();
+                //AddAction();
             }
         });
 
@@ -54,16 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void AddAction(){
 
-        CustomCardView CustomCardView = new CustomCardView(context);
+        CustomCardView CustomCard = new CustomCardView(this.getApplicationContext());
 
         // Add CustomCardView to the layout of the activity
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT
         );
-        CustomCardView.setLayoutParams(layoutParams);
+        CustomCard.setLayoutParams(layoutParams);
 
-        setContentView(CustomCardView);
+        setContentView(CustomCard);
     }
 
     public void Open_activity_new_event() {
