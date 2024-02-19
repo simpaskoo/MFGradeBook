@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent().getBooleanExtra("doAddAction", false)){
+            AddAction();
+        }
+
         setContentView(R.layout.activity_collector);
 
         PrepareAddButton = (FloatingActionButton) findViewById(R.id.floatingActionButton10);
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AddAction(){
-
+        Log.d("MainActivity", "Adding an action, message id: 4631521");
         CustomCardView CustomCard = new CustomCardView(this.getApplicationContext());
 
         // Add CustomCardView to the layout of the activity

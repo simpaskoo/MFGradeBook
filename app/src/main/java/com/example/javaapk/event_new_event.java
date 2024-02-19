@@ -1,6 +1,7 @@
 package com.example.javaapk;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,9 +26,10 @@ public class event_new_event extends AppCompatActivity {
         AddActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(event_new_event.this, MainActivity.class);
+                intent.putExtra("doAddAction", true);
                 event_new_event.this.finish();
-                MainActivity mainActivity = new MainActivity();
-                mainActivity.AddAction();
+                startActivity(intent);
             }
         });
 
