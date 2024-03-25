@@ -1,14 +1,12 @@
 package com.example.javaapk;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.widget.RelativeLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,13 +23,28 @@ public class event_new_event extends AppCompatActivity {
         AddActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(event_new_event.this, MainActivity.class);
+                intent.putExtra("doAddAction",true);
                 event_new_event.this.finish();
-                MainActivity mainActivity = new MainActivity();
-                mainActivity.AddAction();
+                startActivity(intent);
+
+                //buttonIndexSend(view);
             }
         });
-
     }
+
+    /*Intent intent = new Intent(event_new_event.this,  MainActivity.class);
+                intent.putExtra( "doAddAction", true);
+    startActivity(intent);
+                if (getIntent().getBooleanExtra("doAddAction", false)) {
+        AddAction();
+    }*/
+    /*protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getIntent().getBooleanExtra("doAddAction", false)) {
+            AddAction();
+        }
+    }*/
 
 
     /*@SuppressLint("ResourceType")

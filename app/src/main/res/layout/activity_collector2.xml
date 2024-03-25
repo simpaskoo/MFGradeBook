@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -31,9 +32,18 @@
 
             <!-- button1-->
             <Button
+                android:id="@+id/fieldButton"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="Text"
+                android:text="Btn1"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp" />
+
+            <Button
+                android:id="@+id/fieldButton2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="Btn2"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp" />
 
@@ -54,7 +64,7 @@
         android:gravity="bottom">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton10"
+            android:id="@+id/createFieldButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"

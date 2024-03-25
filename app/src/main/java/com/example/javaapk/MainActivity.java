@@ -1,20 +1,15 @@
 package com.example.javaapk;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,16 +27,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collector);
+        setContentView(R.layout.activity_collector2);
 
-        PrepareAddButton = (FloatingActionButton) findViewById(R.id.floatingActionButton10);
+        PrepareAddButton = (FloatingActionButton) findViewById(R.id.createFieldButton);
         PrepareAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Open_activity_new_event();
+                MainActivity.this.finish();
                 //AddAction();
             }
         });
+
+        gettIntent(savedInstanceState);
 
         TimetableWeek timeTable = null;
         try {
@@ -57,9 +55,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void AddAction(){
+    public void gettIntent(Bundle savedInstanceState){
+        if(savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null){
+            }else{
+                String method = extras.getString("doAddAction");
+                //AddAction();
+                AddfieldAction();
+            }
+        }
+    }
 
-        CustomCardView CustomCard = new CustomCardView(this.getApplicationContext());
+    /*public void AddAction(){
+
+        //Log.d("MainActivity", "Adding an action, message id: 4631521");
+        CustomCardView CustomCard = new CustomCardView(this);
 
         // Add CustomCardView to the layout of the activity
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
@@ -69,8 +80,43 @@ public class MainActivity extends AppCompatActivity {
         CustomCard.setLayoutParams(layoutParams);
 
         setContentView(CustomCard);
+    }*/
+    public void AddfieldAction(){
+        Button fieldbtn = new Button(this);
+        //fieldbtn.setBackgroundColor(getColor(R.color.black));
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT
+        );
+        fieldbtn.setLayoutParams(layoutParams);
+
+
+
+
+
+        // Create an instance of the ButtonCreator class
+        CustomFieldButton  customFieldButton = new CustomFieldButton();
+
+        // Get the main layout where you want to add the button
+        RelativeLayout mainLayout = findViewById(R.id.relativeLayout);
+
+        // Call the method to create and configure the button
+        Button button = customFieldButton.createButton(this);
+
+        // Add the button to the main layout
+        mainLayout.addView(button);
+        setContentView(fieldbtn);
     }
 
+
+
+    /*@Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if(getIntent().getBooleanExtra("doAddAction", false)) {
+            AddAction();
+        }
+    }*/
     public void Open_activity_new_event() {
         Intent intent = new Intent(this, event_new_event.class);
         startActivity(intent);
