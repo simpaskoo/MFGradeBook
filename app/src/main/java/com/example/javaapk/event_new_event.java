@@ -14,8 +14,9 @@ public class event_new_event extends AppCompatActivity {
 
     public FloatingActionButton AddActionButton;
     public CustomCardView CustomCV;
+    public Intent intent;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
 
@@ -23,12 +24,10 @@ public class event_new_event extends AppCompatActivity {
         AddActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(event_new_event.this, MainActivity.class);
+                intent = new Intent(event_new_event.this, MainActivity.class);
                 intent.putExtra("doAddAction",true);
                 event_new_event.this.finish();
                 startActivity(intent);
-
-                //buttonIndexSend(view);
             }
         });
     }

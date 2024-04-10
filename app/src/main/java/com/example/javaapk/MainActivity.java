@@ -3,24 +3,31 @@ package com.example.javaapk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.simple.parser.ParseException;
 
+import java.util.SimpleTimeZone;
+
 import data.TimetableWeek;
 
 public class MainActivity extends AppCompatActivity {
     private FloatingActionButton PrepareAddButton;
     private FloatingActionButton AddActionButton;
+    public boolean intenValue;
 
 
     @SuppressLint("MissingInflatedId")
@@ -35,13 +42,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Open_activity_new_event();
                 MainActivity.this.finish();
+                //AddfieldAction();
                 //AddAction();
+                //Buttonbutton();
+
             }
         });
 
-        gettIntent(savedInstanceState);
+        getIntentTwo(getIntent());
 
-        TimetableWeek timeTable = null;
+        /*TimetableWeek timeTable = null;
         try {
             timeTable = TimetableWeek.parseFromJsonString("{\"lessonTimeIntervals\":[\"07:20 - 08:05\",\"08:10 - 08:55\",\"09:05 - 09:50\",\"10:10 - 10:55\",\"11:05 - 11:50\",\"12:00 - 12:45\",\"12:50 - 13:35\",\"13:40 - 14:25\",\"14:30 - 15:15\",\"15:20 - 16:05\",\"16:10 - 16:55\"],\"days\":[{\"date\":\"20.11.\",\"dayOfWeek\":\"Po\",\"lessonRows\":[{\"lessons\":[{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"ČjL (Jazyk český) \",\"subjectShortcut\":\"ČjL\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Piňosová R.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (0)\"},{\"name\":\"Probrané učivo\",\"value\":\"Literární moderna\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[{\"subject\":\"M (Matematika) \",\"showPopupWindowURL\":\"..\\/Hodnoceni\\/KHO010_HodnVypisDetail.aspx?UdalostID=C40484579&OsobaID=C3385762\",\"furtherInfo\":[{\"name\":\"Druh hodnocení:\",\"value\":\"Hodnocení váhy 10% [váha 0,10]\"},{\"name\":\"Téma:\",\"value\":\"Hodnocení samostatné práce\"},{\"name\":\"Slovní hodnocení:\",\"value\":\"neodevzdal\"},{\"name\":\"Den:\",\"value\":\"Po 20.11.\"},{\"name\":\"Hodina:\",\"value\":\"1\"}]}],\"subjectFullName\":\"M (Matematika) \",\"subjectShortcut\":\"M\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Chmela J.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (1)\"},{\"name\":\"Probrané učivo\",\"value\":\"Geometrická posloupnost\"}]},{\"classroomShortcut\":\"PFy\",\"assessments\":[],\"subjectFullName\":\"Fy (Fyzika) \",\"subjectShortcut\":\"Fy\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Říman P.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"PFy\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (2)\"},{\"name\":\"Probrané učivo\",\"value\":\"El. potenciál, napětí - cvičení.\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"M (Matematika) \",\"subjectShortcut\":\"M\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Chmela J.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (A1)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (3)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"Po 20.11. 3, Aj (Angličtina), Šuhajová M., 7.A (A1), U7B\"},{\"name\":\"Probrané učivo\",\"value\":\"Opakování - geometrická posloupnost\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Aj (Angličtina) \",\"subjectShortcut\":\"Aj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (A1)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (4)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"Po 20.11. 4, M (Matematika), Chmela J., 7.A (A1), U7A\"},{\"name\":\"Probrané učivo\",\"value\":\"L 5C - trénink poslechu; konverzace, frázová slovesa\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Šj (Španělština) \",\"subjectShortcut\":\"Šj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Šj)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (5)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"Po 20.11. 5, Šj (Španělština), <span class=AbsZdroj>Číhalová M.<\\/span>, 7.A (Šj), UJ2\"},{\"name\":\"Probrané učivo\",\"value\":\"Imperfektum a příslovce\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"classroomShortcut\":\"U7B\",\"assessments\":[{\"subject\":\"M (Matematika) \",\"showPopupWindowURL\":\"..\\/Hodnoceni\\/KHO010_HodnVypisDetail.aspx?UdalostID=C40471946&OsobaID=C3385762\",\"furtherInfo\":[{\"name\":\"Druh hodnocení:\",\"value\":\"Hodnocení váhy 10% [váha 0,10]\"},{\"name\":\"Téma:\",\"value\":\"Posloupnost, důkaz monotónnosti posloupnosti\"},{\"name\":\"Výsledek:\",\"value\":\"1\"},{\"name\":\"Den:\",\"value\":\"Po 20.11.\"},{\"name\":\"Hodina:\",\"value\":\"3\"}]}],\"subjectFullName\":\"Aj (Angličtina) \",\"subjectShortcut\":\"Aj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (A1)\"},{\"name\":\"Učebna\",\"value\":\"U7B\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (3)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Po 20.11. 3, M (Matematika), Chmela J., 7.A (A1), U7A\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"M (Matematika) \",\"subjectShortcut\":\"M\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Chmela J.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (A1)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (4)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Po 20.11. 4, Aj (Angličtina), Šuhajová M., 7.A (A1), U7A\"}]},{\"classroomShortcut\":\"UJ2\",\"assessments\":[],\"subjectFullName\":\"Šj (Španělština) \",\"subjectShortcut\":\"Šj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Číhalová M.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Šj)\"},{\"name\":\"Učebna\",\"value\":\"UJ2\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Po 20.11. (5)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Po 20.11. 5, Šj (Španělština), Šuhajová M., 7.A (Šj), U7A\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]}]},{\"date\":\"21.11.\",\"dayOfWeek\":\"Út\",\"lessonRows\":[{\"lessons\":[{\"classroomShortcut\":\"7.B\",\"assessments\":[],\"subjectFullName\":\"MCv (Cvičení z matematiky) \",\"subjectShortcut\":\"MCv\",\"groupShortcut\":\"7.A,\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Kahánková H.\"},{\"name\":\"Třída\",\"value\":\"7.A, 7.B\"},{\"name\":\"Žáci\",\"value\":\"7.A (MCv), 7.B (MCv)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (0)\"},{\"name\":\"Probrané učivo\",\"value\":\"Gaussova rovina, řešení kvadratické rovnice v C\"}]},{\"classroomShortcut\":\"7.B\",\"assessments\":[],\"subjectFullName\":\"MCv (Cvičení z matematiky) \",\"subjectShortcut\":\"MCv\",\"groupShortcut\":\"7.A,\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Kahánková H.\"},{\"name\":\"Třída\",\"value\":\"7.A, 7.B\"},{\"name\":\"Žáci\",\"value\":\"7.A (MCv), 7.B (MCv)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (0)\"},{\"name\":\"Probrané učivo\",\"value\":\"Gaussova rovina, řešení kvadratické rovnice v C\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Zsv (Základy spol. věd) \",\"subjectShortcut\":\"Zsv\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Skálová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (2)\"},{\"name\":\"Probrané učivo\",\"value\":\"Trestní právo hmotné.\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[{\"subject\":\"M (Matematika) \",\"showPopupWindowURL\":\"..\\/Hodnoceni\\/KHO010_HodnVypisDetail.aspx?UdalostID=C40490686&OsobaID=C3385762\",\"furtherInfo\":[{\"name\":\"Druh hodnocení:\",\"value\":\"Hodnocení váhy 10% [váha 0,10]\"},{\"name\":\"Téma:\",\"value\":\"aritmetická posloupnost\"},{\"name\":\"Výsledek:\",\"value\":\"1\"},{\"name\":\"Den:\",\"value\":\"Út 21.11.\"},{\"name\":\"Hodina:\",\"value\":\"3\"}]}],\"subjectFullName\":\"M (Matematika) \",\"subjectShortcut\":\"M\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Chmela J.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (3)\"},{\"name\":\"Probrané učivo\",\"value\":\"Užití aritmetických a geometrických posloupností\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Aj (Angličtina) \",\"subjectShortcut\":\"Aj\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (A1)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (4)\"},{\"name\":\"Probrané učivo\",\"value\":\"U 5C - trénink poslechu; formální a neformální omluvení se\"}]},{\"isEmpty\":1},{\"classroomShortcut\":\"7.B,\",\"assessments\":[],\"subjectFullName\":\"C1A (Seminář ke zkoušce C1 Advanced) \",\"subjectShortcut\":\"C1A\",\"groupShortcut\":\"7.A,\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Foltýnová Glacová L.\"},{\"name\":\"Třída\",\"value\":\"7.A, 7.B, 8.A, 8.B\"},{\"name\":\"Žáci\",\"value\":\"7.A (C1A), 7.B (C1A), 8.A (C1A), 8.B (C1A)\"},{\"name\":\"Učebna\",\"value\":\"UJ2\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (6)\"},{\"name\":\"Probrané učivo\",\"value\":\"Lekce 13, dílčí části zkoušky C1 Advanced, esej\"}]},{\"classroomShortcut\":\"7.B,\",\"assessments\":[],\"subjectFullName\":\"C1A (Seminář ke zkoušce C1 Advanced) \",\"subjectShortcut\":\"C1A\",\"groupShortcut\":\"7.A,\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Foltýnová Glacová L.\"},{\"name\":\"Třída\",\"value\":\"7.A, 7.B, 8.A, 8.B\"},{\"name\":\"Žáci\",\"value\":\"7.A (C1A), 7.B (C1A), 8.A (C1A), 8.B (C1A)\"},{\"name\":\"Učebna\",\"value\":\"UJ2\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Út 21.11. (6)\"},{\"name\":\"Probrané učivo\",\"value\":\"Lekce 13, dílčí části zkoušky C1 Advanced, esej\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]}]},{\"date\":\"22.11.\",\"dayOfWeek\":\"St\",\"lessonRows\":[{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Zsv (Základy spol. věd) \",\"subjectShortcut\":\"Zsv\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Skálová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (2)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"St 22.11. 2, D (Dějepis), <span class=AbsZdroj>Skotnicová E.<\\/span>, 7.A (celá třída), U7A\"},{\"name\":\"Probrané učivo\",\"value\":\"Trestní právo hmotné.\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"ČjL (Jazyk český) \",\"subjectShortcut\":\"ČjL\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Piňosová R.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (3)\"},{\"name\":\"Probrané učivo\",\"value\":\"Česká literární moderna; Manifest České moderny\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Šj (Španělština) \",\"subjectShortcut\":\"Šj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Šj)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (4)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"St 22.11. 4, Šj (Španělština), <span class=AbsZdroj>Číhalová M.<\\/span>, 7.A (Šj), U5A\"},{\"name\":\"Probrané učivo\",\"value\":\"Minulý čas prostý, práce s textem\"}]},{\"classroomShortcut\":\"TV1\",\"assessments\":[],\"subjectFullName\":\"Tv\\/c (Tělesná výchova - chlapci) \",\"subjectShortcut\":\"Tv\\/c\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Hýža M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Chlapci)\"},{\"name\":\"Učebna\",\"value\":\"TV1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (5)\"},{\"name\":\"Probrané učivo\",\"value\":\"Kondiční příprava (švihadlo), florbal\"}]},{\"isEmpty\":1},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Ch (Chemie) \",\"subjectShortcut\":\"Ch\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Slaničanová H.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (7)\"},{\"name\":\"Probrané učivo\",\"value\":\"Areny - zástupci\"}]},{\"classroomShortcut\":\"PBi\",\"assessments\":[],\"subjectFullName\":\"Bi (Biologie) \",\"subjectShortcut\":\"Bi\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Dudová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"PBi\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (8)\"},{\"name\":\"Probrané učivo\",\"value\":\"Nemoci svalové soustavy.\"}]},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"classroomShortcut\":\"U7A\",\"assessments\":[{\"subject\":\"Zsv (Základy spol. věd) \",\"showPopupWindowURL\":\"..\\/Hodnoceni\\/KHO010_HodnVypisDetail.aspx?UdalostID=C40508460&OsobaID=C3385762\",\"furtherInfo\":[{\"name\":\"Druh hodnocení:\",\"value\":\"Hodnocení váhy 70% [váha 0,70]\"},{\"name\":\"Téma:\",\"value\":\"Ekonomická olympiáda.\"},{\"name\":\"Výsledek:\",\"value\":\"1\"},{\"name\":\"Den:\",\"value\":\"St 22.11.\"},{\"name\":\"Hodina:\",\"value\":\"2\"}]}],\"subjectFullName\":\"D (Dějepis) \",\"subjectShortcut\":\"D\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Skotnicová E.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (2)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"St 22.11. 2, Zsv (Základy spol. věd), Skálová M., 7.A (celá třída), U7A\"}]},{\"isEmpty\":1},{\"classroomShortcut\":\"U5A\",\"assessments\":[],\"subjectFullName\":\"Šj (Španělština) \",\"subjectShortcut\":\"Šj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Číhalová M.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Šj)\"},{\"name\":\"Učebna\",\"value\":\"U5A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"St 22.11. (4)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"St 22.11. 4, Šj (Španělština), Šuhajová M., 7.A (Šj), U7A\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]}]},{\"date\":\"23.11.\",\"dayOfWeek\":\"Čt\",\"lessonRows\":[{\"lessons\":[{\"classroomShortcut\":\"VT3\",\"assessments\":[],\"subjectFullName\":\"D (Dějepis) \",\"subjectShortcut\":\"D\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Skotnicová E.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"VT3\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (0)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Hodina odpadá\"}]},{\"classroomShortcut\":\"VT3\",\"assessments\":[],\"subjectFullName\":\"Ekonomická olympiáda \",\"subjectShortcut\":\"Ekonomická olympiáda\",\"groupShortcut\":\"7.A\",\"type\":\"EVENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Skálová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"VT3\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (1)\"},{\"name\":\"Probrané učivo\",\"value\":\"Ekonomická olympiáda.\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"M (Matematika) \",\"subjectShortcut\":\"M\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Chmela J.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (2)\"},{\"name\":\"Probrané učivo\",\"value\":\"Slovní úlohy - aritmetická a geometrická posloupnost\"}]},{\"classroomShortcut\":\"PFy\",\"assessments\":[],\"subjectFullName\":\"Fy (Fyzika) \",\"subjectShortcut\":\"Fy\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Říman P.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"PFy\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (3)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"Čt 23.11. 3, Fy (Fyzika), Říman P., 7.A (celá třída), U7A\"},{\"name\":\"Probrané učivo\",\"value\":\"Elektrické pole - cvičení.\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[{\"subject\":\"Ch (Chemie) \",\"showPopupWindowURL\":\"..\\/Hodnoceni\\/KHO010_HodnVypisDetail.aspx?UdalostID=C40513695&OsobaID=C3385762\",\"furtherInfo\":[{\"name\":\"Druh hodnocení:\",\"value\":\"Hodnocení váhy 60% [váha 0,60]\"},{\"name\":\"Téma:\",\"value\":\"Zkoušení\"},{\"name\":\"Výsledek:\",\"value\":\"4\"},{\"name\":\"Den:\",\"value\":\"Čt 23.11.\"},{\"name\":\"Hodina:\",\"value\":\"4\"}]}],\"subjectFullName\":\"Ch (Chemie) \",\"subjectShortcut\":\"Ch\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Slaničanová H.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (4)\"},{\"name\":\"Probrané učivo\",\"value\":\"Deriváty uhlovodíků\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"ČjL (Jazyk český) \",\"subjectShortcut\":\"ČjL\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Piňosová R.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (5)\"},{\"name\":\"Probrané učivo\",\"value\":\"Manifest České moderny; F. X. Šalda\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Zsv (Základy spol. věd) \",\"subjectShortcut\":\"Zsv\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Skálová M.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"<span class=AbsZdroj>7.A<\\/span>\"},{\"name\":\"Žáci\",\"value\":\"<span class=AbsZdroj>7.A (celá třída)<\\/span>\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (1)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Hodina odpadá\"}]},{\"isEmpty\":1},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Fy (Fyzika) \",\"subjectShortcut\":\"Fy\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Říman P.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Čt 23.11. (3)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Čt 23.11. 3, Fy (Fyzika), Říman P., 7.A (celá třída), PFy\"},{\"name\":\"Probrané učivo\",\"value\":\"Elektrické pole - cvičení.\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]}]},{\"date\":\"24.11.\",\"dayOfWeek\":\"Pá\",\"lessonRows\":[{\"lessons\":[{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Ge (Geografie) \",\"subjectShortcut\":\"Ge\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Dudová M.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (0)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Hodina odpadá\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Aj (Angličtina) \",\"subjectShortcut\":\"Aj\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (A1)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (1)\"},{\"name\":\"Probrané učivo\",\"value\":\"Práce s textem (časopis Bridge) - Dávání spropitného v AJ mluvících zemích\"}]},{\"classroomShortcut\":\"PBi\",\"assessments\":[],\"subjectFullName\":\"Bi (Biologie) \",\"subjectShortcut\":\"Bi\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Onderková V.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"PBi\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (2)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"Pá 24.11. 2, Bi (Biologie), Dudová M., 7.A (celá třída), PBi\"},{\"name\":\"Probrané učivo\",\"value\":\"Tělní tekutiny-samostatná práce\"}]},{\"classroomShortcut\":\"6.B,\",\"assessments\":[],\"subjectFullName\":\"Vědecký čtyřboj online \",\"subjectShortcut\":\"Vědecký čtyřboj online\",\"groupShortcut\":\"6.A,\",\"type\":\"EVENT\",\"furtherInfo\":[{\"name\":\"Čas výuky\",\"value\":\"10:00 - 14:25\"},{\"name\":\"Učitel\",\"value\":\"Plachtová L.\"},{\"name\":\"Třída\",\"value\":\"6.A, 6.B, 7.A, 7.B, 8.B\"},{\"name\":\"Žáci\",\"value\":\"6.A (seminář), 6.B (seminář), 7.A (seminář), 7.B (seminář), 8.B (seminář)\"},{\"name\":\"Učebna\",\"value\":\"VT1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (3)\"}]},{\"classroomShortcut\":\"6.B,\",\"assessments\":[],\"subjectFullName\":\"Vědecký čtyřboj online \",\"subjectShortcut\":\"Vědecký čtyřboj online\",\"groupShortcut\":\"6.A,\",\"type\":\"EVENT\",\"furtherInfo\":[{\"name\":\"Čas výuky\",\"value\":\"10:00 - 14:25\"},{\"name\":\"Učitel\",\"value\":\"Plachtová L.\"},{\"name\":\"Třída\",\"value\":\"6.A, 6.B, 7.A, 7.B, 8.B\"},{\"name\":\"Žáci\",\"value\":\"6.A (seminář), 6.B (seminář), 7.A (seminář), 7.B (seminář), 8.B (seminář)\"},{\"name\":\"Učebna\",\"value\":\"VT1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (3)\"}]},{\"classroomShortcut\":\"6.B,\",\"assessments\":[],\"subjectFullName\":\"Vědecký čtyřboj online \",\"subjectShortcut\":\"Vědecký čtyřboj online\",\"groupShortcut\":\"6.A,\",\"type\":\"EVENT\",\"furtherInfo\":[{\"name\":\"Čas výuky\",\"value\":\"10:00 - 14:25\"},{\"name\":\"Učitel\",\"value\":\"Plachtová L.\"},{\"name\":\"Třída\",\"value\":\"6.A, 6.B, 7.A, 7.B, 8.B\"},{\"name\":\"Žáci\",\"value\":\"6.A (seminář), 6.B (seminář), 7.A (seminář), 7.B (seminář), 8.B (seminář)\"},{\"name\":\"Učebna\",\"value\":\"VT1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (3)\"}]},{\"classroomShortcut\":\"6.B,\",\"assessments\":[],\"subjectFullName\":\"Vědecký čtyřboj online \",\"subjectShortcut\":\"Vědecký čtyřboj online\",\"groupShortcut\":\"6.A,\",\"type\":\"EVENT\",\"furtherInfo\":[{\"name\":\"Čas výuky\",\"value\":\"10:00 - 14:25\"},{\"name\":\"Učitel\",\"value\":\"Plachtová L.\"},{\"name\":\"Třída\",\"value\":\"6.A, 6.B, 7.A, 7.B, 8.B\"},{\"name\":\"Žáci\",\"value\":\"6.A (seminář), 6.B (seminář), 7.A (seminář), 7.B (seminář), 8.B (seminář)\"},{\"name\":\"Učebna\",\"value\":\"VT1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (3)\"}]},{\"classroomShortcut\":\"6.B,\",\"assessments\":[],\"subjectFullName\":\"Vědecký čtyřboj online \",\"subjectShortcut\":\"Vědecký čtyřboj online\",\"groupShortcut\":\"6.A,\",\"type\":\"EVENT\",\"furtherInfo\":[{\"name\":\"Čas výuky\",\"value\":\"10:00 - 14:25\"},{\"name\":\"Učitel\",\"value\":\"Plachtová L.\"},{\"name\":\"Třída\",\"value\":\"6.A, 6.B, 7.A, 7.B, 8.B\"},{\"name\":\"Žáci\",\"value\":\"6.A (seminář), 6.B (seminář), 7.A (seminář), 7.B (seminář), 8.B (seminář)\"},{\"name\":\"Učebna\",\"value\":\"VT1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (3)\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"classroomShortcut\":\"PBi\",\"assessments\":[],\"subjectFullName\":\"Bi (Biologie) \",\"subjectShortcut\":\"Bi\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Dudová M.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"PBi\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (2)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Pá 24.11. 2, Bi (Biologie), Onderková V., 7.A (celá třída), PBi\"}]},{\"classroomShortcut\":\"TV1\",\"assessments\":[],\"subjectFullName\":\"Tv\\/c (Tělesná výchova - chlapci) \",\"subjectShortcut\":\"Tv\\/c\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Hýža M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Chlapci)\"},{\"name\":\"Učebna\",\"value\":\"TV1\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (3)\"},{\"name\":\"Probrané učivo\",\"value\":\"Badminton\"}]},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"ČjL (Jazyk český) \",\"subjectShortcut\":\"ČjL\",\"groupShortcut\":\"7.A\",\"type\":\"REGULAR\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Piňosová R.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (4)\"},{\"name\":\"Probrané učivo\",\"value\":\"Úplné zatmění\"}]},{\"isEmpty\":1},{\"classroomShortcut\":\"U7A\",\"assessments\":[],\"subjectFullName\":\"Šj (Španělština) \",\"subjectShortcut\":\"Šj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACEMENT\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"Šuhajová M.\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Šj)\"},{\"name\":\"Učebna\",\"value\":\"U7A\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (6)\"},{\"name\":\"Nahrazuje hodiny\",\"value\":\"Pá 24.11. 6, Šj (Španělština), <span class=AbsZdroj>Číhalová M.<\\/span>, 7.A (Šj), U8B\"},{\"name\":\"Probrané učivo\",\"value\":\"Minulý čas prostý, slovní zásoba L5\"}]},{\"classroomShortcut\":\"VT3\",\"assessments\":[],\"subjectFullName\":\"D (Dějepis) \",\"subjectShortcut\":\"D\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Skotnicová E.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (celá třída)\"},{\"name\":\"Učebna\",\"value\":\"VT3\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (7)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Hodina odpadá\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]},{\"lessons\":[{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"classroomShortcut\":\"U8B\",\"assessments\":[],\"subjectFullName\":\"Šj (Španělština) \",\"subjectShortcut\":\"Šj\",\"groupShortcut\":\"7.A\",\"type\":\"REPLACED\",\"furtherInfo\":[{\"name\":\"Učitel\",\"value\":\"<span class=AbsZdroj>Číhalová M.<\\/span>\"},{\"name\":\"Třída\",\"value\":\"7.A\"},{\"name\":\"Žáci\",\"value\":\"7.A (Šj)\"},{\"name\":\"Učebna\",\"value\":\"U8B\"},{\"name\":\"Cyklus\",\"value\":\"bez cyklů\"},{\"name\":\"Den (vyuč. hodina)\",\"value\":\"Pá 24.11. (6)\"},{\"name\":\"Je suplována hodinami\",\"value\":\"Pá 24.11. 6, Šj (Španělština), Šuhajová M., 7.A (Šj), U7A\"}]},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1},{\"isEmpty\":1}]}]}]}");
         } catch (ParseException e) {
@@ -51,61 +61,111 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("here: " + timeTable.days[0].lessonRows[0].lessons[2].subjectFullName);
         System.out.println("-----------timetable start------------------");
         timeTable.printSelf();
-        System.out.println("-----------timetable end------------------");
+        System.out.println("-----------timetable end------------------");*/
+
+
 
     }
 
-    public void gettIntent(Bundle savedInstanceState){
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+        getIntentTwo(getIntent());
+    }*/
+
+    /*public void gettIntent(Bundle savedInstanceState){
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null){
             }else{
                 String method = extras.getString("doAddAction");
-                //AddAction();
-                AddfieldAction();
+                Buttonbutton();
             }
+        }
+    }*/
+
+
+    /*public void startSecondActivity(Context context) {
+        Intent intent = new Intent(context, event_new_event.class);
+        // If you want to pass any data to SecondActivity
+        intent.putExtra("key", true);
+        context.startActivity(intent);
+    }*/
+
+
+    public void getIntentTwo(Intent intent){
+        //Intent intent = getIntent();
+        boolean intentValue = false;
+        if (intent != null) {
+            System.out.println("neni null");
+
+            boolean doAddAction = intent.getBooleanExtra("doAddAction", false);
+
+            if (doAddAction == true) {
+                Buttonbutton();
+                if (intentValue == false) {
+                    System.out.println("Je false");
+                }
+                if (intentValue == true) {
+                    System.out.println("Je true");
+                }
+
+            } else {
+
+            }
+        }else {
+
         }
     }
 
-    /*public void AddAction(){
 
-        //Log.d("MainActivity", "Adding an action, message id: 4631521");
-        CustomCardView CustomCard = new CustomCardView(this);
-
-        // Add CustomCardView to the layout of the activity
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT
-        );
-        CustomCard.setLayoutParams(layoutParams);
-
-        setContentView(CustomCard);
+    /*private void addNewActionButtons(int numOfButtons) {
+        // Create and add buttons dynamically
+        ViewGroup layout = findViewById(R.id.layout_main);
+        for (int i = 0; i < numOfButtons; i++) {
+            Button button = new Button(this);
+            button.setText("Button " + (i + 1));
+            layout.addView(button);
+        }
     }*/
-    public void AddfieldAction(){
-        Button fieldbtn = new Button(this);
-        //fieldbtn.setBackgroundColor(getColor(R.color.black));
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT
-        );
-        fieldbtn.setLayoutParams(layoutParams);
+
+    public void Buttonbutton(){
+
+        // Create Button
+        Button button = new Button(this);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linerLayout);
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollview);
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+
+        button.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                200 // 80dp height
+        ));
+        button.setText("Btn1");
+        //button.setBackgroundColor(Color.argb(255,98,0,238));
+        //button.setBackgroundColor(Color.YELLOW);
+        //button.setBackgroundColor(/*0xFF5F12E6*/ 0xFFEA421E);
+        button.setClickable(true);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) button.getLayoutParams();
+        params.setMargins(45, 10, 45, 0); // Set margins
+        button.setLayoutParams(params);
 
 
+        // Add Button to LinearLayout
+        linearLayout.addView(button);
 
 
+        /*// Add LinearLayout to ScrollView
+        scrollView.addView(linearLayout);
 
-        // Create an instance of the ButtonCreator class
-        CustomFieldButton  customFieldButton = new CustomFieldButton();
 
-        // Get the main layout where you want to add the button
-        RelativeLayout mainLayout = findViewById(R.id.relativeLayout);
+        // Add ScrollView to RelativeLayout
+        relativeLayout.addView(scrollView);*/
 
-        // Call the method to create and configure the button
-        Button button = customFieldButton.createButton(this);
+        // Set RelativeLayout as the content view of the activity
+        setContentView(relativeLayout);
+        System.out.println("Dosel jsem az tady");
 
-        // Add the button to the main layout
-        mainLayout.addView(button);
-        setContentView(fieldbtn);
     }
 
 
