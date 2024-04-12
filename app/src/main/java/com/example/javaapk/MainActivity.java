@@ -42,14 +42,34 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Open_activity_new_event();
                 MainActivity.this.finish();
+
                 //AddfieldAction();
                 //AddAction();
                 //Buttonbutton();
 
             }
         });
-
         getIntentTwo(getIntent());
+
+        /*Intent intent = getIntent();
+        if (intent != null) {
+            boolean doAddAction = intent.getBooleanExtra("doAddAction", false);
+            if (doAddAction) {
+                Buttonbutton();
+            }
+        }*/
+
+        //gettIntent(savedInstanceState);
+
+
+
+        //gettIntent(savedInstanceState);
+
+        /*if (getIntent().getBooleanExtra("callMethod", true)) {
+            Buttonbutton();
+        }else {
+            //Buttonbutton();
+        }*/
 
         /*TimetableWeek timeTable = null;
         try {
@@ -94,40 +114,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void getIntentTwo(Intent intent){
-        //Intent intent = getIntent();
-        boolean intentValue = false;
+        //boolean doAddAction;
         if (intent != null) {
-            System.out.println("neni null");
-
             boolean doAddAction = intent.getBooleanExtra("doAddAction", false);
-
-            if (doAddAction == true) {
+            if (doAddAction) {
                 Buttonbutton();
-                if (intentValue == false) {
-                    System.out.println("Je false");
-                }
-                if (intentValue == true) {
-                    System.out.println("Je true");
-                }
-
-            } else {
-
             }
-        }else {
-
         }
     }
-
-
-    /*private void addNewActionButtons(int numOfButtons) {
-        // Create and add buttons dynamically
-        ViewGroup layout = findViewById(R.id.layout_main);
-        for (int i = 0; i < numOfButtons; i++) {
-            Button button = new Button(this);
-            button.setText("Button " + (i + 1));
-            layout.addView(button);
-        }
-    }*/
 
     public void Buttonbutton(){
 
@@ -150,21 +144,10 @@ public class MainActivity extends AppCompatActivity {
         params.setMargins(45, 10, 45, 0); // Set margins
         button.setLayoutParams(params);
 
-
-        // Add Button to LinearLayout
         linearLayout.addView(button);
 
-
-        /*// Add LinearLayout to ScrollView
-        scrollView.addView(linearLayout);
-
-
-        // Add ScrollView to RelativeLayout
-        relativeLayout.addView(scrollView);*/
-
-        // Set RelativeLayout as the content view of the activity
         setContentView(relativeLayout);
-        System.out.println("Dosel jsem az tady");
+        System.out.println("vytvarim button");
 
     }
 

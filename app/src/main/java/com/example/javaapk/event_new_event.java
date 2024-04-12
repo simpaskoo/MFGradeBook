@@ -14,7 +14,7 @@ public class event_new_event extends AppCompatActivity {
 
     public FloatingActionButton AddActionButton;
     public CustomCardView CustomCV;
-    public Intent intent;
+    private Intent intent;// = new Intent(event_new_event.this, MainActivity.class);
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +24,46 @@ public class event_new_event extends AppCompatActivity {
         AddActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(event_new_event.this, MainActivity.class);
+                /*intent = new Intent(event_new_event.this, MainActivity.class);
                 intent.putExtra("doAddAction",true);
                 event_new_event.this.finish();
                 startActivity(intent);
+                System.out.println("annnno");*/
+
+
+                // Check if the intent is null
+                if (intent == null) {
+                    // Create the intent only if it hasn't been created yet
+                    intent = new Intent(event_new_event.this, MainActivity.class);
+                    intent.putExtra("doAddAction", true);
+                    System.out.println("Intent je null");
+                }
+                if(intent != null) {
+                    event_new_event.this.finish();
+                    startActivity(intent);
+                    System.out.println("Intent neni null");
+                }
+                // Finish the current activity and start the MainActivity with the existing intent
+
             }
         });
     }
+
+
+    /*if (intent == null) {
+                    // If it's null, create a new Intent
+                    intent = new Intent(event_new_event.this, MainActivity.class);
+                    intent.putExtra("doAddAction", true);
+                    // Finish the current activity
+                    event_new_event.this.finish();
+                    // Start the MainActivity with the intent
+                    startActivity(intent);
+                } else {
+                    // If the intent is not null, just start the MainActivity with the existing intent
+                    startActivity(intent);
+                }*/
+
+
 
     /*Intent intent = new Intent(event_new_event.this,  MainActivity.class);
                 intent.putExtra( "doAddAction", true);
