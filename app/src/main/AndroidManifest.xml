@@ -14,7 +14,8 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,9 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:name=".event_new_event"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
+
             <intent-filter>
                 <action android:name="android.intent.action.new_event" />
 

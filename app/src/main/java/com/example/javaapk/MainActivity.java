@@ -6,7 +6,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -28,48 +30,25 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton PrepareAddButton;
     private FloatingActionButton AddActionButton;
     public boolean intenValue;
-
+    private static MainActivity instance;
+    public int n = 0;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collector2);
+        instance = this;
 
         PrepareAddButton = (FloatingActionButton) findViewById(R.id.createFieldButton);
         PrepareAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Open_activity_new_event();
-                MainActivity.this.finish();
-
-                //AddfieldAction();
-                //AddAction();
-                //Buttonbutton();
 
             }
         });
-        getIntentTwo(getIntent());
-
-        /*Intent intent = getIntent();
-        if (intent != null) {
-            boolean doAddAction = intent.getBooleanExtra("doAddAction", false);
-            if (doAddAction) {
-                Buttonbutton();
-            }
-        }*/
-
-        //gettIntent(savedInstanceState);
-
-
-
-        //gettIntent(savedInstanceState);
-
-        /*if (getIntent().getBooleanExtra("callMethod", true)) {
-            Buttonbutton();
-        }else {
-            //Buttonbutton();
-        }*/
+        //getIntentTwo(getIntent());
 
         /*TimetableWeek timeTable = null;
         try {
@@ -83,48 +62,13 @@ public class MainActivity extends AppCompatActivity {
         timeTable.printSelf();
         System.out.println("-----------timetable end------------------");*/
 
-
-
     }
 
-    /*@Override
-    protected void onResume() {
-        super.onResume();
-        getIntentTwo(getIntent());
-    }*/
-
-    /*public void gettIntent(Bundle savedInstanceState){
-        if(savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if (extras == null){
-            }else{
-                String method = extras.getString("doAddAction");
-                Buttonbutton();
-            }
-        }
-    }*/
-
-
-    /*public void startSecondActivity(Context context) {
-        Intent intent = new Intent(context, event_new_event.class);
-        // If you want to pass any data to SecondActivity
-        intent.putExtra("key", true);
-        context.startActivity(intent);
-    }*/
-
-
-    public void getIntentTwo(Intent intent){
-        //boolean doAddAction;
-        if (intent != null) {
-            boolean doAddAction = intent.getBooleanExtra("doAddAction", false);
-            if (doAddAction) {
-                Buttonbutton();
-            }
-        }
+    public static MainActivity getInstance() {
+        return instance;
     }
 
-    public void Buttonbutton(){
-
+    public int Buttonbutton(){
         // Create Button
         Button button = new Button(this);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linerLayout);
@@ -133,15 +77,22 @@ public class MainActivity extends AppCompatActivity {
 
         button.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                200 // 80dp height
+                160 // 80dp height
         ));
-        button.setText("Btn1");
-        //button.setBackgroundColor(Color.argb(255,98,0,238));
-        //button.setBackgroundColor(Color.YELLOW);
-        //button.setBackgroundColor(/*0xFF5F12E6*/ 0xFFEA421E);
+        if(n < n++) {
+            n++;
+        }
+        button.setText("Button " + n);
         button.setClickable(true);
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{Color.parseColor("#6922b5"), Color.parseColor("#2e0659")}
+        );
+        gradientDrawable.setCornerRadius(20); // Set corner radius if needed
+        button.setBackground(gradientDrawable);
+        //button.setBackgroundColor(Color.parseColor("#6922b5"));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) button.getLayoutParams();
-        params.setMargins(45, 10, 45, 0); // Set margins
+        params.setMargins(33, 30, 33, 0); // Set margins
         button.setLayoutParams(params);
 
         linearLayout.addView(button);
@@ -149,17 +100,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(relativeLayout);
         System.out.println("vytvarim button");
 
+        return n;
     }
 
-
-
-    /*@Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if(getIntent().getBooleanExtra("doAddAction", false)) {
-            AddAction();
-        }
-    }*/
     public void Open_activity_new_event() {
         Intent intent = new Intent(this, event_new_event.class);
         startActivity(intent);
