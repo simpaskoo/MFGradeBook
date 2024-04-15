@@ -1,21 +1,26 @@
 package com.example.javaapk;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,8 +33,8 @@ import data.TimetableWeek;
 
 public class MainActivity extends AppCompatActivity {
     private FloatingActionButton PrepareAddButton;
-    private FloatingActionButton AddActionButton;
-    public boolean intenValue;
+    private TextView textview;
+    private LinearLayout topLinerLayout;
     private static MainActivity instance;
     public int n = 0;
 
@@ -38,9 +43,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collector2);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.menu_color)));
         instance = this;
 
         PrepareAddButton = (FloatingActionButton) findViewById(R.id.createFieldButton);
+        textview = (TextView) findViewById(R.id.NeprecteneZpravy);
+        topLinerLayout = (LinearLayout) findViewById(R.id.linerLayout);
         PrepareAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //getIntentTwo(getIntent());
-
-        //commit test
 
         /*TimetableWeek timeTable = null;
         try {
@@ -64,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         timeTable.printSelf();
         System.out.println("-----------timetable end------------------");*/
 
+        if (n == 0) {
+            textview.setText("Nepřečtené správy:  0");
+        }
     }
 
     public static MainActivity getInstance() {
@@ -81,26 +89,35 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 160 // 80dp height
         ));
-        if(n < n++) {
+
+        if(n >= 0) {
             n++;
         }
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_heavy_bold_font);
+        button.setTypeface(typeface);
         button.setText("Button " + n);
         button.setClickable(true);
         GradientDrawable gradientDrawable = new GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{Color.parseColor("#6922b5"), Color.parseColor("#2e0659")}
         );
+
         gradientDrawable.setCornerRadius(20); // Set corner radius if needed
         button.setBackground(gradientDrawable);
         //button.setBackgroundColor(Color.parseColor("#6922b5"));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) button.getLayoutParams();
-        params.setMargins(33, 30, 33, 0); // Set margins
+        params.setMargins(33, 40, 33, 0); // Set margins
         button.setLayoutParams(params);
 
         linearLayout.addView(button);
 
         setContentView(relativeLayout);
         System.out.println("vytvarim button");
+
+        Typeface NprctnSprvFont = ResourcesCompat.getFont(this, R.font.nexa_heavy_bold_font);
+        textview.setTypeface(NprctnSprvFont);
+        textview.setText("Nepřečtené správy:  " + n);
 
         return n;
     }
