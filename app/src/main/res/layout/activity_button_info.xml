@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#9933ff">
 
     <TextView
         android:id="@+id/textView13"
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Datum od"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -20,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Cena"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -29,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Datum do"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -38,9 +42,10 @@
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:background="#868686"
-        android:text="TextView"
+        android:background="@drawable/new_event_styl"
         android:gravity="center"
+        android:text="cena"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -51,9 +56,10 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="#858585"
-        android:text="TextView"
+        android:background="@drawable/new_event_styl"
         android:gravity="center"
+        android:text="Datum do"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -62,17 +68,18 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="Účastníci"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="331dp"
         android:layout_height="218dp"
         android:layout_marginTop="15dp"
-        android:background="#888888"
+        android:background="@drawable/new_event_styl"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -87,25 +94,43 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/new_event_styl"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="41dp"
+        tools:ignore="MissingConstraints" />
+
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="15dp"
+        android:paddingLeft="15dp"
+        android:text="Nadpis"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
+        app:layout_constraintStart_toStartOf="@+id/toolbar3"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="#878787"
-        android:text="TextView"
+        android:background="@drawable/new_event_styl"
         android:gravity="center"
+        android:text="Datum od"
+        android:fontFamily="@font/nexa_heavy_bold_font"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -149,11 +174,11 @@
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
             android:contentDescription="Pčidej akci"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/baseline_edit_24" />
@@ -174,11 +199,11 @@
             android:id="@+id/infoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
             android:contentDescription="Pčidej akci"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/baseline_info_24" />
@@ -199,11 +224,11 @@
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
             android:contentDescription="Pčidej akci"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/baseline_delete_24" />

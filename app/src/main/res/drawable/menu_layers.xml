@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shape 1 -->
+    <item android:drawable="@drawable/menu_corner_shape" />
+    <!-- Shape 2 -->
+    <item android:drawable="@drawable/menu_rounded_shape" />
+</layer-list>

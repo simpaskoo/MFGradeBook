@@ -1,21 +1,21 @@
 package com.example.javaapk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,17 +25,17 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.simple.parser.ParseException;
-
-import java.util.SimpleTimeZone;
-
-import data.TimetableWeek;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private FloatingActionButton PrepareAddButton;
+    public Button collector_button;
+    public Button button;
     private TextView textview;
     private LinearLayout topLinerLayout;
     private static MainActivity instance;
+
+    public ArrayList<Button> buttonsArrayList = new ArrayList<>();
     public int n = 0;
 
     @SuppressLint("MissingInflatedId")
@@ -43,19 +43,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collector2);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.menu_color)));
+
+        Drawable drawable = getResources().getDrawable(R.drawable.menu_layers);
+        getSupportActionBar().setBackgroundDrawable(drawable);
+
         instance = this;
 
         PrepareAddButton = (FloatingActionButton) findViewById(R.id.createFieldButton);
         textview = (TextView) findViewById(R.id.NeprecteneZpravy);
+
         topLinerLayout = (LinearLayout) findViewById(R.id.linerLayout);
         PrepareAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Open_activity_new_event();
+                //Open_activity_button_info();
+
+                //Intent intent = new Intent(MainActivity.this, button_info.class);
+                //startActivity(intent);
 
             }
         });
+
 
         /*TimetableWeek timeTable = null;
         try {
@@ -72,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         if (n == 0) {
             textview.setText("Nepřečtené správy:  0");
         }
+        
+        //Open_activity_button_info();
     }
 
     public static MainActivity getInstance() {
@@ -80,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     public int Buttonbutton(){
         // Create Button
-        Button button = new Button(this);
+        button = new Button(this);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linerLayout);
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollview);
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
@@ -110,6 +121,13 @@ public class MainActivity extends AppCompatActivity {
         params.setMargins(33, 40, 33, 0); // Set margins
         button.setLayoutParams(params);
 
+        buttonsArrayList.add(button);
+
+        if (n == 5) {
+            System.out.println(buttonsArrayList);
+            //System.out.println("aaaaaaaaaaaaaaaaaa");
+        }
+
         linearLayout.addView(button);
 
         setContentView(relativeLayout);
@@ -122,6 +140,25 @@ public class MainActivity extends AppCompatActivity {
         return n;
     }
 
+    /*public void buttonInfoOpener (){
+        for (final Button button : buttonsArrayList) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Open_activity_button_info();
+                    System.out.println("fakujuuuuu");
+                }
+            });
+        }
+    }*/
+
+
+
+    public void Open_activity_button_info() {
+        Intent intentt = new Intent(this, button_info.class);
+        startActivity(intentt);
+    }
+
     public void Open_activity_new_event() {
         Intent intent = new Intent(this, event_new_event.class);
         startActivity(intent);
@@ -132,5 +169,11 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        // Handle your menu item clicks here
+        return super.onOptionsItemSelected(item);
     }
 }

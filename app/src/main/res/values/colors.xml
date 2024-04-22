@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="menu_color">#2e0659</color>
+    <color name="collector_bg_color">#9933ff</color>
 </resources>
