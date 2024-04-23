@@ -34,9 +34,9 @@
             android:launchMode="singleTop">
 
             <intent-filter>
-                <action android:name="android.intent.action.new_event" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.new_event" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

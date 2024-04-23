@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout topLinerLayout;
     private static MainActivity instance;
 
-    public ArrayList<Button> buttonsArrayList = new ArrayList<>();
+    public ArrayList<Button> buttonsArrayList = new ArrayList<Button>();
     public int n = 0;
 
     @SuppressLint("MissingInflatedId")
@@ -48,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(drawable);
 
         instance = this;
+
+
+        for (final Button button : buttonsArrayList) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Open_activity_button_info();
+                    System.out.println("anoanoneNENE");
+                }
+            });
+        }
+        //buttonInfoOpener(button, buttonsArrayList);
+
 
         PrepareAddButton = (FloatingActionButton) findViewById(R.id.createFieldButton);
         textview = (TextView) findViewById(R.id.NeprecteneZpravy);
@@ -81,8 +94,22 @@ public class MainActivity extends AppCompatActivity {
         if (n == 0) {
             textview.setText("Nepřečtené správy:  0");
         }
-        
+
+        /*View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Open_activity_button_info();
+                System.out.println("safafafa");
+            }
+        };
+
+        for (final Button button : buttonsArrayList) {
+            button.setOnClickListener(listener);
+        }*/
+
+
         //Open_activity_button_info();
+        //buttonInfoOpener();
     }
 
     public static MainActivity getInstance() {
@@ -98,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         button.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                160 // 80dp height
+                160
         ));
 
         if(n >= 0) {
@@ -116,16 +143,26 @@ public class MainActivity extends AppCompatActivity {
 
         gradientDrawable.setCornerRadius(20); // Set corner radius if needed
         button.setBackground(gradientDrawable);
-        //button.setBackgroundColor(Color.parseColor("#6922b5"));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) button.getLayoutParams();
         params.setMargins(33, 40, 33, 0); // Set margins
         button.setLayoutParams(params);
 
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Open_activity_button_info();
+                System.out.println("fungujee");
+            }
+        });
         buttonsArrayList.add(button);
+
+        //addButtonToArray(button, buttonsArrayList);
+        //addButtonsToList();
 
         if (n == 5) {
             System.out.println(buttonsArrayList);
-            //System.out.println("aaaaaaaaaaaaaaaaaa");
         }
 
         linearLayout.addView(button);
@@ -139,9 +176,33 @@ public class MainActivity extends AppCompatActivity {
 
         return n;
     }
+    public static ArrayList<Button> addButtonToArray(Button buttonn, ArrayList<Button> araylist) {
+        araylist.add(buttonn);
+        return araylist;
 
-    /*public void buttonInfoOpener (){
-        for (final Button button : buttonsArrayList) {
+    }
+
+    public void addButtonArray(Button button) {
+        buttonsArrayList.add(button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Open_activity_button_info();
+                System.out.println("fungujee");
+            }
+        });
+    }
+
+    public void addButtonsToList() {
+        // Code to create and add buttons to the layout and array list
+        Button newButton = new Button(this);
+        // Add newButton to your layout
+        addButtonArray(newButton);
+    }
+
+
+    /*public void buttonInfoOpener (final Button btn, ArrayList<Button> BtnArraylist){
+        for (btn : BtnArraylist) {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
