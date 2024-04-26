@@ -1,0 +1,22 @@
+Uživatel
+
+1) Správa uživatelù
+    • Pøidání uživatele
+2) Rozvrh
+    • Zatím nic
+3) Události (dìlení)
+    • Placené akce
+        ? Potvrzení události
+            ? zaplacená
+            ? dokonèená
+        ? Skrytí události
+    • Jednoduché oznámení bez èasového vymezení
+        ? Skrytí události
+    • Jednoduché oznámení èasovì vymezené
+        ? Potvrzení události
+            ? dokonèená
+        ? Skrytí události
+    • + další
+4)Známkování
+    • Zatím nic
+5) + další

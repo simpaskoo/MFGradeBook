@@ -1,0 +1,37 @@
+Správce (editor)
+
+1) Správa uživatelù
+    • Pøidání uživatele
+    • Odstranìní uživatele
+    • Skupiny
+        ? tvorba skupin
+        ? odebírání skupin
+2) Rozvrh
+    • Zatím nic
+3) Události (dìlení)
+    • Placené akce
+        ? Pøidání
+            ? pro všechny
+            ? pro jednotlivé skupiny
+            ? pro vybrané uživatele
+        ? Odebrání
+            ? pro všechny
+            ? pro jednotlivé skupiny
+            ? pro vybrané uživatele
+    • Jednoduché oznámení bez èasového vymezení
+        ? Pøidání
+            ? pro všechny
+            ? pro jednotlivé skupiny
+            ? pro vybrané uživatele
+        ? Odebrání
+            ? pro všechny
+            ? pro jednotlivé skupiny
+            ? pro vybrané uživatele
+    • Jednoduché oznámení èasovì vymezené
+        ? napø. : olympiády, soutìže
+        ? pøidání data
+        ? zaøazení do rozvrhu
+    • + další
+4)Známkování
+    • Zatím nic
+5) + další
