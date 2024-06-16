@@ -1,5 +1,7 @@
 package net.anax.appServerClient.client.data;
 
+
+//exception when the server could not be reached
 public class RequestFailedException extends Exception{
     public static boolean doPrintStackTrace = false;
     public RequestFailedException(String message){

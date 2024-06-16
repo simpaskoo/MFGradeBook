@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JavaAPK</string>
+    <string name="title_activity_login_into_profile">LoginIntoProfileActivity</string>
 </resources>

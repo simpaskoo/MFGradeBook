@@ -10,16 +10,10 @@ import java.util.HashMap;
 
 public class MemoryManager {
 
-    public static MemoryManager MainManager = null;
-
     ClientUser client;
     HashMap<Integer, User> rememberedUsers = new HashMap<>();
     HashMap<Integer, Task> rememberedTasks = new HashMap<>();
     HashMap<Integer, Group> rememberedGroups = new HashMap<>();
-
-    public static void createNewMainMemoryManager(ClientUser client){
-        MainManager = new MemoryManager(client);
-    }
     public MemoryManager(ClientUser client){
         this.client = client;
     }
