@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class MemoryManager {
 
-    ClientUser client;
+    public ClientUser client;
     HashMap<Integer, User> rememberedUsers = new HashMap<>();
     HashMap<Integer, Task> rememberedTasks = new HashMap<>();
     HashMap<Integer, Group> rememberedGroups = new HashMap<>();
@@ -80,6 +80,7 @@ public class MemoryManager {
         rememberedUsers.put(id, user);
         return user;
     }
+
     public ClientUser getClient(){
         try{
             client.requestUserInfo();

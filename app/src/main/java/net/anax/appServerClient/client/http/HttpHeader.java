@@ -4,6 +4,8 @@ public enum HttpHeader {
     Authorization("Authorization"),
     ContentType("Content-Type"),
     ContentLength("Content-Length"),
+    Accept("Accept"),
+    UserAgent("User-Agent"),
 
     ;
     public String key;

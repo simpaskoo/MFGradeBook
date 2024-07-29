@@ -19,6 +19,7 @@ public class HttpUtilities {
             request.addHeader(HttpHeader.Authorization, authToken);
 
             HttpWrapperRequest wrapperRequest = new HttpWrapperRequest(request, KeyManager.getINSTANCE().getAesKey(), KeyManager.getINSTANCE().getRSAPublicKey());
+
             HttpResponse response = wrapperRequest.send();
 
             if(response.responseCode != 200){

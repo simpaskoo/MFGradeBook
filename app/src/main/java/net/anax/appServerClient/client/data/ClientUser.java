@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ClientUser extends User{
+public class ClientUser extends User {
     private boolean autoRefreshToken = true;
     String password = "";
     Token cachedToken = Token.EMPTY;
@@ -24,6 +24,22 @@ public class ClientUser extends User{
     public ClientUser(int id, RemoteServer remoteServer){
         super(id, remoteServer);
     }
+
+    public void forgetPassword(){
+        this.password = "";
+    }
+
+    public boolean isPasswordRemembered() {
+        return this.password.isEmpty();
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public static ClientUser login(String username, String password, RemoteServer remoteServer) throws RequestFailedException, HttpErrorStatusException {
         ClientUser user = new ClientUser(-1, remoteServer);
         user.cachedUsername = username;

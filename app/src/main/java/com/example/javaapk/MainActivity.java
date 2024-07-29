@@ -23,7 +23,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import net.anax.appServerClient.client.data.RequestFailedException;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         Drawable drawable = getResources().getDrawable(R.drawable.menu_layers);
         getSupportActionBar().setBackgroundDrawable(drawable);
+
 
         instance = this;
 
@@ -111,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Open_activity_button_info();
         //buttonInfoOpener();
+
+        startActivity(new Intent(this, ProfilesActivity.class));
+
     }
 
     public static MainActivity getInstance() {

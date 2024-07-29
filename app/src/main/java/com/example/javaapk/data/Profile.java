@@ -8,8 +8,6 @@ import org.json.simple.JSONObject;
 
 public class Profile {
 
-    String name = null;
-    String password = null;
     public String username;
 
     MFGradeBookHandler mfGradeBookHandler;
@@ -19,30 +17,32 @@ public class Profile {
 
         this.username = username;
         mfGradeBookHandler = new MFGradeBookHandler(username, user);
-        mfGradeBookHandler.setPassword(password);
 
-        this.name = mfGradeBookHandler.name;
+    }
+
+    public void verifyPassword(String password) throws RequestFailedException, HttpErrorStatusException {
+        ClientUser.login(username, password, DataManager.REMOTE_SERVER);
     }
     public boolean hasSkolaOnline(){
         return skolaOnlineHandler != null;
     }
 
-    public Profile addPassword(String password){this.password = password; return this;}
-    public void forgetPassword(){
-        this.password = null;
+    public String getName(){
+        return mfGradeBookHandler.getName();
+    }
+
+    public Profile addPassword(String password){
+        mfGradeBookHandler.memoryManager.client.setPassword(password);
+        return this;
     }
     public boolean isPasswordRemembered(){
-        return password != null;
+        return mfGradeBookHandler.memoryManager.client.isPasswordRemembered();
     }
     public JSONObject toJson(){
 
         JSONObject data = new JSONObject();
 
-        data.put("name", name);
-
-        if(password != null){
-            data.put("password", password);
-        }
+        data.put("username", username);
 
         if(skolaOnlineHandler != null){
             data.put("skolaOnlineHandler", skolaOnlineHandler.toJson());

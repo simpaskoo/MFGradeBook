@@ -21,6 +21,12 @@ public class DataManager {
         }
         return INSTANCE;
     }
+
+    public int addProfile(Profile profile){
+        //adds the profile and returns its index;
+        profiles.add(profile);
+        return profiles.size()-1;
+    }
     public void selectProfile(Profile profile){
         this.selectedProfile = profile;
     }

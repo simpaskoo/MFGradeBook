@@ -7,4 +7,11 @@
         android:layout_height="match_parent"
         tools:context=".activities.menu.ProfilesActivity">
 
+    <Button
+            android:text="(+) Add Profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addProfileButton"
+            tools:layout_editor_absoluteY="623dp"
+            tools:layout_editor_absoluteX="249dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

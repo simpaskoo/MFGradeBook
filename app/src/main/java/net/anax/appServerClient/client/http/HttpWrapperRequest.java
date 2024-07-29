@@ -1,6 +1,7 @@
 package net.anax.appServerClient.client.http;
 
 import android.util.Base64;
+import android.util.Log;
 
 import net.anax.appServerClient.client.cryptography.AESKey;
 import net.anax.appServerClient.client.cryptography.RSAPublicKey;
@@ -15,12 +16,16 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Wrapper;
 import java.util.*;
 
 public class HttpWrapperRequest {
@@ -41,7 +46,7 @@ public class HttpWrapperRequest {
         this.rsaKey = rsaKey;
     }
 
-    public HttpResponse send() throws IOException, RequestFailedException {
+    public HttpResponse send() throws IOException, RequestFailedException, HttpErrorStatusException {
         try {
             underlyingRequest.addHeader(HttpHeader.ContentLength, String.valueOf(underlyingRequest.payload.length()));
 
@@ -65,20 +70,25 @@ public class HttpWrapperRequest {
             data.write(underlyingRequest.payload.getBytes(StandardCharsets.US_ASCII));
 
             byte[] requestData = data.toByteArray();
-            String requestDataBase64 = android.util.Base64.encodeToString(requestData, android.util.Base64.DEFAULT);
-            String aesKeyBase64 = android.util.Base64.encodeToString(aesKey.getKeyData(), android.util.Base64.DEFAULT);
+            String requestDataBase64 = android.util.Base64.encodeToString(requestData, Base64.NO_WRAP);
+            String aesKeyBase64 = android.util.Base64.encodeToString(aesKey.getKeyData(), Base64.NO_WRAP);
+            String aesIvBase64 = Base64.encodeToString(aesKey.getIv(), Base64.NO_WRAP);
 
             JSONObject requestJson = new JSONObject();
             requestJson.put("request", requestDataBase64);
             requestJson.put("key", aesKeyBase64);
+            requestJson.put("iv", aesIvBase64);
 
             byte[] wrapperData = requestJson.toString().getBytes(StandardCharsets.US_ASCII);
 
-            Cipher cipher = Cipher.getInstance("RSA");
+
+
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, rsaKey.getKey());
             byte[] encryptedData = cipher.doFinal(wrapperData);
 
-            String encryptedDataBase64 = android.util.Base64.encodeToString(encryptedData, android.util.Base64.DEFAULT);
+
+            String encryptedDataBase64 = android.util.Base64.encodeToString(encryptedData, Base64.NO_WRAP).replace("\n", "");
 
             URL oldUrl = underlyingRequest.url;
             URL url = new URL(oldUrl.getProtocol(), oldUrl.getHost(), oldUrl.getPort(), "/rsaRelay");
@@ -87,7 +97,7 @@ public class HttpWrapperRequest {
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setInstanceFollowRedirects(false);
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod("GET");
 
             connection.setRequestProperty("User-Agent", "redacted");
             connection.setRequestProperty("Host", "redacted"); // does not work
@@ -104,7 +114,15 @@ public class HttpWrapperRequest {
             connection.connect();
             HttpResponse response = new HttpResponse(connection.getResponseMessage(), connection.getResponseCode());
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            System.out.println("response code: " + response.responseCode + ", response message: " + response.message);
+
+            InputStream connectionInputStream;
+            if(response.responseCode == 200){
+                connectionInputStream = connection.getInputStream();
+            }else{
+                throw new HttpErrorStatusException("did not receive a 200 OK status code", response.responseCode, response.message);
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connectionInputStream));
 
             String line;
             StringBuilder builder = new StringBuilder();
@@ -129,21 +147,25 @@ public class HttpWrapperRequest {
             throw new RuntimeException(e);
         } catch (ParseException e) {
             throw new RuntimeException(e);
+        } catch (InvalidAlgorithmParameterException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public byte[] getResponseFromRSARelayPayload(String encryptedPayload, AESKey key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, ParseException, RequestFailedException {
-        byte[] encryptedData = android.util.Base64.decode(encryptedPayload, Base64.DEFAULT);
+    public byte[] getResponseFromRSARelayPayload(String encryptedPayload, AESKey key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, ParseException, RequestFailedException, InvalidAlgorithmParameterException {
+        byte[] encryptedData = android.util.Base64.decode(encryptedPayload, Base64.NO_WRAP);
 
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE, key.getKey());
+        IvParameterSpec ivSpec = new IvParameterSpec(key.getIv());
+
+        cipher.init(Cipher.DECRYPT_MODE, key.getKey(), ivSpec);
         byte[] decryptedData = cipher.doFinal(encryptedData);
 
         String payload = new String(decryptedData, StandardCharsets.US_ASCII);
 
         JSONParser parser = new JSONParser();
         JSONObject responseJson = (JSONObject) parser.parse(payload);
-        return android.util.Base64.decode(JsonUtilities.extractString(responseJson, "response", new RequestFailedException("response data not found in response json")), Base64.DEFAULT);
+        return android.util.Base64.decode(JsonUtilities.extractString(responseJson, "response", new RequestFailedException("response data not found in response json")), Base64.NO_WRAP);
     }
 
     public static HttpResponse parseHttpResponse(byte[] response) throws RequestFailedException {
@@ -160,26 +182,26 @@ public class HttpWrapperRequest {
         for(int i = 0; i < response.length; i++){
             char b = (char) response[i];
             switch (stage) {
-                case 0 : {if(b == SP){stage++;}} //skip over HTTP/1.1
-                case 1 : {if(b == SP){stage++;}else{responseCode.append(b);}} //read status code, move on after encountering SP
-                case 2 : {if(b == CR){stage++;}else{responseMessage.append(b);}} //read response message, skip if linebreak detected
-                case 3 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response after main line");}else{stage++;}} //only support for CRLF
+                case 0 : {if(b == SP){stage++;} break;} //skip over HTTP/1.1
+                case 1 : {if(b == SP){stage++;}else{responseCode.append(b);} break;} //read status code, move on after encountering SP
+                case 2 : {if(b == CR){stage++;}else{responseMessage.append(b);} break;} //read response message, skip if linebreak detected
+                case 3 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response after main line");}else{stage++;} break;} //only support for CRLF
                 case 4 : {if(b == CLN){
                     stage++;
                     tempHeaderKey = tempHeader.toString();
                     tempHeader.setLength(0);
-                }else{tempHeader.append(b);}} //read header key, move over to the value after encountering colon
+                }else{tempHeader.append(b);}break;} //read header key, move over to the value after encountering colon
                 case 5 : {if(b == CR){
                     stage++;
                     if(headers.get(tempHeaderKey) == null){headers.put(tempHeaderKey, new ArrayList<>());}
                     headers.get(tempHeaderKey).add(tempHeader.toString());
                     tempHeader.setLength(0);
 
-                }else{tempHeader.append(b);}} //read header value;
-                case 6 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response after header");}else{stage++;}}
-                case 7 : {if(b != CR){tempHeader.append(b); stage = 4;}else{stage++;}}//move onto another header if not blank line. otherwise move onto payload
-                case 8 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response before payload");}else{stage++;}}
-                case 9 : {payload.append(b);}
+                }else{tempHeader.append(b);}break;} //read header value;
+                case 6 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response after header");}else{stage++;}break;}
+                case 7 : {if(b != CR){tempHeader.append(b); stage = 4;}else{stage++;}break;}//move onto another header if not blank line. otherwise move onto payload
+                case 8 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response before payload");}else{stage++;}break;}
+                case 9 : {payload.append(b);break;}
             }
         }
 
