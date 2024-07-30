@@ -10,13 +10,14 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class ClientUser extends User {
     private boolean autoRefreshToken = true;
     String password = "";
     Token cachedToken = Token.EMPTY;
-    public ArrayList<TaskAssignment> cachedTaskAssignments = new ArrayList<>();
-    public ArrayList<Integer> cachedGroupIds = new ArrayList<>();
+    public HashSet<TaskAssignment> cachedTaskAssignments = new HashSet<>();
+    public HashSet<Integer> cachedGroupIds = new HashSet<>();
 
     public void setDoAutoRefreshToken(boolean autoRefreshToken){
         this.autoRefreshToken = autoRefreshToken;

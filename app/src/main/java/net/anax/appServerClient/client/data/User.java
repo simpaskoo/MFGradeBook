@@ -24,7 +24,9 @@ public class User {
         if(!(response.get("username") instanceof String)){throw new RequestFailedException("response does not contain valid data", null);}
         return (String) response.get("username");
     }
-    public int getId(){return id;}
+    public int getId(){
+        return id;
+    }
     String requestName(Token token) throws RequestFailedException, HttpErrorStatusException {
         JSONObject data = new JSONObject();
         data.put("id", id);

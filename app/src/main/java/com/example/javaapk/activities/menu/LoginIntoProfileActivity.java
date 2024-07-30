@@ -16,6 +16,7 @@ import com.example.javaapk.GlobalConstants;
 import com.example.javaapk.R;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
+import com.example.javaapk.util.ActivityUtilities;
 
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
@@ -29,7 +30,6 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
     public static final String ACTION_LOGIN_EXISTING = GlobalConstants.appQualifier + ".ACTION_LOGIN_EXISTING"; //action to login with a password to an existing profile and select it.
     public static final String ACTION_LOGIN_NEW = GlobalConstants.appQualifier + ".ACTION_LOGIN_NEW"; //action to add a new profile into the list of existing profiles and select it.
     public static final String TAG = LoginIntoProfileActivity.class.getName();
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     Button submitButton;
     EditText usernameText;
@@ -81,7 +81,7 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
 
                         String password = passwordText.getText().toString();
 
-                        executorService.execute(() -> {
+                        ActivityUtilities.runNetworkOperation(() -> {
                             try{
                                 profile.verifyPassword(password);
                             }catch (RequestFailedException e) {
@@ -89,13 +89,14 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
                                 Log.d(TAG, "could not reach server");
                                 return;
                             } catch (HttpErrorStatusException e) {
-                                //invalid password
+                                //invalid password if status code == 403
                                 Log.d(TAG, "invalid password");
                                 return;
                             }
 
                             profile.addPassword(password);
                             DataManager.getInstance().selectProfile(profileIndex);
+                            startMenuActivity();
                             LoginIntoProfileActivity.this.finish();
                         });
 
@@ -108,7 +109,7 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
                 submitButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        executorService.execute(() ->{
+                        ActivityUtilities.runNetworkOperation(() ->{
                             String username = usernameText.getText().toString();
                             String password = passwordText.getText().toString();
                             Profile profile;
@@ -123,6 +124,7 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
                                 return;
                             }
                             DataManager.getInstance().selectProfile(DataManager.getInstance().addProfile(profile));
+                            startMenuActivity();
                             finish();
                         });
                     }
@@ -141,4 +143,10 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
             }
         }
     }
+
+    void startMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
 }

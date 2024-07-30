@@ -1,7 +1,11 @@
 package net.anax.appServerClient.client.data;
 
+import androidx.annotation.Nullable;
+
 import net.anax.appServerClient.client.util.JsonUtilities;
 import org.json.simple.JSONObject;
+
+import java.util.Objects;
 
 public class TaskAssignment {
     public int taskId;
@@ -32,5 +36,20 @@ public class TaskAssignment {
         System.out.println("task id: " + taskId);
         System.out.println("user id: " + userId);
         System.out.println("is completed: " + isCompleted);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskId, userId);
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj instanceof TaskAssignment){
+            TaskAssignment task = (TaskAssignment)obj;
+            return (task.userId == this.userId && task.taskId == this.taskId);
+
+        }
+        return false;
     }
 }

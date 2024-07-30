@@ -15,6 +15,26 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
+                android:name=".activities.menu.ManageGroupsActivity"
+                android:exported="false" />
+        <activity
+                android:name=".activities.aboutApp.AboutAppActivity"
+                android:exported="false" />
+        <activity
+                android:name=".activities.assessments.AssessmentsActivity"
+                android:exported="false" />
+        <activity
+                android:name=".activities.events.EventsActivity"
+                android:exported="false" />
+        <activity
+                android:name=".activities.timetable.TimetableActivity"
+                android:exported="false" />
+        <activity
+                android:name=".activities.menu.MenuActivity"
+                android:exported="false"
+                android:label="@string/title_activity_menu"
+                android:theme="@style/Theme.JavaAPK" />
+        <activity
                 android:name=".activities.menu.LoginIntoProfileActivity"
                 android:exported="false"
                 android:label="@string/title_activity_login_into_profile"

@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">JavaAPK</string>
     <string name="title_activity_login_into_profile">LoginIntoProfileActivity</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="timetable">Timetable</string>
+    <string name="events">Events</string>
+    <string name="assessments">Assessments</string>
+    <string name="manage_profiles">Manage Profiles</string>
+    <string name="about_app">About app</string>
+    <string name="log_out">Log out</string>
+    <string name="manage_groups">Manage Groups</string>
+    <string name="loading">Loading…</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="task_type_unknown">Unknown</string>
+    <string name="task_type_none">None</string>
+    <string name="task_type_not_recognized">Not Recognized</string>
 </resources>

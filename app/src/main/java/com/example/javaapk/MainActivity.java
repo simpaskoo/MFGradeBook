@@ -23,6 +23,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import com.example.javaapk.activities.menu.MenuActivity;
 import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -116,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
         //Open_activity_button_info();
         //buttonInfoOpener();
 
-        startActivity(new Intent(this, ProfilesActivity.class));
+        startActivity(new Intent(this, MenuActivity.class));
+        finish();
 
     }
 

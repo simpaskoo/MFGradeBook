@@ -2,6 +2,7 @@ package com.example.javaapk.data;
 
 import net.anax.appServerClient.client.data.ClientUser;
 import net.anax.appServerClient.client.data.RequestFailedException;
+import net.anax.appServerClient.client.data.TaskAssignment;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
 import org.json.simple.JSONObject;
@@ -10,7 +11,7 @@ public class Profile {
 
     public String username;
 
-    MFGradeBookHandler mfGradeBookHandler;
+    public MFGradeBookHandler mfGradeBookHandler;
     SkolaOnlineHandler skolaOnlineHandler = null;
     public Profile(String username, String password) throws RequestFailedException, HttpErrorStatusException {
         ClientUser user = ClientUser.login(username, password, DataManager.REMOTE_SERVER);
@@ -31,12 +32,20 @@ public class Profile {
         return mfGradeBookHandler.getName();
     }
 
+    public TaskAssignment[] getTaskAssignments(){
+        return mfGradeBookHandler.getTaskIds();
+    }
+
     public Profile addPassword(String password){
         mfGradeBookHandler.memoryManager.client.setPassword(password);
         return this;
     }
     public boolean isPasswordRemembered(){
         return mfGradeBookHandler.memoryManager.client.isPasswordRemembered();
+    }
+
+    public int getId(){
+        return mfGradeBookHandler.memoryManager.client.getId();
     }
     public JSONObject toJson(){
 

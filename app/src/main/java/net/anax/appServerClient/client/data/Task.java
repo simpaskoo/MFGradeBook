@@ -1,5 +1,7 @@
 package net.anax.appServerClient.client.data;
 
+import com.example.javaapk.R;
+
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 import net.anax.appServerClient.client.server.RemoteServer;
 import net.anax.appServerClient.client.server.Token;
@@ -13,9 +15,9 @@ public class Task {
     int id;
     public long cachedDueTimestamp = 0;
     public String cachedDescription = "";
-    int cachedType = TaskType.UNKNOWN.type;
-    int cachedGroupId = ID.UNKNOWN.id;
-    int cachedAmount = ID.UNKNOWN.id;
+    public int cachedType = TaskType.UNKNOWN.type;
+    public int cachedGroupId = ID.UNKNOWN.id;
+    public int cachedAmount = ID.UNKNOWN.id;
 
     ArrayList<Integer> cachedUserIds = new ArrayList<>();
     public Task(int id){
@@ -43,17 +45,17 @@ public class Task {
         this.cachedType = type;
 
         if(response.containsKey("groupId") && response.get("groupId") instanceof Long){
-            cachedGroupId = (int) response.get("groupId");
+            cachedGroupId = (int) ((Long)response.get("groupId")).longValue();
         }
         if(response.containsKey("amount") && response.get("amount") instanceof Long){
-            this.cachedAmount = (int) response.get("amount");
+            this.cachedAmount = (int) ((Long)response.get("amount")).longValue();
         }
 
         JSONArray userIds = JsonUtilities.extractJSONArray(response, "userIds", e);
 
         for(int i = 0; i < userIds.size(); i++){
             if(userIds.get(i) instanceof Long){
-                cachedUserIds.add((Integer) userIds.get(i));
+                cachedUserIds.add((int) ((Long)userIds.get(i)).longValue());
             }
         }
     }
@@ -200,12 +202,20 @@ public class Task {
     }
 
     public static enum TaskType{
-        UNKNOWN(-2),
-        NONE(0);
+        UNKNOWN(-2, R.string.task_type_unknown),
+        NONE(0, R.string.task_type_none);
 
-        public int type;
-        TaskType(int type){
+        public final int type;
+        public final int textId;
+        TaskType(int type, int textId){
             this.type = type;
+            this.textId = textId;
+        }
+        public static int getTextId(int type){
+            for(TaskType taskType : TaskType.values()){
+                if (taskType.type == type){return taskType.textId;}
+            }
+            return R.string.task_type_not_recognized;
         }
     }
 

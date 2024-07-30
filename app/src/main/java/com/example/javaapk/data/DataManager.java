@@ -30,9 +30,14 @@ public class DataManager {
     public void selectProfile(Profile profile){
         this.selectedProfile = profile;
     }
-
     public void selectProfile(int profileIndex){
         this.selectProfile(profiles.get(profileIndex));
+    }
+    public boolean isProfileSelected(){
+        return selectedProfile != null;
+    }
+    public Profile getSelectedProfile(){
+        return selectedProfile;
     }
 
 }
