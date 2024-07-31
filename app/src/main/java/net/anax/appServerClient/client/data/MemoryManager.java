@@ -13,7 +13,7 @@ public class MemoryManager {
     public ClientUser client;
     HashMap<Integer, User> rememberedUsers = new HashMap<>();
     HashMap<Integer, Task> rememberedTasks = new HashMap<>();
-    HashMap<Integer, Group> rememberedGroups = new HashMap<>();
+    public HashMap<Integer, Group> rememberedGroups = new HashMap<>();
     public MemoryManager(ClientUser client){
         this.client = client;
     }

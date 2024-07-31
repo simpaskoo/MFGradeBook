@@ -1,16 +1,21 @@
 package com.example.javaapk.activities.menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaapk.R;
@@ -44,11 +49,31 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
         Profile profile = DataManager.getInstance().getSelectedProfile();
 
-        SideMenuHelper menuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
-        menuHelper.initiateSideMenu();
+        Button addNewGroupButton = findViewById(R.id.button_add_new_group);
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    refreshGroups(profile);
+                }
+        );
+        addNewGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ManageGroupsActivity.this, CreateNewGroupActivity.class);
+                activityResultLauncher.launch(intent);
+            }
+        });
 
         RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        SideMenuHelper menuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
+        menuHelper.initiateSideMenu();
+        refreshGroups(profile);
+    }
+
+    void refreshGroups(Profile profile){
+        RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
         ActivityUtilities.runNetworkOperation(() -> {
             int[] ids = profile.mfGradeBookHandler.getGroupIds();
 
@@ -64,11 +89,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
                 GroupEntryAdapter adapter = new GroupEntryAdapter(groups);
                 recyclerView.setAdapter(adapter);
             });
-
         });
-
-
-
     }
 
     static class GroupEntryAdapter extends RecyclerView.Adapter<GroupEntryAdapter.ViewHolder>{

@@ -1,8 +1,11 @@
 package com.example.javaapk.data;
 
 import net.anax.appServerClient.client.data.ClientUser;
+import net.anax.appServerClient.client.data.Group;
 import net.anax.appServerClient.client.data.MemoryManager;
+import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.data.TaskAssignment;
+import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
 import org.json.simple.JSONObject;
 
@@ -29,6 +32,14 @@ public class MFGradeBookHandler {
     public int[] getGroupIds(){
         HashSet<Integer> set = memoryManager.getClient().cachedGroupIds;
         return set.stream().mapToInt(Number::intValue).toArray();
+    }
+
+    public Group createGroup(String name) throws RequestFailedException, HttpErrorStatusException {
+        Group g = Group.createGroup(memoryManager.getClient().getToken(), name, DataManager.REMOTE_SERVER);
+
+        memoryManager.rememberedGroups.put(g.id, g);
+        return g;
+
     }
 
     public JSONObject toJson(){

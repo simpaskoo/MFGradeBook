@@ -117,8 +117,7 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
                                 profile = new Profile(username, password);
                             } catch (RequestFailedException e) {
                                 Log.d(TAG, "could not reach server");
-                                throw new RuntimeException(e);
-                                //return;
+                                return;
                             } catch (HttpErrorStatusException e) {
                                 Log.d(TAG, "invalid password");
                                 return;

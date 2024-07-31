@@ -15,6 +15,9 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
+                android:name=".activities.menu.CreateNewGroupActivity"
+                android:exported="false" />
+        <activity
                 android:name=".activities.menu.ManageGroupsActivity"
                 android:exported="false" />
         <activity

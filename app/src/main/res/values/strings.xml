@@ -15,4 +15,5 @@
     <string name="task_type_unknown">Unknown</string>
     <string name="task_type_none">None</string>
     <string name="task_type_not_recognized">Not Recognized</string>
+    <string name="create_new_group">Create new group</string>
 </resources>

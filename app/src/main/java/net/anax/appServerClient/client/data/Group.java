@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
 public class Group {
-    int id;
+    public int id;
     public String cachedName = "";
     int treasurerUserId = ID.UNKNOWN.id;
     int adminUserId = ID.UNKNOWN.id;
