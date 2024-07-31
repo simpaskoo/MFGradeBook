@@ -6,6 +6,7 @@ import android.util.Log;
 import net.anax.appServerClient.client.cryptography.AESKey;
 import net.anax.appServerClient.client.cryptography.RSAPublicKey;
 import net.anax.appServerClient.client.data.RequestFailedException;
+import net.anax.appServerClient.client.util.CryptoUtilities;
 import net.anax.appServerClient.client.util.JsonUtilities;
 import net.anax.appServerClient.client.util.StringUtilities;
 import org.json.simple.JSONObject;
@@ -70,27 +71,22 @@ public class HttpWrapperRequest {
             data.write(underlyingRequest.payload.getBytes(StandardCharsets.US_ASCII));
 
             byte[] requestData = data.toByteArray();
-            String requestDataBase64 = android.util.Base64.encodeToString(requestData, Base64.NO_WRAP);
-            String aesKeyBase64 = android.util.Base64.encodeToString(aesKey.getKeyData(), Base64.NO_WRAP);
-            String aesIvBase64 = Base64.encodeToString(aesKey.getIv(), Base64.NO_WRAP);
+            byte[] encryptedRequestData = CryptoUtilities.encryptWithAES(requestData, aesKey.getKey(), aesKey.getIv());
+
+            byte[] encryptedAesKey = CryptoUtilities.encryptWithRSA(aesKey.getKeyData(), rsaKey.getKey());
+            byte[] encryptedIv = CryptoUtilities.encryptWithRSA(aesKey.getIv(), rsaKey.getKey());
+
+            String encryptedRequestDataBase64 = android.util.Base64.encodeToString(encryptedRequestData, Base64.NO_WRAP);
+            String encryptedAesKeyBase64 = Base64.encodeToString(encryptedAesKey, Base64.NO_WRAP);
+            String encryptedIvBase64 = Base64.encodeToString(encryptedIv, Base64.NO_WRAP);
 
             JSONObject requestJson = new JSONObject();
 
-
-            requestJson.put("request", requestDataBase64);
-            requestJson.put("key", aesKeyBase64);
-            requestJson.put("iv", aesIvBase64);
+            requestJson.put("encrypted_request", encryptedRequestDataBase64);
+            requestJson.put("encrypted_key", encryptedAesKeyBase64);
+            requestJson.put("encrypted_iv", encryptedIvBase64);
 
             byte[] wrapperData = requestJson.toString().getBytes(StandardCharsets.US_ASCII);
-
-
-
-            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, rsaKey.getKey());
-            byte[] encryptedData = cipher.doFinal(wrapperData);
-
-
-            String encryptedDataBase64 = android.util.Base64.encodeToString(encryptedData, Base64.NO_WRAP).replace("\n", "");
 
             URL oldUrl = underlyingRequest.url;
             URL url = new URL(oldUrl.getProtocol(), oldUrl.getHost(), oldUrl.getPort(), "/rsaRelay");
@@ -109,9 +105,9 @@ public class HttpWrapperRequest {
 
             OutputStream ostream = connection.getOutputStream();
 
-            System.out.println("beginning to write data: " + Arrays.toString(encryptedDataBase64.getBytes(StandardCharsets.US_ASCII)));
+            System.out.println("beginning to write data: " + Arrays.toString(wrapperData));
 
-            ostream.write(encryptedDataBase64.getBytes(StandardCharsets.US_ASCII));
+            ostream.write(wrapperData);
 
             connection.connect();
             HttpResponse response = new HttpResponse(connection.getResponseMessage(), connection.getResponseCode());
