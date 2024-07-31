@@ -25,6 +25,12 @@ public class MFGradeBookHandler {
         set.toArray(ret);
         return ret;
     }
+
+    public int[] getGroupIds(){
+        HashSet<Integer> set = memoryManager.getClient().cachedGroupIds;
+        return set.stream().mapToInt(Number::intValue).toArray();
+    }
+
     public JSONObject toJson(){
         JSONObject data = new JSONObject();
         data.put("username", username);

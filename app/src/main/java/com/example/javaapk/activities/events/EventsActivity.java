@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.menu.SideMenuHelper;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -51,8 +52,8 @@ public class EventsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Profile profile = DataManager.getInstance().getSelectedProfile();
-
-        Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+        SideMenuHelper sideMenuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
+        sideMenuHelper.initiateSideMenu();
 
         ActivityUtilities.runNetworkOperation(() -> {
             TaskAssignment[] assignments = profile.getTaskAssignments();
@@ -77,7 +78,7 @@ public class EventsActivity extends AppCompatActivity {
 
             System.out.println("taskids: " + taskIds);
 
-            mainThreadHandler.post(() -> {
+            ActivityUtilities.runOnMainThread(() -> {
                 EventEntryTaskAdapter adapter = new EventEntryTaskAdapter(tasks);
                 recyclerView.setAdapter(adapter);
             });

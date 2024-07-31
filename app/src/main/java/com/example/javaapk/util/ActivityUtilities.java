@@ -2,6 +2,8 @@ package com.example.javaapk.util;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +18,7 @@ import java.util.function.Supplier;
 
 public class ActivityUtilities {
     final static ExecutorService executorService = Executors.newSingleThreadExecutor();
+    static Handler mainThreadHandler = new Handler(Looper.getMainLooper());
     public static void askToSelectProfile(Activity parent){
         Intent intent = new Intent(parent, ProfilesActivity.class);
         parent.startActivity(intent);
@@ -35,6 +38,10 @@ public class ActivityUtilities {
             }
         });
 
+    }
+
+    public static void runOnMainThread(Runnable command){
+        mainThreadHandler.post(command);
     }
 
 }

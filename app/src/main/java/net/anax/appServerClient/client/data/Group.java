@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Group {
     int id;
-    String cachedName = "";
+    public String cachedName = "";
     int treasurerUserId = ID.UNKNOWN.id;
     int adminUserId = ID.UNKNOWN.id;
     ArrayList<Integer> userIds = new ArrayList<>();

@@ -75,6 +75,8 @@ public class HttpWrapperRequest {
             String aesIvBase64 = Base64.encodeToString(aesKey.getIv(), Base64.NO_WRAP);
 
             JSONObject requestJson = new JSONObject();
+
+
             requestJson.put("request", requestDataBase64);
             requestJson.put("key", aesKeyBase64);
             requestJson.put("iv", aesIvBase64);
