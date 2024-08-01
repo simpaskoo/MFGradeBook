@@ -9,6 +9,7 @@ import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class MFGradeBookHandler {
@@ -32,6 +33,21 @@ public class MFGradeBookHandler {
     public int[] getGroupIds(){
         HashSet<Integer> set = memoryManager.getClient().cachedGroupIds;
         return set.stream().mapToInt(Number::intValue).toArray();
+    }
+
+    public int[] getUsersFromGroups(){
+        int[] groupIds = getGroupIds();
+
+        HashSet<Integer> userIds = new HashSet<>();
+        for(int groupId : groupIds){
+            try {
+                Group g = memoryManager.getGroup(groupId);
+                userIds.addAll(g.userIds);
+            } catch (RequestFailedException | HttpErrorStatusException e) {
+                continue;
+            }
+        }
+        return userIds.stream().mapToInt(Number::intValue).toArray();
     }
 
     public Group createGroup(String name) throws RequestFailedException, HttpErrorStatusException {

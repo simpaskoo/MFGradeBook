@@ -16,4 +16,18 @@
     <string name="task_type_none">None</string>
     <string name="task_type_not_recognized">Not Recognized</string>
     <string name="create_new_group">Create new group</string>
+    <string name="user_name_unknown">Unknown</string>
+    <string name="user_name_none">No one</string>
+    <string name="name">Name</string>
+    <string name="admin">Administrator</string>
+    <string name="treasurer">Treasurer\n</string>
+    <string name="member_count">Members</string>
+    <string name="admin_options">Admin Options</string>
+    <string name="change_group_admin">Change Admin</string>
+    <string name="change_group_name">Change Name</string>
+    <string name="change_group_treasurer">Change Treasurer</string>
+    <string name="reroll_group_access_code">Reroll Access Code</string>
+    <string name="enter_name">Enter name</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
 </resources>

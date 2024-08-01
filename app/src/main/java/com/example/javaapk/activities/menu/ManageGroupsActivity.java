@@ -1,6 +1,10 @@
 package com.example.javaapk.activities.menu;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +36,17 @@ import java.util.List;
 
 public class ManageGroupsActivity extends AppCompatActivity {
 
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals("GROUP_CHANGED")){
+                refreshGroups(profile);
+            }
+        }
+    };
+
+    Profile profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,25 +57,33 @@ public class ManageGroupsActivity extends AppCompatActivity {
             return insets;
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(receiver, new IntentFilter("GROUP_CHANGED"), Context.RECEIVER_NOT_EXPORTED);
+        }else{
+            registerReceiver(receiver, new IntentFilter("GROUP_CHANGED"));
+        }
 
         if(!DataManager.getInstance().isProfileSelected()){
             ActivityUtilities.askToSelectProfile(this);
         }
-
-        Profile profile = DataManager.getInstance().getSelectedProfile();
+        profile = DataManager.getInstance().getSelectedProfile();
 
         Button addNewGroupButton = findViewById(R.id.button_add_new_group);
 
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(), result -> {
-                    refreshGroups(profile);
-                }
-        );
         addNewGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ManageGroupsActivity.this, CreateNewGroupActivity.class);
-                activityResultLauncher.launch(intent);
+                ActivityUtilities.InputDialogHelper dialogHelper = new ActivityUtilities.InputDialogHelper(getResources().getString(R.string.enter_name), getResources().getString(R.string.name), ManageGroupsActivity.this);
+                dialogHelper.initDialog((dialog, which) -> ActivityUtilities.runNetworkOperation(() -> {
+                    dialog.dismiss();
+                    try {
+                        String name = dialogHelper.input.getText().toString();
+                        if(name.isEmpty()){return;}
+                        profile.mfGradeBookHandler.createGroup(name);
+                        sendBroadcast(new Intent("GROUP_CHANGED"));
+                    } catch (RequestFailedException | HttpErrorStatusException e) {
+                        //TODO: handle unable to create group;
+                    }}));
             }
         });
 
@@ -69,6 +92,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
         SideMenuHelper menuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
         menuHelper.initiateSideMenu();
+
         refreshGroups(profile);
     }
 
@@ -86,7 +110,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
             }
 
             ActivityUtilities.runOnMainThread(()->{
-                GroupEntryAdapter adapter = new GroupEntryAdapter(groups);
+                GroupEntryAdapter adapter = new GroupEntryAdapter(groups, ManageGroupsActivity.this);
                 recyclerView.setAdapter(adapter);
             });
         });
@@ -94,21 +118,25 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
     static class GroupEntryAdapter extends RecyclerView.Adapter<GroupEntryAdapter.ViewHolder>{
         List<Group> groups;
-        GroupEntryAdapter(List<Group> groups){
+        Context context;
+        GroupEntryAdapter(List<Group> groups, Context context){
             this.groups = groups;
+            this.context = context;
         }
 
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.group_entry, parent, false);
-            return new ViewHolder(view);
+            return new ViewHolder(view, context);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Group g = groups.get(position);
             holder.groupNameView.setText(g.cachedName);
+            holder.initListener(g.id);
+
         }
 
         @Override
@@ -116,13 +144,29 @@ public class ManageGroupsActivity extends AppCompatActivity {
             return groups.size();
         }
 
+        public Group getGroupAtPosition(int position){
+            return groups.get(position);
+        }
         static class ViewHolder extends RecyclerView.ViewHolder{
             TextView groupNameView;
-            public ViewHolder(@NonNull View itemView){
+            View itemView;
+            Context context;
+            public ViewHolder(@NonNull View itemView, Context context){
                 super(itemView);
                 groupNameView = itemView.findViewById(R.id.group_entry_name);
+                this.itemView = itemView;
+                this.context = context;
             }
-
+            public void initListener(int groupId){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ManageSingleGroupActivity.class);
+                        intent.putExtra("groupId", groupId);
+                        context.startActivity(intent);
+                    }
+                });
+            }
         }
     }
 }

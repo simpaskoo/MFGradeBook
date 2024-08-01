@@ -22,7 +22,9 @@ public class User {
         JSONObject response = HttpUtilities.doRequest(remoteServer.getUrl() + "/user/getUsername", data, token.getTokenString());
         if(!response.containsKey("username")){throw new RequestFailedException("response does not contain necessary data", null);}
         if(!(response.get("username") instanceof String)){throw new RequestFailedException("response does not contain valid data", null);}
-        return (String) response.get("username");
+        String username = (String) response.get("username");
+        this.cachedUsername = username;
+        return username;
     }
     public int getId(){
         return id;
@@ -33,7 +35,9 @@ public class User {
         JSONObject response = HttpUtilities.doRequest(remoteServer.getUrl() + "/user/getName", data, token.getTokenString());
         if(!response.containsKey("name")){throw new RequestFailedException("response does not contain necessary data");}
         if(!(response.get("name") instanceof String)){throw new RequestFailedException("response does not contain valid data");}
-        return (String) response.get("name");
+        String name = (String) response.get("name");
+        this.cachedName = name;
+        return name;
     }
 
     public JSONObject getJson(){

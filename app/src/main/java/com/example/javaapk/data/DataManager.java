@@ -7,7 +7,7 @@ import net.anax.appServerClient.client.server.RemoteServer;
 import java.util.ArrayList;
 
 public class DataManager {
-    public static DataManager INSTANCE = null;
+    private static DataManager INSTANCE = null;
     public static RemoteServer REMOTE_SERVER = new RemoteServer(GlobalConstants.serverUrl);
 
     public ArrayList<Profile> profiles = new ArrayList<>();

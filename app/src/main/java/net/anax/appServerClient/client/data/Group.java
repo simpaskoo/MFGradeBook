@@ -13,9 +13,10 @@ import java.util.ArrayList;
 public class Group {
     public int id;
     public String cachedName = "";
-    int treasurerUserId = ID.UNKNOWN.id;
-    int adminUserId = ID.UNKNOWN.id;
-    ArrayList<Integer> userIds = new ArrayList<>();
+    public String cachedAccessCode = "";
+    public int treasurerUserId = ID.UNKNOWN.id;
+    public int adminUserId = ID.UNKNOWN.id;
+    public ArrayList<Integer> userIds = new ArrayList<>();
     ArrayList<Integer> taskIds = new ArrayList<>();
     public Group(int id){
         this.id = id;
@@ -36,6 +37,7 @@ public class Group {
 
         this.cachedName = JsonUtilities.extractString(response, "name", e);
         this.adminUserId = JsonUtilities.extractInt(response, "admin_id", e);
+        this.cachedAccessCode = JsonUtilities.extractString(response, "accessCode", e);
 
         JSONArray userIds = JsonUtilities.extractJSONArray(response, "userIds", e);
         JSONArray taskIds = JsonUtilities.extractJSONArray(response, "taskIds", e);
@@ -119,6 +121,7 @@ public class Group {
         data.put("id", id);
         data.put("treasurerUserId", treasurerUserId);
         data.put("adminUserID", adminUserId);
+        data.put("accessCode", cachedAccessCode);
 
         JSONArray userIdsArray = new JSONArray();
         JSONArray taskIdsArray = new JSONArray();
@@ -145,11 +148,13 @@ public class Group {
         String name = JsonUtilities.extractString(data, "name", e);
         int treasurerUserId = JsonUtilities.extractInt(data, "treasurerUserId", e);
         int adminUserId = JsonUtilities.extractInt(data, "adminUserId", e);
+        String accessCode = JsonUtilities.extractString(data, "accessCode", e);
 
         Group g = new Group(id);
         g.cachedName = name;
         g.treasurerUserId = treasurerUserId;
         g.adminUserId = adminUserId;
+        g.cachedAccessCode = accessCode;
 
         for(Object o : userIdsArray){
             if(o instanceof Long){
