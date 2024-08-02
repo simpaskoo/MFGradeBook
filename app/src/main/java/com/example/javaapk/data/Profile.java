@@ -12,29 +12,30 @@ public class Profile {
     public String username;
 
     public MFGradeBookHandler mfGradeBookHandler;
-    SkolaOnlineHandler skolaOnlineHandler = null;
+    public SkolaOnlineHandler skolaOnlineHandler = null;
     public Profile(String username, String password) throws RequestFailedException, HttpErrorStatusException {
         ClientUser user = ClientUser.login(username, password, DataManager.REMOTE_SERVER);
 
         this.username = username;
         mfGradeBookHandler = new MFGradeBookHandler(username, user);
-
     }
 
+    public void initiateSkolaOnline(String username, String password){
+        this.skolaOnlineHandler = new SkolaOnlineHandler(username, password);
+    }
     public void verifyPassword(String password) throws RequestFailedException, HttpErrorStatusException {
         ClientUser.login(username, password, DataManager.REMOTE_SERVER);
     }
     public boolean hasSkolaOnline(){
         return skolaOnlineHandler != null;
     }
-
     public String getName(){
         return mfGradeBookHandler.getName();
     }
-
     public TaskAssignment[] getTaskAssignments(){
         return mfGradeBookHandler.getTaskIds();
     }
+
 
     public Profile addPassword(String password){
         mfGradeBookHandler.memoryManager.client.setPassword(password);

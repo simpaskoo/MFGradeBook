@@ -28,4 +28,8 @@
             android:title="@string/about_app"
             android:id="@+id/side_menu_item_about_app" />
 
+    <item
+            android:title="@string/settings"
+            android:id="@+id/side_menu_item_settings" />
+
 </menu>

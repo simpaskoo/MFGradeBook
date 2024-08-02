@@ -14,7 +14,6 @@ import org.jsoup.select.Elements;
 import java.util.Arrays;
 
 public class TimetableWeek {
-
     public TimetableDay[] days;
     /** contains the time intervals for each lesson column. for example "07:20 - 08:05" **/
     public String[] lessonTimeIntervals;

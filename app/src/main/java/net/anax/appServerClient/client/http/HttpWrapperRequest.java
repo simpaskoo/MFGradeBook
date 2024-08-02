@@ -18,6 +18,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
+import javax.net.ssl.HttpsURLConnection;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -90,6 +91,7 @@ public class HttpWrapperRequest {
 
             URL oldUrl = underlyingRequest.url;
             URL url = new URL(oldUrl.getProtocol(), oldUrl.getHost(), oldUrl.getPort(), "/rsaRelay");
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setDoInput(true);

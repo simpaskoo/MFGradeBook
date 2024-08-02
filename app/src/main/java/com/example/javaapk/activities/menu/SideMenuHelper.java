@@ -51,6 +51,11 @@ public class SideMenuHelper {
                     parent.startActivity(intent);
                     parent.finish();
                     return true;
+                }else if (id == R.id.side_menu_item_settings){
+                    Intent intent = new Intent(parent, SettingsActivity.class);
+                    parent.startActivity(intent);
+                    parent.finish();
+                    return true;
                 }
                 return false;
             }
