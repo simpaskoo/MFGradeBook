@@ -30,35 +30,32 @@ public class SideMenuHelper {
     public void initiateSideMenu(){
         View headerView = navigationView.getHeaderView(0);
         TextView drawerHeader = headerView.findViewById(R.id.header_text);
-        ActivityUtilities.updateTextViewWithRemoteString(drawerHeader, () -> {return selectedUser.getName();});
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
+        ActivityUtilities.updateTextViewWithRemoteString(drawerHeader, () -> selectedUser.getName());
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-                if(id == R.id.side_menu_item_manage_profiles){
-                    Intent intent = new Intent(parent, ProfilesActivity.class);
-                    parent.startActivity(intent);
-                    parent.finish();
-                    return true;
-                }else if (id == R.id.side_menu_item_events){
-                    Intent intent = new Intent(parent, EventsActivity.class);
-                    parent.startActivity(intent);
-                    parent.finish();
-                    return true;
-                }else if (id == R.id.side_menu_item_manage_groups){
-                    Intent intent = new Intent(parent, ManageGroupsActivity.class);
-                    parent.startActivity(intent);
-                    parent.finish();
-                    return true;
-                }else if (id == R.id.side_menu_item_settings){
-                    Intent intent = new Intent(parent, SettingsActivity.class);
-                    parent.startActivity(intent);
-                    parent.finish();
-                    return true;
-                }
-                return false;
+            if(id == R.id.side_menu_item_manage_profiles){
+                Intent intent = new Intent(parent, ProfilesActivity.class);
+                parent.startActivity(intent);
+                parent.finish();
+                return true;
+            }else if (id == R.id.side_menu_item_events){
+                Intent intent = new Intent(parent, EventsActivity.class);
+                parent.startActivity(intent);
+                parent.finish();
+                return true;
+            }else if (id == R.id.side_menu_item_manage_groups){
+                Intent intent = new Intent(parent, ManageGroupsActivity.class);
+                parent.startActivity(intent);
+                parent.finish();
+                return true;
+            }else if (id == R.id.side_menu_item_settings){
+                Intent intent = new Intent(parent, SettingsActivity.class);
+                parent.startActivity(intent);
+                parent.finish();
+                return true;
             }
+            return false;
         });
     }
 

@@ -70,21 +70,18 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
         Button addNewGroupButton = findViewById(R.id.button_add_new_group);
 
-        addNewGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityUtilities.InputDialogHelper dialogHelper = new ActivityUtilities.InputDialogHelper(getResources().getString(R.string.enter_name), getResources().getString(R.string.name), ManageGroupsActivity.this);
-                dialogHelper.initDialog((dialog, which) -> ActivityUtilities.runNetworkOperation(() -> {
-                    dialog.dismiss();
-                    try {
-                        String name = dialogHelper.input.getText().toString();
-                        if(name.isEmpty()){return;}
-                        profile.mfGradeBookHandler.createGroup(name);
-                        sendBroadcast(new Intent("GROUP_CHANGED"));
-                    } catch (RequestFailedException | HttpErrorStatusException e) {
-                        //TODO: handle unable to create group;
-                    }}));
-            }
+        addNewGroupButton.setOnClickListener(v -> {
+            ActivityUtilities.InputDialogHelper dialogHelper = new ActivityUtilities.InputDialogHelper(getResources().getString(R.string.enter_name), getResources().getString(R.string.name), ManageGroupsActivity.this);
+            dialogHelper.initDialog((dialog, which) -> ActivityUtilities.runNetworkOperation(() -> {
+                dialog.dismiss();
+                try {
+                    String name = dialogHelper.input.getText().toString();
+                    if(name.isEmpty()){return;}
+                    profile.mfGradeBookHandler.createGroup(name);
+                    sendBroadcast(new Intent("GROUP_CHANGED"));
+                } catch (RequestFailedException | HttpErrorStatusException e) {
+                    //TODO: handle unable to create group;
+                }}));
         });
 
         RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
@@ -147,6 +144,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
         public Group getGroupAtPosition(int position){
             return groups.get(position);
         }
+
         static class ViewHolder extends RecyclerView.ViewHolder{
             TextView groupNameView;
             View itemView;
@@ -158,13 +156,10 @@ public class ManageGroupsActivity extends AppCompatActivity {
                 this.context = context;
             }
             public void initListener(int groupId){
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, ManageSingleGroupActivity.class);
-                        intent.putExtra("groupId", groupId);
-                        context.startActivity(intent);
-                    }
+                itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, ManageSingleGroupActivity.class);
+                    intent.putExtra("groupId", groupId);
+                    context.startActivity(intent);
                 });
             }
         }

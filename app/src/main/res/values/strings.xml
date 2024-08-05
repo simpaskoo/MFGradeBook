@@ -31,4 +31,16 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="settings">Settings</string>
+    <string name="kick_user">Kick</string>
+    <string name="make_admin">Make Admin</string>
+    <string name="make_treasurer">Make Treasurer</string>
+    <string name="add_users">Add Users</string>
+    <string name="access_code">Access Code</string>
+    <string name="add_event">Add Event</string>
+    <string name="task_type_task">Task</string>
+    <string name="task_type_event">Event</string>
+    <string name="task_type_payment">Payment</string>
+    <string name="task_type_test">Test</string>
+    <string name="task_type_homework">Homework</string>
+    <string name="no_group"><![CDATA[<no group>]]></string>
 </resources>

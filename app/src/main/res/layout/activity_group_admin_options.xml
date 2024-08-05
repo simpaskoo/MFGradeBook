@@ -7,7 +7,6 @@
         android:layout_height="match_parent"
         tools:context=".activities.menu.GroupAdminOptionsActivity">
 
-
     <TextView
             android:text="@string/admin_options"
             android:layout_width="217dp"
@@ -43,26 +42,19 @@
             android:layout_marginTop="32dp" />
 
     <Button
-            android:text="@string/change_group_treasurer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_change_group_treasurer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_change_group_name" />
-
-    <Button
-            android:text="@string/change_group_admin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_change_group_admin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_change_group_treasurer" />
-
-    <Button
             android:text="@string/reroll_group_access_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_reroll_group_access_code"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_change_group_admin" />
+            app:layout_constraintTop_toBottomOf="@+id/button_change_group_name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/member_users_list_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/button_reroll_group_access_code"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

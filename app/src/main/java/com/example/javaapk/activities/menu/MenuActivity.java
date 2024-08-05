@@ -39,6 +39,5 @@ public class MenuActivity extends AppCompatActivity {
         SideMenuHelper sideMenuHelper = new SideMenuHelper(navigationView, profile, this);
         sideMenuHelper.initiateSideMenu();
 
-
     }
 }

@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 public class ActivityUtilities {
     final static ExecutorService executorService = Executors.newSingleThreadExecutor();
     static Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+
     public static void askToSelectProfile(Activity parent){
         Intent intent = new Intent(parent, ProfilesActivity.class);
         parent.startActivity(intent);

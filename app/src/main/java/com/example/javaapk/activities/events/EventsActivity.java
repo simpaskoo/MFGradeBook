@@ -1,11 +1,15 @@
 package com.example.javaapk.activities.events;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,12 +32,25 @@ import net.anax.appServerClient.client.data.TaskAssignment;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class EventsActivity extends AppCompatActivity {
+
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(Objects.equals(intent.getAction(), "EVENT_CHANGED")){
+                refresh();
+            }
+        }
+    };
+
+    Profile profile;
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +65,28 @@ public class EventsActivity extends AppCompatActivity {
             ActivityUtilities.askToSelectProfile(this);
         }
 
-        RecyclerView recyclerView = findViewById(R.id.event_list_recycler_view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(receiver, new IntentFilter("EVENT_CHANGED"), Context.RECEIVER_NOT_EXPORTED);
+        }else{
+            registerReceiver(receiver, new IntentFilter("EVENT_CHANGED"));
+        }
+
+        recyclerView = findViewById(R.id.event_list_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Profile profile = DataManager.getInstance().getSelectedProfile();
+        profile = DataManager.getInstance().getSelectedProfile();
         SideMenuHelper sideMenuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
         sideMenuHelper.initiateSideMenu();
+        Button createNewEventButton = findViewById(R.id.add_new_event_button);
+        createNewEventButton.setOnClickListener(V -> {
+            Intent intent = new Intent(this, CreateNewEventActivity.class);
+            startActivity(intent);
+        });
 
+        refresh();
+    }
+
+    public void refresh(){
         ActivityUtilities.runNetworkOperation(() -> {
             TaskAssignment[] assignments = profile.getTaskAssignments();
             ArrayList<Integer> taskIds = new ArrayList<>();
@@ -85,6 +117,7 @@ public class EventsActivity extends AppCompatActivity {
 
         });
     }
+
     static class EventEntryTaskAdapter extends RecyclerView.Adapter<EventEntryTaskAdapter.ViewHolder> {
         List<Task> tasks;
         EventEntryTaskAdapter(List<Task> tasks){

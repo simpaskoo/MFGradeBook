@@ -31,12 +31,7 @@ public class ProfilesActivity extends AppCompatActivity {
         });
 
         addProfileButton = findViewById(R.id.addProfileButton);
-        addProfileButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                addNewProfileAndSelect();
-            }
-        });
+        addProfileButton.setOnClickListener(v -> addNewProfileAndSelect());
 
         DataManager dataManager = DataManager.getInstance();
         for(Profile profile : dataManager.profiles){

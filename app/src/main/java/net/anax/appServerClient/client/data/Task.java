@@ -203,10 +203,17 @@ public class Task {
 
     public static enum TaskType{
         UNKNOWN(-2, R.string.task_type_unknown),
-        NONE(0, R.string.task_type_none);
+        NONE(0, R.string.task_type_none),
+        TASK(1, R.string.task_type_task),
+        HOMEWORK(2, R.string.task_type_homework),
+        TEST(3, R.string.task_type_test),
+        PAYMENT(4, R.string.task_type_payment),
+        EVENT(5, R.string.task_type_event)
+        ;
 
         public final int type;
         public final int textId;
+
         TaskType(int type, int textId){
             this.type = type;
             this.textId = textId;
@@ -217,6 +224,7 @@ public class Task {
             }
             return R.string.task_type_not_recognized;
         }
+
     }
 
 }

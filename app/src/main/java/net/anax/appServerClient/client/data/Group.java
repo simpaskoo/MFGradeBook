@@ -55,11 +55,13 @@ public class Group {
                 taskIdsArray.add((int)(long)taskIds.get(i));
             }
         }
-        if(response.containsKey("treasurerUserId") && (response.get("treasurerUserId") instanceof Long)){
-            this.treasurerUserId = (int)(long)response.get("treasurerUserId");
-        }else{
+
+        try{
+            this.treasurerUserId = JsonUtilities.extractInt(response, "treasurerUserId", new MissingDataException("no treasurer id"));
+        } catch(MissingDataException ex){
             this.treasurerUserId = ID.NONE.id;
         }
+        System.out.println("treasurer user id: " + this.treasurerUserId);
 
         this.taskIds = taskIdsArray;
         this.userIds = userIdsArray;
@@ -70,6 +72,13 @@ public class Group {
         data.put("newName", newName);
         HttpUtilities.validateSuccess(HttpUtilities.doRequest(server.getUrl()+"/group/setName", data, token.getTokenString()));
         this.cachedName = newName;
+    }
+
+    public void requestRerollAccessCode(Token token, RemoteServer server) throws RequestFailedException, HttpErrorStatusException {
+        JSONObject data = new JSONObject();
+        data.put("groupId", id);
+        JSONObject response = HttpUtilities.doRequest(server.getUrl()+"/group/rerollAccessCode", data, token.getTokenString());
+        this.cachedAccessCode = JsonUtilities.extractString(response, "newAccessCode", new RequestFailedException("response did not contain necessary data"));
     }
 
     public void requestSetTreasurerUserId(Token token, int newTreasurerUserId, RemoteServer server) throws RequestFailedException, HttpErrorStatusException {
