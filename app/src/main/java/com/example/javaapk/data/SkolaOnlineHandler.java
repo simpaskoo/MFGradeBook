@@ -25,6 +25,8 @@ public class SkolaOnlineHandler {
 
     HashMap<DateOfDay, TimetableWeek> timetableWeeks = new HashMap<>();
     AssessmentList assessmentList = new AssessmentList(0);
+
+
     public SkolaOnlineHandler(String username, String password) {
         this.username = username;
         this.password = password;

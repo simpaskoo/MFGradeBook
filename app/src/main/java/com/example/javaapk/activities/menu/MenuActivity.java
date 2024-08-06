@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.sideMenu);
         SideMenuHelper sideMenuHelper = new SideMenuHelper(navigationView, profile, this);
-        sideMenuHelper.initiateSideMenu();
+        sideMenuHelper.initiateSideMenu(false);
 
     }
 }

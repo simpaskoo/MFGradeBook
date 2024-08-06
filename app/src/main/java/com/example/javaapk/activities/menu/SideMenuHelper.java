@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.assessments.AssessmentsActivity;
 import com.example.javaapk.activities.events.EventsActivity;
+import com.example.javaapk.activities.timetable.TimetableActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -28,6 +30,10 @@ public class SideMenuHelper {
         this.selectedUser = selectedUser;
     }
     public void initiateSideMenu(){
+        initiateSideMenu(true);
+    }
+
+    public void initiateSideMenu(boolean finish){
         View headerView = navigationView.getHeaderView(0);
         TextView drawerHeader = headerView.findViewById(R.id.header_text);
         ActivityUtilities.updateTextViewWithRemoteString(drawerHeader, () -> selectedUser.getName());
@@ -37,25 +43,28 @@ public class SideMenuHelper {
             if(id == R.id.side_menu_item_manage_profiles){
                 Intent intent = new Intent(parent, ProfilesActivity.class);
                 parent.startActivity(intent);
-                parent.finish();
-                return true;
             }else if (id == R.id.side_menu_item_events){
                 Intent intent = new Intent(parent, EventsActivity.class);
                 parent.startActivity(intent);
-                parent.finish();
-                return true;
             }else if (id == R.id.side_menu_item_manage_groups){
                 Intent intent = new Intent(parent, ManageGroupsActivity.class);
                 parent.startActivity(intent);
-                parent.finish();
-                return true;
             }else if (id == R.id.side_menu_item_settings){
                 Intent intent = new Intent(parent, SettingsActivity.class);
                 parent.startActivity(intent);
-                parent.finish();
-                return true;
+            } else if(id == R.id.side_menu_item_assessments){
+                Intent intent = new Intent(parent, AssessmentsActivity.class);
+                parent.startActivity(intent);
+            } else if(id == R.id.side_menu_item_timetable){
+                Intent intent = new Intent(parent, TimetableActivity.class);
+                parent.startActivity(intent);
             }
-            return false;
+            else{
+                return false;
+            }
+
+            if(finish){parent.finish();}
+            return true;
         });
     }
 

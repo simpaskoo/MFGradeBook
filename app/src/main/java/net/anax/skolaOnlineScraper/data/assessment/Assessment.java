@@ -9,12 +9,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Assessment {
-    String date;
-    String subject;
-    String theme;
-    String weight;
-    String result;
-    String verbalAssessment;
+    public String date;
+    public String subject;
+    public String theme;
+    public String weight;
+    public String result;
+    public String verbalAssessment;
 
     public Assessment(String date, String subject, String theme, String weight, String result, String verbal_assessment){
         this.date = date;

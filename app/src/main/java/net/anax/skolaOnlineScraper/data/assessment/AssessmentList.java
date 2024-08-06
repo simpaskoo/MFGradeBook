@@ -11,7 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class AssessmentList {
-    Assessment[] assessments;
+    public Assessment[] assessments;
     public AssessmentList(int assessment_count){
         assessments = new Assessment[assessment_count];
     }
