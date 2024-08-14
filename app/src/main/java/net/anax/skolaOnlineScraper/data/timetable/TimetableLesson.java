@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 public class TimetableLesson {
 
     public static final TimetableLesson EMPTY_LESSON = getBlankLesson();
+
     public String subjectShortcut;
     public String subjectFullName;
     public String groupShortcut;
@@ -15,6 +16,7 @@ public class TimetableLesson {
     public FurtherInfoElement[] furtherInfo;
     public ETimetableLessonType type;
     public TimetableAssessment[] assessments;
+
     public static TimetableLesson getBlankLesson(){
         TimetableLesson lesson = new TimetableLesson();
         lesson.subjectShortcut = "";

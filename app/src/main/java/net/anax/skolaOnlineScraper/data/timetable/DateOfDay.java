@@ -1,6 +1,11 @@
 package net.anax.skolaOnlineScraper.data.timetable;
 import androidx.annotation.Nullable;
 
+import net.anax.appServerClient.client.data.MissingDataException;
+import net.anax.appServerClient.client.util.JsonUtilities;
+
+import org.json.simple.JSONObject;
+
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -17,6 +22,24 @@ public class DateOfDay {
 
     public static DateOfDay fromCalendar(Calendar calendar){
         return new DateOfDay(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
+    }
+
+    public JSONObject toJson(){
+        JSONObject data = new JSONObject();
+        data.put("day", dayOfMonth);
+        data.put("month", monthOfYear);
+        data.put("year", year);
+        return data;
+    }
+
+    public static DateOfDay fromJson(JSONObject data) throws MissingDataException {
+        MissingDataException e = new MissingDataException("missing data, unable to extract DateOfDay");
+        return new DateOfDay(
+                JsonUtilities.extractInt(data, "day", e),
+                JsonUtilities.extractInt(data, "month", e),
+                JsonUtilities.extractInt(data, "year", e)
+        );
+
     }
 
     @Override

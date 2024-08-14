@@ -50,7 +50,7 @@ public class AssessmentList {
         return data;
     }
 
-    public AssessmentList parseFromJsonString(JSONObject data) throws ParseException, InvalidDataInJsonException {
+    public static AssessmentList parseFromJson(JSONObject data) throws ParseException, InvalidDataInJsonException {
 
         if(!data.containsKey("assessments") || !(data.get("assessments") instanceof JSONArray)){
             throw new InvalidDataInJsonException("necessary data missing");

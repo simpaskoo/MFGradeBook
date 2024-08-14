@@ -34,7 +34,7 @@ public class Token {
         MissingDataException e = new MissingDataException("insufficient data in json");
         String tokenString = JsonUtilities.extractString(data, "tokenString", e);
         int subject = JsonUtilities.extractInt(data, "subject", e);
-        long exp = JsonUtilities.extractInt(data, "expirationTimestamp", e);
+        long exp = JsonUtilities.extractLong(data, "expirationTimestamp", e);
         return new Token(tokenString, subject, exp);
     }
     public static Token parseToken(String tokenString){

@@ -129,8 +129,9 @@ public class Group {
         JSONObject data = new JSONObject();
         data.put("id", id);
         data.put("treasurerUserId", treasurerUserId);
-        data.put("adminUserID", adminUserId);
+        data.put("adminUserId", adminUserId);
         data.put("accessCode", cachedAccessCode);
+        data.put("name", cachedName);
 
         JSONArray userIdsArray = new JSONArray();
         JSONArray taskIdsArray = new JSONArray();
@@ -148,7 +149,7 @@ public class Group {
     }
 
     public static Group getFromJSON(JSONObject data) throws MissingDataException{
-        MissingDataException e = new MissingDataException("the json does not contain data necessary to recreate user");
+        MissingDataException e = new MissingDataException("the json does not contain data necessary to recreate group");
 
         JSONArray userIdsArray = JsonUtilities.extractJSONArray(data, "userIds", e);
         JSONArray taskIdsArray = JsonUtilities.extractJSONArray(data, "taskIds", e);

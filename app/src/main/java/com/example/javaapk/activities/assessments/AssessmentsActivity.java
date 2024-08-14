@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.menu.SideMenuHelper;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -40,6 +41,8 @@ public class AssessmentsActivity extends AppCompatActivity {
         }
 
         Profile profile = DataManager.getInstance().getSelectedProfile();
+        SideMenuHelper helper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
+        helper.initiateSideMenu();
 
         if(!profile.hasSkolaOnline()){
             finish();
@@ -51,7 +54,6 @@ public class AssessmentsActivity extends AppCompatActivity {
 
         ActivityUtilities.runNetworkOperation(() -> {
             AssessmentList assessmentList = profile.skolaOnlineHandler.getAssessments();
-
             ActivityUtilities.runOnMainThread(() -> {
                 AssessmentEntryAdapter adapter = new AssessmentEntryAdapter(assessmentList);
                 recyclerView.setAdapter(adapter);

@@ -52,9 +52,11 @@ public class TimetableActivity extends AppCompatActivity {
 
         ActivityUtilities.runNetworkOperation(() -> {
             TimetableWeek timetableWeek = profile.skolaOnlineHandler.getTimetableWeekForDate(DateOfDay.fromCalendar(Calendar.getInstance()));
-            ActivityUtilities.runOnMainThread(() -> {
-                jsonTestView.setText(timetableWeek.getJsonObject().toJSONString());
-            });
+            if(timetableWeek != null){
+                ActivityUtilities.runOnMainThread(() -> {
+                    jsonTestView.setText(timetableWeek.getJsonObject().toJSONString());
+                });
+            }
         });
 
     }

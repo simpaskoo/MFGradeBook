@@ -3,9 +3,11 @@ package com.example.javaapk.data;
 import net.anax.appServerClient.client.data.ClientUser;
 import net.anax.appServerClient.client.data.Group;
 import net.anax.appServerClient.client.data.MemoryManager;
+import net.anax.appServerClient.client.data.MissingDataException;
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.data.TaskAssignment;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
+import net.anax.appServerClient.client.util.JsonUtilities;
 
 import org.json.simple.JSONObject;
 
@@ -13,8 +15,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class MFGradeBookHandler {
-    String username;
-    public MemoryManager memoryManager;
+    String username = null;
+    public MemoryManager memoryManager = null;
+
     public MFGradeBookHandler(String username, ClientUser user) {
         memoryManager = new MemoryManager(user);
         this.username = username;
@@ -61,6 +64,20 @@ public class MFGradeBookHandler {
     public JSONObject toJson(){
         JSONObject data = new JSONObject();
         data.put("username", username);
+        data.put("memory", memoryManager.getJson());
         return data;
+    }
+
+    private MFGradeBookHandler(){}
+
+    public static MFGradeBookHandler fromJson(JSONObject data) throws MissingDataException {
+        MissingDataException e = new MissingDataException("json is missing data");
+
+        String username = JsonUtilities.extractString(data, "username", e);
+        MemoryManager memory = MemoryManager.fromJson(JsonUtilities.extractJSONObject(data, "memory", e), DataManager.REMOTE_SERVER);
+        MFGradeBookHandler handler = new MFGradeBookHandler();
+        handler.username = username;
+        handler.memoryManager = memory;
+        return handler;
     }
 }

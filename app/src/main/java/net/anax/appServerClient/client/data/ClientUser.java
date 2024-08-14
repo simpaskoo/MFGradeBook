@@ -213,30 +213,49 @@ public class ClientUser extends User {
         data.put("token", cachedToken.getJson());
 
         JSONArray array = new JSONArray();
+        JSONArray groupArray = new JSONArray();
 
         for(TaskAssignment assignment : cachedTaskAssignments){
             array.add(assignment.getJson());
         }
 
+        for(Integer groupId : cachedGroupIds){
+            groupArray.add(groupId);
+        }
+
+        data.put("groupIds", groupArray);
         data.put("assignments", array);
         return data;
 
     }
 
     public static ClientUser fromJson(JSONObject data, RemoteServer server) throws MissingDataException{
-        MissingDataException e = new MissingDataException("json is missing data");
-        int id = JsonUtilities.extractInt(data, "id", e);
-        String password = JsonUtilities.extractString(data, "password", e);
-        String username = JsonUtilities.extractString(data, "username", e);
-        String name = JsonUtilities.extractString(data, "name", e);
-        Token token = Token.getFromJSON(JsonUtilities.extractJSONObject(data, "token", e));
+        int id = JsonUtilities.extractInt(data, "id", new MissingDataException("json is missing id data"));
 
-        JSONArray assignments = JsonUtilities.extractJSONArray(data, "assignments", e);
+        String password = "";
+        try{
+            password = JsonUtilities.extractString(data, "password", new MissingDataException("json is missing password data"));
+        } catch (MissingDataException ignored){}
+
+        String username = JsonUtilities.extractString(data, "username", new MissingDataException("json is missing username data"));
+        String name = JsonUtilities.extractString(data, "name", new MissingDataException("json is missing name data"));
+
+        Token token = Token.getFromJSON(JsonUtilities.extractJSONObject(data, "token", new MissingDataException("json is missing token data")));
+
+        JSONArray assignments = JsonUtilities.extractJSONArray(data, "assignments", new MissingDataException("json is missing assignment data"));
+        JSONArray groupIds = JsonUtilities.extractJSONArray(data, "groupIds", new MissingDataException("json missing group ids data"));
 
         ClientUser user = new ClientUser(id, server);
+
         for(Object o : assignments){
             if(o instanceof JSONObject){
                 user.cachedTaskAssignments.add(TaskAssignment.getFromJson((JSONObject) o));
+            }
+        }
+
+        for(Object o : groupIds){
+            if(o instanceof Long){
+                user.cachedGroupIds.add((int)(long)o);
             }
         }
 

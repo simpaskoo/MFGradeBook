@@ -221,16 +221,13 @@ public class TimetableWeek {
 
 
     /**
-     * parses a jsonString and returns a TimetableWeek.
-     * @param jsonString the jsonString from which the timetable will be parsed.
+     * returns a TimetableWeek from a json.
+     * @param json the json from which the timetable will be parsed.
      * can be obtained from a JSONObject using {@link JSONObject#toJSONString()}
      * @return returns a TimetableWeek containing the timetable.
      * @exception ParseException is thrown in case of an invalid jsonString.
      */
-    public static TimetableWeek parseFromJsonString(String jsonString) throws ParseException {
-        JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject) parser.parse(jsonString);
-
+    public static TimetableWeek parseFromJsonString(JSONObject json) throws ParseException {
         TimetableWeek week = new TimetableWeek(0, 0);
 
         if(json.containsKey("days") && json.get("days") instanceof JSONArray && !((JSONArray) json.get("days")).isEmpty() && ((JSONArray) json.get("days")).get(0) instanceof JSONObject){

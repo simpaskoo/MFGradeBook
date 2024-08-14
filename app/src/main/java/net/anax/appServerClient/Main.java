@@ -10,16 +10,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws RequestFailedException, HttpErrorStatusException, ParseException, IOException {
-
-        RequestFailedException.doPrintStackTrace = false;
-        RemoteServer.getInstance().setUrl("https://dory-bright-endlessly.ngrok-free.app/");
-        RemoteServer.getInstance().setUrl("http://localhost:8080");
-
-        RemoteServer server = RemoteServer.getInstance();
-
-        ClientUser user = ClientUser.login("username", "password", server);
-        user.requestUserInfo();
-        user.printSelf();
+        System.out.println("Hello World!");
 
     }
 }

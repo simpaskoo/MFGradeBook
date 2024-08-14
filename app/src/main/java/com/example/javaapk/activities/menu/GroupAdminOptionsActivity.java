@@ -29,9 +29,15 @@ import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
 
 import net.anax.appServerClient.client.data.Group;
+import net.anax.appServerClient.client.data.MissingDataException;
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.data.User;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
+import net.anax.appServerClient.client.util.StringUtilities;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 

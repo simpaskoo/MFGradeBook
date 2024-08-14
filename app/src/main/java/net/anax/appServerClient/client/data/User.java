@@ -12,6 +12,7 @@ public class User {
     int id;
     public String cachedUsername = "";
     public String cachedName = "";
+
     public User(int id, RemoteServer remoteServer){
         this.id = id;
         this.remoteServer = remoteServer;
@@ -29,6 +30,7 @@ public class User {
     public int getId(){
         return id;
     }
+
     String requestName(Token token) throws RequestFailedException, HttpErrorStatusException {
         JSONObject data = new JSONObject();
         data.put("id", id);

@@ -1,12 +1,10 @@
 package com.example.javaapk.activities.menu;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.window.OnBackInvokedDispatcher;
@@ -21,6 +19,15 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.javaapk.R;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
+
+import net.anax.appServerClient.client.data.MissingDataException;
+import net.anax.appServerClient.client.util.StringUtilities;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class SettingsActivity extends AppCompatActivity {
     EditText usernameEditText;
@@ -38,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
             return insets;
         });
 
+
         usernameEditText = findViewById(R.id.sko_name_edit_text);
         setUsernameButton = findViewById(R.id.sko_set_username_button);
 
@@ -50,6 +58,30 @@ public class SettingsActivity extends AppCompatActivity {
         profile = DataManager.getInstance().getSelectedProfile();
         SideMenuHelper sideMenuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
         sideMenuHelper.initiateSideMenu();
+
+        Button testLoadDataButton = findViewById(R.id.test_button_load_data);
+        Button testSaveDataButton = findViewById(R.id.test_button_save_data);
+
+        testSaveDataButton.setOnClickListener(v -> {
+            try {
+                String[] data = StringUtilities.chopUp(3000, DataManager.getInstance().toJson().toJSONString());
+                System.out.println("saving data manager, json: ");
+                for(String line : data){System.out.println(line);}
+                DataManager.getInstance().saveData(this);
+            } catch (IOException e) {
+                System.out.println("failed to save data");
+                e.printStackTrace();
+            }
+        });
+
+        testLoadDataButton.setOnClickListener(v -> {
+            DataManager.loadData(this);
+            String[] data = StringUtilities.chopUp(3000,  DataManager.getInstance().toJson().toJSONString());
+            System.out.println("data manager json after load: ");
+            for(String line : data){System.out.println(line);}
+        });
+
+
 
 
         refreshUsernameEditTextColor();

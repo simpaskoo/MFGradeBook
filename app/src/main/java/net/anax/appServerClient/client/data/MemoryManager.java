@@ -14,9 +14,11 @@ public class MemoryManager {
     HashMap<Integer, User> rememberedUsers = new HashMap<>();
     HashMap<Integer, Task> rememberedTasks = new HashMap<>();
     public HashMap<Integer, Group> rememberedGroups = new HashMap<>();
+
     public MemoryManager(ClientUser client){
         this.client = client;
     }
+
     public JSONObject getJson(){
         JSONArray users = new JSONArray();
         JSONArray tasks = new JSONArray();
@@ -41,24 +43,27 @@ public class MemoryManager {
     }
     public static MemoryManager fromJson(JSONObject data, RemoteServer server) throws MissingDataException{
         MissingDataException e = new MissingDataException("missing data in json");
-        JSONArray users = JsonUtilities.extractJSONArray(data, "users", e);
-        JSONArray tasks = JsonUtilities.extractJSONArray(data, "tasks", e);
-        JSONArray groups = JsonUtilities.extractJSONArray(data, "groups", e);
-        ClientUser client = ClientUser.fromJson(JsonUtilities.extractJSONObject(data, "clientUser", e), server);
+        JSONArray users = JsonUtilities.extractJSONArray(data, "users", new MissingDataException("missing users data in json"));
+        JSONArray tasks = JsonUtilities.extractJSONArray(data, "tasks", new MissingDataException("missing tasks data in json"));
+        JSONArray groups = JsonUtilities.extractJSONArray(data, "groups", new MissingDataException("missing groups data in json"));
+        ClientUser client = ClientUser.fromJson(JsonUtilities.extractJSONObject(data, "clientUser", new MissingDataException("missing clientUser data in json")), server);
 
 
         MemoryManager manager = new MemoryManager(client);
 
         for(int i = 0; i < users.size(); i++){
-            ClientUser user = ClientUser.fromJson(JsonUtilities.extractJSONObjectFromJSONArray(users, i, e), server);
+
+
+            User user = User.fromJson(JsonUtilities.extractJSONObjectFromJSONArray(users, i, e), server);
+
             manager.rememberedUsers.put(user.id, user);
         }
         for(int i = 0; i < tasks.size(); i++){
-            Task task = Task.getFromJSON(JsonUtilities.extractJSONObjectFromJSONArray(users, i, e));
+            Task task = Task.getFromJSON(JsonUtilities.extractJSONObjectFromJSONArray(tasks, i, e));
             manager.rememberedTasks.put(task.id, task);
         }
         for(int i = 0; i < groups.size(); i++){
-            Group group = Group.getFromJSON(JsonUtilities.extractJSONObjectFromJSONArray(users, i, e));
+            Group group = Group.getFromJSON(JsonUtilities.extractJSONObjectFromJSONArray(groups, i, e));
             manager.rememberedGroups.put(group.id, group);
         }
 
