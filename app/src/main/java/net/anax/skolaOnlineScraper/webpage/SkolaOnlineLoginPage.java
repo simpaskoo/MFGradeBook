@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 
 public class SkolaOnlineLoginPage extends AbstractSkolaOnlinePage{
-    public static final String url = "https://www.skolaonline.cz/Aktuality.aspx";
+    public static final String url = "https://www.skolaonline.cz/prihlaseni/";
     private boolean doLogs = false;
     private SkolaOnlineLoginPage(){
         this.cookieCache = new BrowserCookieCache();

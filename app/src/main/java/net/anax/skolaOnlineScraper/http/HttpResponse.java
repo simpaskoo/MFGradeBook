@@ -62,7 +62,7 @@ public class HttpResponse {
 
    ArrayList<HttpCookie> getSetCookies(){
         ArrayList<HttpCookie> cookies = new ArrayList<>();
-        for(String value : headers.get("set-cookie")){
+        for(String value : headers.getOrDefault("set-cookie", new ArrayList<>())){
             HttpCookie cookie;
             if((cookie = parseCookie(value)) != null){
                 cookies.add(cookie);
