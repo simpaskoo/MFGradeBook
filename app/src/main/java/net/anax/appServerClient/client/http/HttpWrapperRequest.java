@@ -32,10 +32,10 @@ import java.util.*;
 
 public class HttpWrapperRequest {
 
-    private static final char CR = 13; // Carriage return
-    private static final char LF = 10; // Line Feed
-    private static final char SP = 32; // Space
-    private static final char CLN = ':';
+    private static final byte CR = 13; // Carriage return
+    private static final byte LF = 10; // Line Feed
+    private static final byte SP = 32; // Space
+    private static final byte CLN = ':';
     private static final byte[] CRLF = new byte[]{CR, LF};
 
     HttpRequest underlyingRequest;
@@ -54,22 +54,22 @@ public class HttpWrapperRequest {
 
             ByteArrayOutputStream data = new ByteArrayOutputStream();
 
-            data.write(underlyingRequest.method.name().getBytes(StandardCharsets.US_ASCII));
+            data.write(underlyingRequest.method.name().getBytes(StandardCharsets.UTF_8));
             data.write(SP);
-            data.write(underlyingRequest.url.getPath().getBytes(StandardCharsets.US_ASCII));
+            data.write(underlyingRequest.url.getPath().getBytes(StandardCharsets.UTF_8));
             data.write(SP);
-            data.write("HTTP/1.1".getBytes(StandardCharsets.US_ASCII));
+            data.write("HTTP/1.1".getBytes(StandardCharsets.UTF_8));
             data.write(CRLF);
 
             for (HttpHeader header : underlyingRequest.headers.keySet()) {
-                data.write(header.key.getBytes(StandardCharsets.US_ASCII));
-                data.write(": ".getBytes(StandardCharsets.US_ASCII));
-                data.write(underlyingRequest.headers.get(header).getBytes(StandardCharsets.US_ASCII));
+                data.write(header.key.getBytes(StandardCharsets.UTF_8));
+                data.write(": ".getBytes(StandardCharsets.UTF_8));
+                data.write(underlyingRequest.headers.get(header).getBytes(StandardCharsets.UTF_8));
                 data.write(CRLF);
             }
 
             data.write(CRLF);
-            data.write(underlyingRequest.payload.getBytes(StandardCharsets.US_ASCII));
+            data.write(underlyingRequest.payload.getBytes(StandardCharsets.UTF_8));
 
             byte[] requestData = data.toByteArray();
             byte[] encryptedRequestData = CryptoUtilities.encryptWithAES(requestData, aesKey.getKey(), aesKey.getIv());
@@ -87,7 +87,7 @@ public class HttpWrapperRequest {
             requestJson.put("encrypted_key", encryptedAesKeyBase64);
             requestJson.put("encrypted_iv", encryptedIvBase64);
 
-            byte[] wrapperData = requestJson.toString().getBytes(StandardCharsets.US_ASCII);
+            byte[] wrapperData = requestJson.toString().getBytes(StandardCharsets.UTF_8);
 
             URL oldUrl = underlyingRequest.url;
             URL url = new URL(oldUrl.getProtocol(), oldUrl.getHost(), oldUrl.getPort(), "/rsaRelay");
@@ -161,7 +161,7 @@ public class HttpWrapperRequest {
         cipher.init(Cipher.DECRYPT_MODE, key.getKey(), ivSpec);
         byte[] decryptedData = cipher.doFinal(encryptedData);
 
-        String payload = new String(decryptedData, StandardCharsets.US_ASCII);
+        String payload = new String(decryptedData, StandardCharsets.UTF_8);
 
         JSONParser parser = new JSONParser();
         JSONObject responseJson = (JSONObject) parser.parse(payload);
@@ -175,12 +175,14 @@ public class HttpWrapperRequest {
         StringBuilder responseMessage = new StringBuilder();
         StringBuilder tempHeader = new StringBuilder();
         String tempHeaderKey = null;
-        StringBuilder payload = new StringBuilder();
+
+        ByteArrayOutputStream payloadBuffer = new ByteArrayOutputStream();
+
 
         HashMap<String, List<String>> headers = new HashMap<>();
 
         for(int i = 0; i < response.length; i++){
-            char b = (char) response[i];
+            char b = (char)response[i]; //has to be a char! if its a byte, the StringBuilders are just going to append the byte number as a string. for example ("72" instead of "H")
             switch (stage) {
                 case 0 : {if(b == SP){stage++;} break;} //skip over HTTP/1.1
                 case 1 : {if(b == SP){stage++;}else{responseCode.append(b);} break;} //read status code, move on after encountering SP
@@ -201,7 +203,7 @@ public class HttpWrapperRequest {
                 case 6 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response after header");}else{stage++;}break;}
                 case 7 : {if(b != CR){tempHeader.append(b); stage = 4;}else{stage++;}break;}//move onto another header if not blank line. otherwise move onto payload
                 case 8 : {if(b != LF){throw new RequestFailedException("found no LF after CR in response before payload");}else{stage++;}break;}
-                case 9 : {payload.append(b);break;}
+                case 9 : {payloadBuffer.write((byte)b);break;}
             }
         }
 
@@ -218,7 +220,7 @@ public class HttpWrapperRequest {
             tempHeader.setLength(0);
         }
 
-        r.setPayload(payload.toString());
+        r.setPayload(new String(payloadBuffer.toByteArray(), StandardCharsets.UTF_8));
         return r;
     }
 
