@@ -10,6 +10,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class AssessmentList {
     public Assessment[] assessments;
     public AssessmentList(int assessment_count){
@@ -48,6 +51,23 @@ public class AssessmentList {
         }
         data.put("assessments", array);
         return data;
+    }
+
+    public SubjectAssessments[] getBySubjects(){
+        HashMap<String, SubjectAssessments> subjectAssessments = new HashMap<>();
+
+        for(Assessment assessment : assessments){
+            if(!subjectAssessments.containsKey(assessment.subject)){
+                subjectAssessments.put(assessment.subject, new SubjectAssessments(assessment.subject));
+            }
+            subjectAssessments.get(assessment.subject).assessments.add(assessment);
+        }
+
+        for(SubjectAssessments assessment : subjectAssessments.values()){
+            assessment.updateData();
+        }
+
+        return subjectAssessments.values().toArray(new SubjectAssessments[0]);
     }
 
     public static AssessmentList parseFromJson(JSONObject data) throws ParseException, InvalidDataInJsonException {
