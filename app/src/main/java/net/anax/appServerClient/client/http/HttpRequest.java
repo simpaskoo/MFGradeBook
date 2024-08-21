@@ -43,7 +43,7 @@ public class HttpRequest {
         if(payload != null && !payload.isEmpty()){
             connection.setDoOutput(true);
             OutputStream ostream = connection.getOutputStream();
-            ostream.write(payload.getBytes(StandardCharsets.US_ASCII));
+            ostream.write(payload.getBytes(StandardCharsets.UTF_8));
         }
 
         HttpResponse response = new HttpResponse(connection.getResponseMessage(), connection.getResponseCode());

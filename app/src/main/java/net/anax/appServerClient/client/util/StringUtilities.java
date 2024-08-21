@@ -14,10 +14,21 @@ public class StringUtilities {
             return false;
         }
     }
+
     public static boolean isLong(String string){
         if(string == null){return false;}
         try{
             Long.parseLong(string);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static boolean isFloat(String string){
+        if(string == null){return false;}
+        try{
+            Float.parseFloat(string);
             return true;
         }catch(NumberFormatException e){
             return false;

@@ -92,4 +92,16 @@ public class Assessment {
         System.out.println(verbalAssessment + StringUtilities.repeat(" ", Math.max(0, maxVerbalAssessmentLength-verbalAssessment.length())) + " | ");
 
     }
+
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                "date='" + date + '\'' +
+                ", subject='" + subject + '\'' +
+                ", theme='" + theme + '\'' +
+                ", weight='" + weight + '\'' +
+                ", result='" + result + '\'' +
+                ", verbalAssessment='" + verbalAssessment + '\'' +
+                '}';
+    }
 }
