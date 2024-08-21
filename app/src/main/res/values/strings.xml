@@ -43,4 +43,15 @@
     <string name="task_type_test">Test</string>
     <string name="task_type_homework">Homework</string>
     <string name="no_group"><![CDATA[<no group>]]></string>
+
+    <string name="fab_description">Add new item</string>
+    <string name="event_date_description">event_date_description</string>
+
+    <string-array name="event_type_add">
+        <item>none</item>
+        <item>domaci ukol</item>
+        <item>udalost</item>
+        <item>oznameni</item>
+        <item>platba</item>
+    </string-array>
 </resources>

@@ -9,4 +9,20 @@
     <color name="white">#FFFFFFFF</color>
     <color name="menu_color">#2e0659</color>
     <color name="collector_bg_color">#9933ff</color>
+
+    <color name="FilterButton">#0c1025</color>
+    <color name="User_name_icon">#171e3b</color>
+    <color name="Plus_button">#ffdb9f</color>
+    <color name="semi_transparent_black">#CC000000</color>
+    <color name="new_event_btn">#1534c0</color>
+    <color name="udalosti_zluta_bg">#d28300</color>
+    <color name="check_mark">#36DB18</color>
+
+    <color name="new_event_type">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="new_event_yellow">#ffbc4c</color>
+    <color name="new_event_blue">#29366e</color>
+    <color name="new_event_yellow2">#daa119</color>
+    <color name="new_event_blue2">#196eda</color>
+    <color name="new_event_search_bar">#a4a4a4</color>
 </resources>

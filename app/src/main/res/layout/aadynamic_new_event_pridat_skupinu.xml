@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="6dp"
+        android:background="@drawable/aanew_event_skupina_btn_bg"
+        android:fontFamily="@font/roboto_black"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:text="Vše"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_centerInParent="true"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,9 @@
 package com.example.javaapk;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -22,12 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.javaapk.activities.menu.MenuActivity;
-import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import net.anax.appServerClient.client.data.RequestFailedException;
 
 import java.util.ArrayList;
 

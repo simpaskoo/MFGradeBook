@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints">
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/aaudalosti_plus_btn_bg"
+            android:fontFamily="@font/roboto_black"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Vše"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/checkMark7"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="2dp"
+            android:layout_centerInParent="true"
+            android:layout_alignTop="@id/button2"
+            android:layout_alignBottom="@id/button2"
+            android:layout_alignRight="@id/button2"
+            android:layout_alignEnd="@id/button2"
+            android:layout_alignLeft="@id/button2"
+            android:layout_alignStart="@id/button2"
+            android:layout_gravity="center"
+            android:translationZ="5dp"
+            android:background="@drawable/aaudalosti_check_mark_bg"
+            android:src="@drawable/aabaseline_check_24" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:translationZ="20dp">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/udalosti_zluta_bg"
+        android:contentDescription="@string/fab_description"
+        app:srcCompat="@drawable/aabaseline_check_24"
+        app:backgroundTint="@color/udalosti_zluta_bg"
+        tools:ignore="MissingConstraints">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+</androidx.constraintlayout.widget.ConstraintLayout>

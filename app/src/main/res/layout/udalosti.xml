@@ -84,23 +84,23 @@
 
 
             <!-- button1-->
-            <!-- <Button
-                 android:id="@+id/fieldButton"
-                 android:layout_width="match_parent"
-                 android:layout_height="80dp"
-                 android:text="Btn1"
-                 android:layout_marginStart="20dp"
-                 android:layout_marginEnd="20dp" />
+           <!-- <Button
+                android:id="@+id/fieldButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="Btn1"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp" />
 
-             <Button
-                 android:id="@+id/fieldButton2"
-                 android:layout_width="match_parent"
-                 android:layout_height="80dp"
-                 android:text="Btn2"
-                 android:layout_marginStart="20dp"
-                 android:layout_marginEnd="20dp" />
+            <Button
+                android:id="@+id/fieldButton2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="Btn2"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp" />
 
-              button2-->
+             button2-->
 
         </LinearLayout>
 
