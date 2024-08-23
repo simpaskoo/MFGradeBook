@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:translationZ="20dp">
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/aacena_udalost_bg"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cena">
+
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="60dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/roboto_black"
+            android:inputType="text"
+            android:text="Cena"
+            android:textColor="@color/white" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kč"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="Cena"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pridani_ucastnici" />
+</androidx.constraintlayout.widget.ConstraintLayout>

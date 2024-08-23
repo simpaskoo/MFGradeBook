@@ -22,7 +22,7 @@ public class MainClass extends AppCompatActivity {
         setContentView(R.layout.aaudalosti_design);
         System.out.println("ahojky");
 
-        filter_button = (Button) findViewById(R.id.button_button);
+        filter_button = (Button) findViewById(R.id.flter_button);
         filter_layout = (Toolbar) findViewById(R.id.filter_udalosti);
         textView = (TextView) findViewById(R.id.textView);
         filter_button.setOnClickListener(new View.OnClickListener() {
