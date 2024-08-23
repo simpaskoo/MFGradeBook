@@ -58,13 +58,14 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
         android:background="@drawable/aaudalosti_scroll_view_bgstyle"
         android:fontFamily="@font/roboto_black"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
+        android:paddingTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -73,7 +74,6 @@
             android:id="@+id/events_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:gravity="center"
             android:orientation="vertical">
 

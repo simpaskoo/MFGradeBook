@@ -12,13 +12,10 @@
         tools:ignore="MissingConstraints">
         <Button
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_margin="6dp"
             android:background="@drawable/aamore_light_blue_style"
             android:fontFamily="@font/roboto_black"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
             android:text="Vše"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -27,7 +24,6 @@
             android:id="@+id/checkMark7"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginStart="2dp"
             android:layout_centerInParent="true"
             android:layout_alignTop="@id/button1"
             android:layout_alignBottom="@id/button1"
