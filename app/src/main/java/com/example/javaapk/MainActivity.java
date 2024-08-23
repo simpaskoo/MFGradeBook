@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_collector2);
 
-        Drawable drawable = getResources().getDrawable(R.drawable.menu_layers);
-        getSupportActionBar().setBackgroundDrawable(drawable);
+        //Drawable drawable = getResources().getDrawable(R.drawable.menu_layers);
+        //getSupportActionBar().setBackgroundDrawable(drawable);
 
 
         instance = this;

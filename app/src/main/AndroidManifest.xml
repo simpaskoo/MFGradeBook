@@ -15,6 +15,9 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
+                android:name=".activities.aboutApp.TestActivity"
+                android:exported="false" />
+        <activity
                 android:name=".activities.events.CreateNewEventActivity"
                 android:exported="false" />
         <activity

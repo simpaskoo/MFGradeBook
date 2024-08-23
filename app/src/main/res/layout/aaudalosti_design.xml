@@ -70,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <LinearLayout
+            android:id="@+id/events_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -79,13 +80,13 @@
             <include
                 layout="@layout/aadynamic_idk"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"/>
             <include
                 layout="@layout/aadynamic_idk"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"/>
 
@@ -93,6 +94,7 @@
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_create_new_event"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="30dp"
@@ -101,13 +103,13 @@
         app:backgroundTint="@color/Plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/aabaseline_add_24"/>
+        app:srcCompat="@drawable/aabaseline_add_24" />
 
     <include
         layout="@layout/aadynamic_udalosti_filter_layout"
         android:id="@+id/filter_udalosti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

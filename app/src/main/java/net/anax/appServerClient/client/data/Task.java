@@ -49,6 +49,8 @@ public class Task {
         }
         if(response.containsKey("amount") && response.get("amount") instanceof Long){
             this.cachedAmount = (int) ((Long)response.get("amount")).longValue();
+        }else{
+            this.cachedAmount = ID.NONE.id;
         }
 
         JSONArray userIds = JsonUtilities.extractJSONArray(response, "userIds", e);
