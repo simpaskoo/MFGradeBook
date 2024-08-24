@@ -54,6 +54,18 @@
         app:layout_constraintEnd_toStartOf="@id/flter_button"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <!--
+    <include
+        layout="@layout/aaloading_udalosti_design"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:paddingTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"/>
+-->
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -109,5 +121,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id = "@+id/sideMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        app:menu="@menu/menu_side_drawer_menu"
+        app:headerLayout="@menu/menu_side_drawer_header"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

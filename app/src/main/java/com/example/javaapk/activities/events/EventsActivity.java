@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +22,7 @@ import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import net.anax.appServerClient.client.data.ID;
 import net.anax.appServerClient.client.data.RequestFailedException;
@@ -37,6 +37,11 @@ import java.util.Date;
 import java.util.Objects;
 
 public class EventsActivity extends AppCompatActivity {
+
+    private NavigationView sideMenu;
+    private boolean isMenuOpen = false;  // To track whether the menu is open or not
+    private float menuWidth;  // To store the width of the menu
+    private static final String TAG = "MainActivity";
 
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -53,6 +58,26 @@ public class EventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aaudalosti_design);
+
+        //Side menu
+        sideMenu = findViewById(R.id.sideMenu);
+        sideMenu.post(() -> {
+            menuWidth = sideMenu.getWidth();
+            sideMenu.setTranslationX(-menuWidth);  // Initially hide the side menu by moving it off screen
+        });
+
+        // Button to toggle the side menu
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleMenu();
+            }
+        });
+        //Side menu
+
+
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainActivity), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -73,8 +98,8 @@ public class EventsActivity extends AppCompatActivity {
         profile = DataManager.getInstance().getSelectedProfile();
 
         // no navigation view inside aaudalosti_design.xml, cannot create side menu.
-        //SideMenuHelper sideMenuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
-        //sideMenuHelper.initiateSideMenu();
+        SideMenuHelper sideMenuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
+        sideMenuHelper.initiateSideMenu();
 
         FloatingActionButton createNewEventButton = findViewById(R.id.button_create_new_event);
 
@@ -85,6 +110,29 @@ public class EventsActivity extends AppCompatActivity {
 
         refresh();
     }
+
+    //Side menu
+    private void toggleMenu() {
+        if (isMenuOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+        isMenuOpen = !isMenuOpen;
+    }
+
+    private void openMenu() {
+        sideMenu.animate().translationX(0).setDuration(300);  // Slide the menu in
+    }
+
+    private void closeMenu() {
+        sideMenu.animate().translationX(-menuWidth).setDuration(300);  // Slide the menu out
+    }
+    //Side menu
+
+
+
+
 
     public void refresh(){
         ActivityUtilities.runNetworkOperation(() -> {

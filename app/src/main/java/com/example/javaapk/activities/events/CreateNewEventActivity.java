@@ -4,9 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +27,7 @@ import com.example.javaapk.activities.menu.SelectUsersActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.data.Task;
@@ -31,15 +36,64 @@ import net.anax.appServerClient.client.http.HttpErrorStatusException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class CreateNewEventActivity extends AppCompatActivity {
     Calendar selectedDatetime = Calendar.getInstance();
     int[] userIds = new int[0];
 
+    //Dynamic price
+    public LinearLayout cenaLiner;
+    public TextView cenaText;
+    private Spinner mySpinner;
+    private List<String> optionsList;
+    //Dynamic price
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_event);
+        setContentView(R.layout.aapridat_udalost);
+
+        //Dynamic price
+        // Find the Spinner and TextView by their IDs
+        cenaLiner = findViewById(R.id.cena_linear);
+        cenaText = findViewById(R.id.cena);
+        mySpinner = findViewById(R.id.spinner_select_task_type);
+
+        // Initialize the list of options for the Spinner
+        optionsList = new ArrayList<>();
+        optionsList.add("None");
+        optionsList.add("Task");
+        optionsList.add("Homework");
+        optionsList.add("Test");
+        optionsList.add("Payment");  // The item we want to trigger visibility
+        optionsList.add("Event");
+
+        // Set up the ArrayAdapter for the Spinner
+        ArrayAdapter<String> adapterr = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, optionsList);
+        mySpinner.setAdapter(adapterr);
+
+        // Set up the listener for the Spinner
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Show the TextView only when "Payment" is selected
+                if (optionsList.get(position).equals("Payment")) {
+                    cenaText.setVisibility(View.VISIBLE);
+                    cenaLiner.setVisibility(View.VISIBLE);// Show the TextView
+                } else {
+                    cenaText.setVisibility(View.GONE);
+                    cenaLiner.setVisibility(View.GONE);// Hide the TextView for other selections
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No action needed here
+            }
+        });
+        //Dynamic price
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -94,7 +148,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         TextView dateView = findViewById(R.id.new_event_date_text_view);
         TextView timeView = findViewById(R.id.new_event_time_text_view);
-        Button submitButton = findViewById(R.id.submit_create_event_button);
+        FloatingActionButton submitButton = findViewById(R.id.submit_create_event_button);
         Button addUsersButton = findViewById(R.id.new_event_select_users_button);
 
         dateView.setOnClickListener(v -> {
@@ -159,6 +213,15 @@ public class CreateNewEventActivity extends AppCompatActivity {
             }
         });
         refreshDatetimeView();
+
+        ImageButton back = findViewById(R.id.clear_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     public void refreshDatetimeView(){

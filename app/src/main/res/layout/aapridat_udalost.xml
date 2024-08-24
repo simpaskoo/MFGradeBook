@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainActivity"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0c1025">
+    android:background="#0c1025"
+    tools:context=".activities.events.CreateNewEventActivity">
 
     <Spinner
-        android:id="@+id/event_type"
+        android:id="@+id/spinner_select_task_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="80dp"
@@ -17,16 +18,11 @@
         android:paddingStart="5dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:entries="@array/event_type_add"
-        android:spinnerMode="dropdown"
-        android:contextClickable="true"
         android:gravity="start"
         android:background="@drawable/aanew_event_spinner_style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/clear_btn">
-
-    </Spinner>
+        app:layout_constraintEnd_toStartOf="@id/clear_btn"/>
 
     <ImageButton
         android:id="@+id/clear_btn"
@@ -40,52 +36,21 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/nazev_udalosti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="Název"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/event_type"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/nazev"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="název"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:paddingStart="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingEnd="20dp"
-        android:background="@drawable/aanew_event_nazev_udalosti_bg"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/nazev_udalosti"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
         android:id="@+id/popis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Popis"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/nazev"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_select_task_type"
+        tools:layout_editor_absoluteY="168dp" />
 
     <EditText
-        android:id="@+id/popis2"
+        android:id="@+id/new_event_description_edit_text"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="15dp"
@@ -104,28 +69,58 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/ucastnici"
+        android:id="@+id/do_skupiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:text="Účastníci"
         android:textColor="@color/white"
         android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
-        app:layout_constraintTop_toBottomOf="@id/popis2"
+        app:layout_constraintTop_toBottomOf="@id/new_event_description_edit_text"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_select_task_group"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="100dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="start"
+        android:background="@drawable/aanew_event_spinner_style"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pridani_ucastnici"/>
+        app:layout_constraintTop_toBottomOf="@id/do_skupiny">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/ucastnici"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:text="Účastníci"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_black"
+        android:textSize="15dp"
+        app:layout_constraintTop_toBottomOf="@id/new_event_description_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/pridat_btn"
+        android:id="@+id/new_event_select_users_button"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
         android:text="Přidat"
         android:src="@drawable/aabaseline_add_24"
-        app:layout_constraintTop_toBottomOf="@id/popis2"
+        app:layout_constraintTop_toBottomOf="@id/ucastnici"
         app:layout_constraintEnd_toEndOf="parent">
     </Button>
 
@@ -136,11 +131,13 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:orientation="vertical"
+        android:paddingStart="8dp"
         android:layout_marginTop="0dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pridat_btn">
+        app:layout_constraintTop_toBottomOf="@id/new_event_select_users_button">
 
         <GridLayout
             android:layout_width="match_parent"
@@ -246,40 +243,74 @@
         app:layout_constraintTop_toBottomOf="@id/ukonceni">
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/new_event_date_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:ems="10"
             android:text="Datum"
             android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"
-            android:inputType="text"/>
+            android:fontFamily="@font/roboto_black"/>
+
+        <EditText
+            android:id="@+id/new_event_time_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Čas"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="Cena"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/ukonceni_info"
+        app:layout_constraintTop_toBottomOf="@id/pridani_ucastnici"/>
+
+    <LinearLayout
+        android:id="@+id/cena_linear"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/aacena_udalost_bg"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@id/ukonceni_info"
+        app:layout_constraintTop_toBottomOf="@id/cena">
 
         <EditText
             android:id="@+id/editTextTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="60dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/roboto_black"
+            android:inputType="text"
+            android:text="Cena"
+            android:textColor="@color/white" />
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:text="Čas"
-            android:textColor="@color/white"
+            android:text="Kč"
             android:fontFamily="@font/roboto_black"
-            android:inputType="text" />
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
-    <include
-        layout="@layout/aadynamic_new_event_cena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        app:layout_constraintTop_toBottomOf="@id/pridani_ucastnici"
-        app:layout_constraintStart_toEndOf="@id/ukonceni_info"/>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/submit_create_event_button"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="20dp"
