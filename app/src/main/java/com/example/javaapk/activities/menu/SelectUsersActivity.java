@@ -2,7 +2,6 @@ package com.example.javaapk.activities.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +24,6 @@ import net.anax.appServerClient.client.data.User;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class SelectUsersActivity extends AppCompatActivity {
@@ -37,12 +32,12 @@ public class SelectUsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_users);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        setContentView(R.layout.aadynamic_add_user_layout);
+        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-        });
+        });*/
 
         if(!DataManager.getInstance().isProfileSelected()){
             finish();
@@ -82,11 +77,12 @@ public class SelectUsersActivity extends AppCompatActivity {
                 RecyclerView recyclerView = findViewById(R.id.user_list_recycler_view);
                 recyclerView.setLayoutManager(new LinearLayoutManager(SelectUsersActivity.this));
 
+                //GridLayout gridLayout = findViewById(R.id.grid_layout2);
 
                 UserEntryAdapter adapter = new UserEntryAdapter(knownUsers, finalPreselectedUserIds);
                 recyclerView.setAdapter(adapter);
 
-                Button submitButton = findViewById(R.id.submit_selected_users_button);
+                Button submitButton = findViewById(R.id.add_users);
                 submitButton.setOnClickListener(v -> {
                     Intent intent = new Intent();
                     int[] userIds = adapter.selectedUserIds.stream().mapToInt(i -> i).toArray();

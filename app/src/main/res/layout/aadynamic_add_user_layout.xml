@@ -43,7 +43,7 @@
                     android:id="@+id/skupiny"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Skupiny"
+                    android:text="Ze skupiny"
                     android:textColor="@color/white"
                     android:fontFamily="@font/roboto_black"
                     android:textSize="15dp"
@@ -156,6 +156,7 @@
                     android:layout_margin="2dp"/>
             </GridLayout>
             <Button
+                android:id="@+id/add_users"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="end"

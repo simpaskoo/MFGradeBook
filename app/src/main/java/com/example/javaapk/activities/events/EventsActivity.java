@@ -59,6 +59,9 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aaudalosti_design);
 
+
+
+
         //Side menu
         sideMenu = findViewById(R.id.sideMenu);
         sideMenu.post(() -> {
@@ -188,8 +191,23 @@ public class EventsActivity extends AppCompatActivity {
 
                     boolean isPayment = task.cachedType == Task.TaskType.PAYMENT.type;
 
+                    //Price
+                    Intent intent = getIntent();
+
+                    // Retrieve the number passed from MainActivity (default to 0 if no number found)
+                    int receivedNumber = intent.getIntExtra("number_key", 0);
+
+                    // Set the number to the TextView
+                    //textView.setText(String.valueOf(receivedNumber));
+
+                    //Price
+
+
+
+
                     if(isPayment && task.cachedAmount >= 0) {
-                        amount.setText(format.format(task.cachedAmount / 100f) + " ,-");
+                        amount.setText(format.format(task.cachedAmount / 100f) + String.valueOf(receivedNumber) + " ,-");
+                        //amount.setText(receivedText + " ,-");
                     } else if (isPayment && task.cachedAmount == ID.NONE.id){
                         amount.setText("not set");
                     } else if (isPayment && task.cachedAmount == ID.UNKNOWN.id){

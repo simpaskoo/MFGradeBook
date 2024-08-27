@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/user_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:translationZ="1dp"
+        android:background="@drawable/aaudalosti_filter_button_bg"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User1"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="@id/group_toolbar"/>
+
+    </Toolbar>
+    <Toolbar
+        android:id="@+id/user_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingTop="60dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/aauser_edit_bg"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/smazat_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/aauser_delete_bg"
+            android:text="Smazat"
+            android:fontFamily="@font/roboto_black"
+            android:layout_gravity="end"/>
+        <Button
+            android:id="@+id/admin_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/aauser_admin_pkldnk_bg"
+            android:text="Admin"
+            android:fontFamily="@font/roboto_black"
+            android:layout_gravity="end"/>
+        <Button
+            android:id="@+id/pokladnik_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/aauser_admin_pkldnk_bg"
+            android:text="Pokladnik"
+            android:fontFamily="@font/roboto_black"
+            android:layout_gravity="end"/>
+
+    </Toolbar>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,27 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/mainActivity_groups"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d28300"
     tools:context=".activities.menu.ManageGroupsActivity">
 
     <TextView
-        android:id="@+id/moje_skupiny"
+        android:id="@+id/nazev_skupiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/roboto_black"
-        android:text="Moje skupiny"
+        android:text="Název skupiny"
         android:textColor="@color/black"
         android:textSize="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/back_btn"
+        android:id="@+id/edit_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:backgroundTint="@color/transparent"
+        app:layout_constraintStart_toEndOf="@id/nazev_skupiny"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/clear_btn"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
@@ -33,35 +44,21 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/button_add_new_group"
+        android:id="@+id/edit_group"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/aaudalosti_filter_button_bg"
         android:fontFamily="@font/roboto_black"
-        android:text="Přidat +"
+        android:text="Upravit"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@id/groups_filter"
-        app:layout_constraintTop_toBottomOf="@id/moje_skupiny"/>
-
-    <Spinner
-        android:id="@+id/groups_filter"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:paddingStart="5dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="start"
-        android:background="@drawable/aanew_event_spinner_style"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/moje_skupiny"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <LinearLayout
         android:id="@+id/group_linearlayout"
@@ -73,55 +70,18 @@
         android:layout_marginEnd="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_add_new_group">
+        app:layout_constraintTop_toBottomOf="@id/nazev_skupiny">
 
         <include
-            layout="@layout/aadynamic_group_layout"
+            layout="@layout/aadynamic_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"/>
         <include
-            layout="@layout/aadynamic_group_layout"
+            layout="@layout/aadynamic_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"/>
 
     </LinearLayout>
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/group_list_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-
-        <!--<Button
-                android:id="@+id/button_add_new_group"
-                android:text="@string/create_new_group"
-                android:layout_width="100dp"
-                android:layout_height="79dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_bias="0.9"
-                app:layout_constraintHorizontal_bias="0.9" />-->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <com.google.android.material.navigation.NavigationView
-            android:id = "@+id/sideMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-        android:visibility="gone"
-            app:menu="@menu/menu_side_drawer_menu"
-            app:headerLayout="@menu/menu_side_drawer_header"
-        tools:ignore="MissingConstraints" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

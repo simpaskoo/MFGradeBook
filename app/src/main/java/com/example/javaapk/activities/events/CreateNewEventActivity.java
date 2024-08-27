@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -23,7 +24,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.javaapk.R;
-import com.example.javaapk.activities.menu.SelectUsersActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -53,6 +53,36 @@ public class CreateNewEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aapridat_udalost);
+
+        //Price
+        EditText editText = findViewById(R.id.editTextPrice);
+        FloatingActionButton button = findViewById(R.id.submit_create_event_button);
+
+        // Set onClickListener for the button
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the number from EditText
+                String numberInput = editText.getText().toString();
+
+                // Check if the input is not empty
+                if (!numberInput.isEmpty()) {
+                    // Parse the string to an integer (you can use float or double as per requirement)
+                    int numberToSend = Integer.parseInt(numberInput);
+
+                    // Create an Intent to start the SecondActivity
+                    Intent intent = new Intent(CreateNewEventActivity.this, EventsActivity.class);
+
+                    // Add the number to the Intent
+                    intent.putExtra("number_key", numberToSend);
+
+                    // Start the second activity
+                    startActivity(intent);
+                }
+            }
+        });
+        //Price
+
 
         //Dynamic price
         // Find the Spinner and TextView by their IDs
@@ -179,11 +209,43 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         });
 
-        addUsersButton.setOnClickListener(v -> {
+        /*addUsersButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, SelectUsersActivity.class);
             intent.putExtra("selectedUserIds", userIds);
             launcher.launch(intent);
 
+        });*/
+
+        Toolbar toolbar = findViewById(R.id.add_users_toolbar);
+        View vieww = findViewById(R.id.vieww);
+        ImageButton imageButton = findViewById(R.id.clear_btn3);
+
+        addUsersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (vieww.getVisibility() == View.GONE) {
+                    vieww.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.VISIBLE);
+                } else {
+                    vieww.setVisibility(View.GONE);
+                    toolbar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (toolbar.getVisibility() == View.VISIBLE) {
+                    vieww.setVisibility(View.GONE);
+                    toolbar.setVisibility(View.GONE);
+                    System.out.println("is VISIBLE");
+                } else {
+                    vieww.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.GONE);
+                }
+
+            }
         });
 
         submitButton.setOnClickListener(v -> {

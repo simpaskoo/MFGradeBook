@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -31,6 +32,7 @@ import net.anax.appServerClient.client.data.Group;
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
     };
 
     Profile profile;
+    LinearLayout groupLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,12 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
         Button addNewGroupButton = findViewById(R.id.button_add_new_group);
 
+        LinearLayout eventsLayout = findViewById(R.id.group_linearlayout);
+        //eventsLayout.removeAllViews();
+
+        int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+        int marginBottomPx = marginTopPx;
+
         addNewGroupButton.setOnClickListener(v -> {
             ActivityUtilities.InputDialogHelper dialogHelper = new ActivityUtilities.InputDialogHelper(getResources().getString(R.string.enter_name), getResources().getString(R.string.name), ManageGroupsActivity.this);
             dialogHelper.initDialog((dialog, which) -> ActivityUtilities.runNetworkOperation(() -> {
@@ -78,11 +87,13 @@ public class ManageGroupsActivity extends AppCompatActivity {
                 try {
                     String name = dialogHelper.input.getText().toString();
                     if(name.isEmpty()){return;}
+
                     profile.mfGradeBookHandler.createGroup(name);
                     sendBroadcast(new Intent("GROUP_CHANGED"));
                 } catch (RequestFailedException | HttpErrorStatusException e) {
                     //TODO: handle unable to create group;
-                }}));
+                }
+            }));
         });
 
         RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
@@ -91,11 +102,19 @@ public class ManageGroupsActivity extends AppCompatActivity {
         SideMenuHelper menuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
         menuHelper.initiateSideMenu();
 
+        ImageButton backk = findViewById(R.id.back_btn);
+        backk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         refreshGroups(profile);
     }
 
     void refreshGroups(Profile profile){
-        RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
+        //RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
         ActivityUtilities.runNetworkOperation(() -> {
             int[] ids = profile.mfGradeBookHandler.getGroupIds();
 
@@ -108,8 +127,32 @@ public class ManageGroupsActivity extends AppCompatActivity {
             }
 
             ActivityUtilities.runOnMainThread(()->{
-                GroupEntryAdapter adapter = new GroupEntryAdapter(groups, ManageGroupsActivity.this);
-                recyclerView.setAdapter(adapter);
+                //GroupEntryAdapter adapter = new GroupEntryAdapter(groups, ManageGroupsActivity.this);
+                //recyclerView.setAdapter(adapter);
+
+
+                LinearLayout eventsLayout = findViewById(R.id.group_linearlayout);
+
+                //eventsLayout.removeAllViews();
+
+                int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                int marginBottomPx = marginTopPx;
+
+                NumberFormat format = NumberFormat.getNumberInstance();
+                format.setMaximumFractionDigits(2);
+
+                View view = getLayoutInflater().inflate(R.layout.aadynamic_group_layout, eventsLayout, false);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                );
+                params.setMargins(0, marginTopPx, 0, marginBottomPx);
+                view.setLayoutParams(params);
+
+                TextView groupName = view.findViewById(R.id.group_name);
+
+                groupName.setText("ahoj");
+
             });
         });
     }
