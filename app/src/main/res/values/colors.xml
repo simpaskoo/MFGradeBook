@@ -30,4 +30,9 @@
     <color name="user_edit_blue">#29366e</color>
     <color name="user_delete">#c34035</color>
     <color name="user_admin_pkldnk">#196eda</color>
+
+    <color name="login_inicial_bg">#29366e</color>
+    <color name="use_new_account_clr">#d9b020</color>
+    <color name="login_user_icon">#c67500</color>
+
 </resources>

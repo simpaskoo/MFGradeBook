@@ -26,45 +26,9 @@
             app:layout_constraintStart_toStartOf="@id/group_toolbar"/>
 
     </Toolbar>
-    <Toolbar
-        android:id="@+id/user_edit"
+    <include
+        layout="@layout/aadynamic_user_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingTop="60dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/aauser_edit_bg"
-        tools:ignore="MissingConstraints">
-
-        <Button
-            android:id="@+id/smazat_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/aauser_delete_bg"
-            android:text="Smazat"
-            android:fontFamily="@font/roboto_black"
-            android:layout_gravity="end"/>
-        <Button
-            android:id="@+id/admin_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/aauser_admin_pkldnk_bg"
-            android:text="Admin"
-            android:fontFamily="@font/roboto_black"
-            android:layout_gravity="end"/>
-        <Button
-            android:id="@+id/pokladnik_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/aauser_admin_pkldnk_bg"
-            android:text="Pokladnik"
-            android:fontFamily="@font/roboto_black"
-            android:layout_gravity="end"/>
-
-    </Toolbar>
-
+        android:layout_marginTop="5dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

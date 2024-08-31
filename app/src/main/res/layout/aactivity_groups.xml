@@ -34,23 +34,38 @@
 
     <Button
         android:id="@+id/new_group_btn"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/aaudalosti_filter_button_bg"
         android:fontFamily="@font/roboto_black"
-        android:text="Přidat +"
+        android:text="Vytvořit +"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintEnd_toStartOf="@id/groups_filter"
+        app:layout_constraintTop_toBottomOf="@id/moje_skupiny"/>
+    <Button
+        android:id="@+id/pripojit_se"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/aaudalosti_filter_button_bg"
+        android:fontFamily="@font/roboto_black"
+        android:text="Připojit se"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@id/new_group_btn"
         app:layout_constraintTop_toBottomOf="@id/moje_skupiny"/>
 
     <Spinner
         android:id="@+id/groups_filter"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
