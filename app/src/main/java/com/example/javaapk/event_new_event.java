@@ -1,10 +1,5 @@
 package com.example.javaapk;
 
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static android.content.Intent.parseIntent;
-
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;

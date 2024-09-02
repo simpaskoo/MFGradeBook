@@ -2,18 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainActivity_login"
+    android:id="@+id/mainmainactivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d28300"
-    android:paddingStart="15dp"
-    android:paddingEnd="15dp"
     tools:context=".activities.menu.ManageGroupsActivity">
 
     <ScrollView
         android:id="@+id/login_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,58 +30,57 @@
                 android:layout_height="120dp"
                 android:src="@mipmap/logo_image2"
                 android:layout_marginBottom="40dp"/>
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:text="+ Přidat účet"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
+                android:id="@+id/addProfileButton"
+                tools:ignore="MissingConstraints" />
             <include
                 layout="@layout/aadynamic_login_account"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="@id/login_scroll_view"
-                app:layout_constraintTop_toTopOf="login_scroll_view"
-                app:layout_constraintEnd_toEndOf="login_scroll_view"
-                app:layout_constraintBottom_toBottomOf="login_scroll_view"/>
+                android:layout_marginTop="5dp" />
             <include
                 layout="@layout/aadynamic_login_account"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="@id/login_scroll_view"
-                app:layout_constraintTop_toTopOf="login_scroll_view"
-                app:layout_constraintEnd_toEndOf="login_scroll_view"
-                app:layout_constraintBottom_toBottomOf="login_scroll_view"/>
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </ScrollView>
 
-    <Toolbar
-        android:id="@+id/login_toolbar"
+    <!--<Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/aalogin_use_new_account_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toBottomOf="parent">
+    </Button>-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/aalogin_user_icone_bg"
-                android:src="@drawable/baseline_supervised_user_circle_24"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Použít jiný účet"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/roboto_black"
-                android:textColor="@color/white"
-                android:textSize="25dp"/>
-        </LinearLayout>
-    </Toolbar>
+    <include
+        layout="@layout/aadynamic_different_acconut_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/different_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <include
+        layout="@layout/aadynamic_login_layout"
+        android:id="@+id/jiny_ucet_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

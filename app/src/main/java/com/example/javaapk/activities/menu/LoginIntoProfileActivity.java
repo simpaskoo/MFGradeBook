@@ -21,9 +21,6 @@ import com.example.javaapk.util.ActivityUtilities;
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 //activity used when we need to ask the user for a password or a username or both in order to login.
 public class LoginIntoProfileActivity extends AppCompatActivity {
 
