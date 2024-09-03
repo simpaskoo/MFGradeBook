@@ -7,21 +7,17 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaapk.R;
 import com.example.javaapk.data.DataManager;
@@ -32,9 +28,7 @@ import net.anax.appServerClient.client.data.Group;
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ManageGroupsActivity extends AppCompatActivity {
 
@@ -123,6 +117,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
                 int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
                 int marginBottomPx = marginTopPx;
 
+                ScrollView groupsScrollView = findViewById(R.id.groups_scroll_view);
                 LinearLayout groupLinearLayout = findViewById(R.id.group_linearlayout);
                 groupLinearLayout.removeAllViews();
 
@@ -139,6 +134,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
                     TextView groupName = view.findViewById(R.id.group_name);
                     TextView memberAmount = view.findViewById(R.id.member_amount);
 
+
                     groupName.setText(g.cachedName);
                     memberAmount.setText(" - " + g.userIds.size() + " members");
 
@@ -150,7 +146,9 @@ public class ManageGroupsActivity extends AppCompatActivity {
                     });
 
                     groupLinearLayout.addView(view);
+                    //groupsScrollView.addView(groupLinearLayout);
                 }
+
             });
         });
     }

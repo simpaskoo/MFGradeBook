@@ -40,7 +40,7 @@
                 android:layout_gravity="end"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
-                android:id="@+id/addProfileButton"
+                android:id="@+id/addProfileButtonnn"
                 tools:ignore="MissingConstraints" />
             <include
                 layout="@layout/aadynamic_login_account"

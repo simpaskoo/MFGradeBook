@@ -30,7 +30,7 @@ public class ProfilesActivity extends AppCompatActivity {
             return insets;
         });
 
-        addProfileButton = findViewById(R.id.addProfileButton);
+        addProfileButton = findViewById(R.id.addProfileButtonnn);
         addProfileButton.setOnClickListener(v -> addNewProfileAndSelect());
 
         DataManager dataManager = DataManager.getInstance();
