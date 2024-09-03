@@ -48,7 +48,6 @@ public class ManageGroupsActivity extends AppCompatActivity {
     };
 
     Profile profile;
-    LinearLayout groupLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +69,10 @@ public class ManageGroupsActivity extends AppCompatActivity {
         if(!DataManager.getInstance().isProfileSelected()){
             ActivityUtilities.askToSelectProfile(this);
         }
+
         profile = DataManager.getInstance().getSelectedProfile();
 
         Button addNewGroupButton = findViewById(R.id.button_add_new_group);
-
-        LinearLayout eventsLayout = findViewById(R.id.group_linearlayout);
-        //eventsLayout.removeAllViews();
-
-        int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-        int marginBottomPx = marginTopPx;
 
         addNewGroupButton.setOnClickListener(v -> {
             ActivityUtilities.InputDialogHelper dialogHelper = new ActivityUtilities.InputDialogHelper(getResources().getString(R.string.enter_name), getResources().getString(R.string.name), ManageGroupsActivity.this);
@@ -96,13 +90,11 @@ public class ManageGroupsActivity extends AppCompatActivity {
             }));
         });
 
-        RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         SideMenuHelper menuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
         menuHelper.initiateSideMenu();
 
         ImageButton backk = findViewById(R.id.back_btn);
+
         backk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,11 +106,11 @@ public class ManageGroupsActivity extends AppCompatActivity {
     }
 
     void refreshGroups(Profile profile){
-        //RecyclerView recyclerView = findViewById(R.id.group_list_recycler_view);
         ActivityUtilities.runNetworkOperation(() -> {
             int[] ids = profile.mfGradeBookHandler.getGroupIds();
 
             ArrayList<Group> groups = new ArrayList<>();
+
             for(int id: ids){
                 try {
                     Group g = profile.mfGradeBookHandler.memoryManager.getGroup(id);
@@ -127,85 +119,39 @@ public class ManageGroupsActivity extends AppCompatActivity {
             }
 
             ActivityUtilities.runOnMainThread(()->{
-                //GroupEntryAdapter adapter = new GroupEntryAdapter(groups, ManageGroupsActivity.this);
-                //recyclerView.setAdapter(adapter);
 
-
-                LinearLayout eventsLayout = findViewById(R.id.group_linearlayout);
-
-                //eventsLayout.removeAllViews();
-
-                int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
                 int marginBottomPx = marginTopPx;
 
-                NumberFormat format = NumberFormat.getNumberInstance();
-                format.setMaximumFractionDigits(2);
+                LinearLayout groupLinearLayout = findViewById(R.id.group_linearlayout);
+                groupLinearLayout.removeAllViews();
 
-                View view = getLayoutInflater().inflate(R.layout.aadynamic_group_layout, eventsLayout, false);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                );
-                params.setMargins(0, marginTopPx, 0, marginBottomPx);
-                view.setLayoutParams(params);
+                for(Group g : groups){
+                    View view = getLayoutInflater().inflate(R.layout.aadynamic_group_layout, groupLinearLayout, false);
 
-                TextView groupName = view.findViewById(R.id.group_name);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, marginTopPx, 0, marginBottomPx);
+                    view.setLayoutParams(params);
 
-                groupName.setText("ahoj");
+                    TextView groupName = view.findViewById(R.id.group_name);
+                    TextView memberAmount = view.findViewById(R.id.member_amount);
 
+                    groupName.setText(g.cachedName);
+                    memberAmount.setText(" - " + g.userIds.size() + " members");
+
+                    view.findViewById(R.id.group_toolbar).setOnClickListener(v -> {
+                        ;;;System.out.println("HERE 354643543,5");
+                        Intent intent = new Intent(ManageGroupsActivity.this, ManageSingleGroupActivity.class);
+                        intent.putExtra("groupId", g.id);
+                        ManageGroupsActivity.this.startActivity(intent);
+                    });
+
+                    groupLinearLayout.addView(view);
+                }
             });
         });
-    }
-
-    static class GroupEntryAdapter extends RecyclerView.Adapter<GroupEntryAdapter.ViewHolder>{
-        List<Group> groups;
-        Context context;
-        GroupEntryAdapter(List<Group> groups, Context context){
-            this.groups = groups;
-            this.context = context;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.group_entry, parent, false);
-            return new ViewHolder(view, context);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Group g = groups.get(position);
-            holder.groupNameView.setText(g.cachedName);
-            holder.initListener(g.id);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return groups.size();
-        }
-
-        public Group getGroupAtPosition(int position){
-            return groups.get(position);
-        }
-
-        static class ViewHolder extends RecyclerView.ViewHolder{
-            TextView groupNameView;
-            View itemView;
-            Context context;
-            public ViewHolder(@NonNull View itemView, Context context){
-                super(itemView);
-                groupNameView = itemView.findViewById(R.id.group_entry_name);
-                this.itemView = itemView;
-                this.context = context;
-            }
-            public void initListener(int groupId){
-                itemView.setOnClickListener(v -> {
-                    Intent intent = new Intent(context, ManageSingleGroupActivity.class);
-                    intent.putExtra("groupId", groupId);
-                    context.startActivity(intent);
-                });
-            }
-        }
     }
 }

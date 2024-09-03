@@ -61,8 +61,6 @@ public class Group {
         } catch(MissingDataException ex){
             this.treasurerUserId = ID.NONE.id;
         }
-        System.out.println("treasurer user id: " + this.treasurerUserId);
-
         this.taskIds = taskIdsArray;
         this.userIds = userIdsArray;
     }

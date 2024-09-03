@@ -107,14 +107,10 @@ public class HttpWrapperRequest {
 
             OutputStream ostream = connection.getOutputStream();
 
-            System.out.println("beginning to write data: " + Arrays.toString(wrapperData));
-
             ostream.write(wrapperData);
 
             connection.connect();
             HttpResponse response = new HttpResponse(connection.getResponseMessage(), connection.getResponseCode());
-
-            System.out.println("response code: " + response.responseCode + ", response message: " + response.message);
 
             InputStream connectionInputStream;
             if(response.responseCode == 200){

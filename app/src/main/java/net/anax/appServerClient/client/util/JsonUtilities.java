@@ -91,7 +91,6 @@ public class JsonUtilities {
     }
 
     private static <E extends Exception> E fail(String data, String key, E e) throws E {
-        System.out.println("could not retrieve " + key + " from " + data);
         return ExceptionUtilities.throwAgain(e);
     }
 

@@ -1,3 +1,4 @@
+package com.example.javaapk;
 /*package com.example.javaapk;
 
 import android.graphics.Color;
