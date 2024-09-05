@@ -47,8 +47,8 @@ public class ManageGroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_groups);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        setContentView(R.layout.aactivity_groups);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainActivity_groups), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -66,7 +66,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
         profile = DataManager.getInstance().getSelectedProfile();
 
-        Button addNewGroupButton = findViewById(R.id.button_add_new_group);
+        Button addNewGroupButton = findViewById(R.id.new_group_btn);
 
         addNewGroupButton.setOnClickListener(v -> {
             ActivityUtilities.InputDialogHelper dialogHelper = new ActivityUtilities.InputDialogHelper(getResources().getString(R.string.enter_name), getResources().getString(R.string.name), ManageGroupsActivity.this);
@@ -84,10 +84,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
             }));
         });
 
-        SideMenuHelper menuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
-        menuHelper.initiateSideMenu();
-
-        ImageButton backk = findViewById(R.id.back_btn);
+        ImageButton backk = findViewById(R.id.clear_btn);
 
         backk.setOnClickListener(new View.OnClickListener() {
             @Override

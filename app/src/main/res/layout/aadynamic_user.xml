@@ -28,6 +28,7 @@
     </Toolbar>
     <include
         layout="@layout/aadynamic_user_info"
+        android:id="@+id/user_options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"/>

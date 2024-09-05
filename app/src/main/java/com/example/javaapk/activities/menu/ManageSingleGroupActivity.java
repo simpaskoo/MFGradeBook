@@ -1,13 +1,16 @@
 package com.example.javaapk.activities.menu;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.window.OnBackInvokedDispatcher;
 
@@ -27,8 +30,10 @@ import com.example.javaapk.util.ActivityUtilities;
 import net.anax.appServerClient.client.data.Group;
 import net.anax.appServerClient.client.data.ID;
 import net.anax.appServerClient.client.data.RequestFailedException;
+import net.anax.appServerClient.client.data.User;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -46,13 +51,14 @@ public class ManageSingleGroupActivity extends AppCompatActivity {
 
     int groupId;
     Profile profile;
+    @SuppressLint({"InlinedApi", "UnspecifiedRegisterReceiverFlag"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_single_group);
+        setContentView(R.layout.aaactivity_group_info);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainActivity_groups_info), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -64,6 +70,7 @@ public class ManageSingleGroupActivity extends AppCompatActivity {
         if(groupId == -1 || !DataManager.getInstance().isProfileSelected()){
             this.finish();
         }
+
         profile = DataManager.getInstance().getSelectedProfile();
 
         IntentFilter filter = new IntentFilter("GROUP_CHANGED");
@@ -75,7 +82,6 @@ public class ManageSingleGroupActivity extends AppCompatActivity {
         }
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-
             if(result.getData() != null){
                 int[] userIds = result.getData().getIntArrayExtra("selectedUserIds");
                 if(userIds != null){
@@ -98,74 +104,90 @@ public class ManageSingleGroupActivity extends AppCompatActivity {
 
     public void refresh(){
 
-        TextView groupNameView = findViewById(R.id.text_view_manage_group_group_name);
-        TextView adminNameView = findViewById(R.id.text_view_manage_group_admin_name);
-        TextView treasurerNameView = findViewById(R.id.text_view_manage_group_treasurer_name);
-        TextView memberCountView = findViewById(R.id.text_view_manage_group_member_count);
-        TextView groupAccessCodeView = findViewById(R.id.text_view_manage_group_group_access_code);
-
-        Button adminOptionsButton = findViewById(R.id.button_manage_group_as_admin);
-        Button addUsersButton = findViewById(R.id.add_users_button);
-
-        addUsersButton.setOnClickListener(v -> {
-            launcher.launch(new Intent(this, SelectUsersActivity.class));
-        });
+        TextView groupNameView = findViewById(R.id.nazev_skupiny);
+        TextView groupAccessCodeView = findViewById(R.id.code);
 
         ActivityUtilities.runNetworkOperation(() -> {
             try {
                 Group g = profile.mfGradeBookHandler.memoryManager.getGroup(groupId);
                 String name = g.cachedName;
+
                 ActivityUtilities.runOnMainThread(() -> {
                     groupNameView.setText(name);
                     groupAccessCodeView.setText(getResources().getText(R.string.access_code) + ": " + g.cachedAccessCode);
                 });
 
-                int adminId = g.adminUserId;
-
-                if(adminId == profile.getId()){
-                    ActivityUtilities.runOnMainThread(() -> {
-                        adminOptionsButton.setEnabled(true);
-                        adminOptionsButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(ManageSingleGroupActivity.this, GroupAdminOptionsActivity.class);
-                                intent.putExtra("groupId", groupId);
-                                startActivity(intent);
-                            }
-                        });
-                    });
-                }
-
-                int treasurerId = g.treasurerUserId;
-
                 HashSet<Integer> members = new HashSet<Integer>();
                 members.addAll(g.userIds);
 
-                int memberCount = members.size();
-
-                ActivityUtilities.runOnMainThread(() -> {memberCountView.setText(getResources().getText(R.string.member_count) + ": " + memberCount);});
-
-                String adminName = getResources().getString(R.string.user_name_unknown);
-                String treasurerName = getResources().getString(R.string.user_name_unknown);
-
-                if(adminId != ID.UNKNOWN.id){
-                    adminName = profile.mfGradeBookHandler.memoryManager.getUser(adminId).cachedName;
+                ArrayList<User> users = new ArrayList<>();
+                for (int memberId : members){
+                    User u = profile.mfGradeBookHandler.memoryManager.getUser(memberId);
+                    users.add(u);
                 }
 
-                if(treasurerId == ID.NONE.id){
-                    treasurerName = getResources().getString(R.string.user_name_none);
-                } else if (treasurerId != ID.UNKNOWN.id) {
-                    treasurerName = profile.mfGradeBookHandler.memoryManager.getUser(treasurerId).cachedName;
-                }
-                final String finalAdminName = adminName;
+                boolean isAdmin = g.adminUserId == profile.getId();
 
-                String finalTreasurerName = treasurerName;
                 ActivityUtilities.runOnMainThread(() -> {
-                    adminNameView.setText(getResources().getText(R.string.admin) + ": " + finalAdminName);
-                    treasurerNameView.setText(getResources().getText(R.string.treasurer) + ": " + finalTreasurerName);
+                    LinearLayout usersLayout = findViewById(R.id.group_linearlayout);
+                    usersLayout.removeAllViews();
+
+                    int marginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+
+                    for(User user : users){
+                        View view = getLayoutInflater().inflate(R.layout.aadynamic_user, usersLayout, false);
+
+                        TextView nameText = view.findViewById(R.id.user_name);
+                        nameText.setText(user.cachedName);
+
+                        Button makeAdminButton = view.findViewById(R.id.admin_btn);
+                        Button makeTreasurerButton = view.findViewById(R.id.pokladnik_btn);
+                        Button kickButton = view.findViewById(R.id.smazat_btn);
+
+                        if(!isAdmin){
+                            makeAdminButton.setVisibility(View.GONE);
+                            makeTreasurerButton.setVisibility(View.GONE);
+                            kickButton.setVisibility(View.GONE);
+                            view.findViewById(R.id.user_options).setVisibility(View.GONE);
+                        }else{
+                            makeAdminButton.setOnClickListener(v -> {
+                                ActivityUtilities.runNetworkOperation(() -> {
+                                    try {
+                                        g.requestSetAdminUserId(profile.mfGradeBookHandler.memoryManager.getClient().getToken(),user.getId() , DataManager.REMOTE_SERVER);
+                                        sendBroadcast(new Intent("GROUP_CHANGED"));
+                                    } catch (RequestFailedException | HttpErrorStatusException ignored) {}
+
+                                });
+                            });
+                            makeTreasurerButton.setOnClickListener(v -> {
+                                ActivityUtilities.runNetworkOperation(() -> {
+                                    try {
+                                        g.requestSetTreasurerUserId(profile.mfGradeBookHandler.memoryManager.getClient().getToken(), user.getId(), DataManager.REMOTE_SERVER);
+                                        sendBroadcast(new Intent("GROUP_CHANGED"));
+                                    } catch (RequestFailedException | HttpErrorStatusException ignored) {}
+                                });
+                            });
+                            kickButton.setOnClickListener(v -> {
+                                ActivityUtilities.runNetworkOperation(() -> {
+                                    try {
+                                        g.requestSetIsInGroup(profile.mfGradeBookHandler.memoryManager.getClient().getToken(),user.getId(), false, DataManager.REMOTE_SERVER);
+                                        sendBroadcast(new Intent("GROUP_CHANGED"));
+                                    } catch (RequestFailedException | HttpErrorStatusException ignored) {}
+                                });
+                            });
+                        }
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        params.setMargins(0, marginTopPx, 0, 0);
+                        view.setLayoutParams(params);
+                        usersLayout.addView(view);
+
+                    }
+
                 });
-
-
 
             } catch (RequestFailedException | HttpErrorStatusException e) {
                 finish();

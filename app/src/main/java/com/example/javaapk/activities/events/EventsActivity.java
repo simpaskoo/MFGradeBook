@@ -60,8 +60,6 @@ public class EventsActivity extends AppCompatActivity {
         setContentView(R.layout.aaudalosti_design);
 
 
-
-
         //Side menu
         sideMenu = findViewById(R.id.sideMenu);
         sideMenu.post(() -> {
@@ -77,10 +75,6 @@ public class EventsActivity extends AppCompatActivity {
             }
         });
         //Side menu
-
-
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainActivity), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
