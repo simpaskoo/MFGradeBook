@@ -39,4 +39,14 @@ public class MainClass extends AppCompatActivity {
         });
     }
 
+    /*public void loadingMethod() {
+
+        ProgressBar progressBar = findViewById(R.id.progress_bar);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainClass.this);
+
+        LayoutInflater inflater = MainClass.this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout))
+
+    }*/
+
 }

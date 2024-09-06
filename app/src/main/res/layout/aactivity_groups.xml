@@ -82,21 +82,30 @@
         android:id="@+id/groups_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pripojit_se"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
             android:id="@+id/group_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp">
 
-            <include
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="250dp"
+                android:indeterminateTint="@color/FilterButton"
+                android:layout_gravity="center" />
+
+            <!--<include
                 layout="@layout/aadynamic_group_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +114,7 @@
                 layout="@layout/aadynamic_group_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"/>-->
 
         </LinearLayout>
     </ScrollView>
