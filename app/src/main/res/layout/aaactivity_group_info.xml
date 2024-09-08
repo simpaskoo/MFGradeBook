@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d28300"
-    tools:context=".activities.menu.ManageGroupsActivity">
+    tools:context=".activities.menu.ManageSingleGroupActivity">
 
     <TextView
         android:id="@+id/nazev_skupiny"

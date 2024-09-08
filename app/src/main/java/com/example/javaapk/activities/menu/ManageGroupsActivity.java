@@ -102,6 +102,27 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
             ArrayList<Group> groups = new ArrayList<>();
 
+         //   for (int i = 0; i < groups.size(); i++) {
+            //    final int index = i;  // This is necessary to refer to the correct button inside the loop
+             //   groups.get(i).setOnClickListener(new View.OnClickListener() {
+                   // @Override
+                  //  public void onClick(View view) {
+                   //     Intent intent = new Intent(ManageGroupsActivity.this, ManageSingleGroupActivity.class);
+                   //     //intent.putExtra("groupId", g.id);
+                   //     ManageGroupsActivity.this.startActivity(intent);
+                   // }
+               // });
+
+                /*groups.get(i).findViewById(R.id.group_toolbar).setOnClickListener(v -> {
+                    ;;;System.out.println("HERE 354643543,5");
+                    Intent intent = new Intent(ManageGroupsActivity.this, ManageSingleGroupActivity.class);
+                    intent.putExtra("groupId", g.id);
+                    ManageGroupsActivity.this.startActivity(intent);
+                });*/
+          //  }
+
+
+
             for(int id: ids){
                 try {
                     Group g = profile.mfGradeBookHandler.memoryManager.getGroup(id);

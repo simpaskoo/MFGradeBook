@@ -24,7 +24,7 @@ public class MainClass extends AppCompatActivity {
 
         filter_button = (Button) findViewById(R.id.flter_button);
         filter_layout = (Toolbar) findViewById(R.id.filter_udalosti);
-        textView = (TextView) findViewById(R.id.textView);
+        //textView = (TextView) findViewById(R.id.textView);
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

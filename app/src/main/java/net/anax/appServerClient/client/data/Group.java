@@ -1,5 +1,7 @@
 package net.anax.appServerClient.client.data;
 
+import android.view.View;
+
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 import net.anax.appServerClient.client.server.RemoteServer;
 import net.anax.appServerClient.client.server.Token;
@@ -189,5 +191,8 @@ public class Group {
         for(Integer id : taskIds){
             System.out.println("task: " + id);
         }
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
     }
 }

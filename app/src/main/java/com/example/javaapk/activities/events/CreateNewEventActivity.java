@@ -216,6 +216,21 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         });*/
 
+        Spinner spinnerSelectTaskType = findViewById(R.id.spinner_select_task_type);
+        ImageButton clearButton = findViewById(R.id.clear_btn);
+        TextView popis = findViewById(R.id.popis);
+        EditText newEventDescribe = findViewById(R.id.new_event_description_edit_text);
+        TextView doSkupiny = findViewById(R.id.do_skupiny);
+        Spinner selectTask = findViewById(R.id.spinner_select_task_group);
+        TextView ucastnici = findViewById(R.id.ucastnici);
+        TextView pocetUcastniku = findViewById(R.id.pocet_ucastniku);
+        Button selectUsersBtn = findViewById(R.id.new_event_select_users_button);
+        TextView ukonceni = findViewById(R.id.ukonceni);
+        LinearLayout ukonceniInfo = findViewById(R.id.ukonceni_info);
+        TextView cena = findViewById(R.id.cena);
+        LinearLayout cenaInfo = findViewById(R.id.cena_linear);
+        FloatingActionButton submitNewEvent = findViewById(R.id.submit_create_event_button);
+
         Toolbar toolbar = findViewById(R.id.add_users_toolbar);
         View vieww = findViewById(R.id.vieww);
         ImageButton imageButton = findViewById(R.id.clear_btn3);
@@ -226,6 +241,24 @@ public class CreateNewEventActivity extends AppCompatActivity {
                 if (vieww.getVisibility() == View.GONE) {
                     vieww.setVisibility(View.VISIBLE);
                     toolbar.setVisibility(View.VISIBLE);
+
+                    spinnerSelectTaskType.setEnabled(false);
+                    clearButton.setEnabled(false);
+                    popis.setEnabled(false);
+                    newEventDescribe.setEnabled(false);
+                    doSkupiny.setEnabled(false);
+                    selectTask.setEnabled(false);
+                    ucastnici.setEnabled(false);
+                    pocetUcastniku.setEnabled(false);
+                    selectUsersBtn.setEnabled(false);
+                    ukonceni.setEnabled(false);
+                    ukonceniInfo.setEnabled(false);
+                    cena.setEnabled(false);
+                    cenaInfo.setEnabled(false);
+                    submitNewEvent.setEnabled(false);
+
+
+
                 } else {
                     vieww.setVisibility(View.GONE);
                     toolbar.setVisibility(View.GONE);
@@ -233,20 +266,24 @@ public class CreateNewEventActivity extends AppCompatActivity {
             }
         });
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (toolbar.getVisibility() == View.VISIBLE) {
-                    vieww.setVisibility(View.GONE);
-                    toolbar.setVisibility(View.GONE);
-                    System.out.println("is VISIBLE");
-                } else {
-                    vieww.setVisibility(View.VISIBLE);
-                    toolbar.setVisibility(View.GONE);
-                }
 
-            }
-        });
+        if(toolbar.getVisibility() == View.VISIBLE){
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (vieww.getVisibility() == View.VISIBLE) {
+                        vieww.setVisibility(View.GONE);
+                        toolbar.setVisibility(View.GONE);
+                        System.out.println("is VISIBLE");
+                    } else {
+                        vieww.setVisibility(View.VISIBLE);
+                        toolbar.setVisibility(View.VISIBLE);
+                    }
+
+                }
+            });
+        }
+
 
         submitButton.setOnClickListener(v -> {
             EntryWithId taskTypeEntry = (EntryWithId) taskTypeSpinner.getSelectedItem();
