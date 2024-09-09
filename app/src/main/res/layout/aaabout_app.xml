@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/udalosti_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d28300"
+    tools:context=".activities.menu.UdalostInfo">
+
+    <ScrollView
+        android:id="@+id/about_app_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:id="@+id/o_aplikaci"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="O aplikaci"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/clear_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:backgroundTint="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:src="@mipmap/logo_image2"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/o_aplikaci"/>
+        <TextView
+            android:id="@+id/mfgb_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:text="MFGB App"
+            android:fontFamily="@font/roboto_black"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@id/logo"
+            app:layout_constraintTop_toBottomOf="@id/o_aplikaci" />
+        <LinearLayout
+            android:id="@+id/about_app_linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:background="@drawable/aaudalosti_filter_button_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo"
+            app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/o_aplikaci_statement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="O aplikaci MFGB App"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/popis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App O aplikaci MFGB App"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintTop_toBottomOf="@id/o_aplikaci"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:background="@drawable/aaudalosti_filter_button_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/about_app_linear"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="Zákaznická podpora"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="aplikace@mfgbapp.cz"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="Zásady ochrany osobních údajů"
+                android:paddingTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="Více informací naleznete zde"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="Verze aplikace"
+                android:paddingTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="0.0.1 (001)"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="Licence"
+                android:textColor="@color/white"
+                android:paddingTop="10dp"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="!@2024 MFGBA software s.r.o."
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

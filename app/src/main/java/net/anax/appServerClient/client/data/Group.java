@@ -194,5 +194,6 @@ public class Group {
     }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
+
     }
 }

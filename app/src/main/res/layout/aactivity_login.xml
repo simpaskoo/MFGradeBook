@@ -18,16 +18,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="100dp"
             android:orientation="vertical"
             android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/profily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="Profily"
+                    android:textColor="@color/black"
+                    android:textSize="35dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageButton
+                    android:id="@+id/clear_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="225dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:backgroundTint="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
+
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_marginTop="40dp"
                 android:src="@mipmap/logo_image2"
                 android:layout_marginBottom="40dp"/>
             <Button
