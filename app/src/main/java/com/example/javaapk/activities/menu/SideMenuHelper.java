@@ -2,17 +2,14 @@ package com.example.javaapk.activities.menu;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.example.javaapk.R;
+import com.example.javaapk.activities.aboutApp.AboutAppActivity;
 import com.example.javaapk.activities.assessments.AssessmentsActivity;
 import com.example.javaapk.activities.events.EventsActivity;
 import com.example.javaapk.activities.timetable.TimetableActivity;
-import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
 import com.google.android.material.navigation.NavigationView;
@@ -57,6 +54,10 @@ public class SideMenuHelper {
                 parent.startActivity(intent);
             } else if(id == R.id.side_menu_item_timetable){
                 Intent intent = new Intent(parent, TimetableActivity.class);
+                parent.startActivity(intent);
+            }
+            else if(id == R.id.side_menu_item_about_app){
+                Intent intent = new Intent(parent, AboutAppActivity.class);
                 parent.startActivity(intent);
             }
             else{
