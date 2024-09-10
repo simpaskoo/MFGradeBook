@@ -355,7 +355,7 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -492,6 +492,11 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center">
 
+                <include
+                    layout="@layout/aadynamic_new_event_pridat_ucastnika"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"/>
                 <include
                     layout="@layout/aadynamic_new_event_pridat_ucastnika"
                     android:layout_width="wrap_content"
