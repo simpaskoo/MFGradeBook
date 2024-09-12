@@ -247,6 +247,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/zaplatil_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"

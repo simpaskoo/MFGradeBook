@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.example.javaapk.activities.menu.MenuActivity;
+import com.example.javaapk.activities.events.EventsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         //Open_activity_button_info();
         //buttonInfoOpener();
 
-        startActivity(new Intent(this, MenuActivity.class));
+        startActivity(new Intent(this, EventsActivity.class));
         finish();
 
     }

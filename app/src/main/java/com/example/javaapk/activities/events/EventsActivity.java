@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,7 +19,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.assessments.AssessmentsActivity;
+import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.example.javaapk.activities.menu.SideMenuHelper;
+import com.example.javaapk.activities.timetable.TimetableActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -105,7 +110,42 @@ public class EventsActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        if(!DataManager.getInstance().isProfileSelected()){
+            Intent intent = new Intent(this, ProfilesActivity.class);
+            startActivity(intent);
+            this.finish();
+            return;
+        }
+        Profile profile = DataManager.getInstance().getSelectedProfile();
+
+        slideToActivity();
         refresh();
+    }
+
+    private void slideToActivity() {
+        ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
+        timeTableIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Navigation", "Timetable Icon Clicked");
+                Intent intent = new Intent(EventsActivity.this, TimetableActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
+
+        ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
+        assessmentsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Navigation", "Timetable Icon Clicked");
+                Intent intent = new Intent(EventsActivity.this, AssessmentsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            }
+        });
     }
 
     //Side menu
@@ -178,10 +218,12 @@ public class EventsActivity extends AppCompatActivity {
 
                     TextView description = view.findViewById(R.id.text_view_event_description);
                     TextView date = view.findViewById(R.id.text_view_event_date);
+                    TextView groupName = view.findViewById(R.id.text_view_group);
                     TextView amount = view.findViewById(R.id.text_view_event_amount);
 
                     description.setText(task.cachedDescription);
                     date.setText(DateFormat.getDateTimeInstance().format(new Date(task.cachedDueTimestamp * 1000)));
+                    groupName.setText("group name");
 
                     boolean isPayment = task.cachedType == Task.TaskType.PAYMENT.type;
 

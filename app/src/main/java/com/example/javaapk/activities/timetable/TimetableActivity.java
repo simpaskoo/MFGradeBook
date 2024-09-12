@@ -1,6 +1,10 @@
 package com.example.javaapk.activities.timetable;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.assessments.AssessmentsActivity;
+import com.example.javaapk.activities.events.EventsActivity;
 import com.example.javaapk.activities.menu.SideMenuHelper;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
@@ -32,9 +38,9 @@ public class TimetableActivity extends AppCompatActivity {
             return insets;
         });
 
-
+        slideToActivity();
         if(!DataManager.getInstance().isProfileSelected()){
-            finish();
+            //finish();
             return;
         }
         Profile profile = DataManager.getInstance().getSelectedProfile();
@@ -44,7 +50,7 @@ public class TimetableActivity extends AppCompatActivity {
         sideMenuHelper.initiateSideMenu();
 
         if(!profile.hasSkolaOnline()){
-            finish();
+            //finish();
             return;
         }
 
@@ -59,5 +65,31 @@ public class TimetableActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void slideToActivity() {
+        ImageButton eventsIcon = findViewById(R.id.events_icon1);
+        eventsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Navigation", "Timetable Icon Clicked");
+                Intent intent = new Intent(TimetableActivity.this, EventsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            }
+        });
+
+        ImageButton assessmentsIcon = findViewById(R.id.assessments_icon1);
+        assessmentsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Navigation", "Timetable Icon Clicked");
+                Intent intent = new Intent(TimetableActivity.this, AssessmentsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            }
+        });
     }
 }

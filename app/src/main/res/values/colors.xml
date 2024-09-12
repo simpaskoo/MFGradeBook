@@ -35,4 +35,6 @@
     <color name="use_new_account_clr">#d9b020</color>
     <color name="login_user_icon">#c67500</color>
 
+    <color name="navigation">#ffdb9f</color>
+
 </resources>

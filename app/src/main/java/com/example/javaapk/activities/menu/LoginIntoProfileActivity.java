@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.javaapk.GlobalConstants;
 import com.example.javaapk.R;
+import com.example.javaapk.activities.events.EventsActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -141,7 +142,7 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
     }
 
     void startMenuActivity(){
-        Intent intent = new Intent(this, MenuActivity.class);
+        Intent intent = new Intent(this, EventsActivity.class);
         startActivity(intent);
     }
 

@@ -1,9 +1,12 @@
 package com.example.javaapk.activities.assessments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.events.EventsActivity;
 import com.example.javaapk.activities.menu.SideMenuHelper;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
@@ -35,8 +39,9 @@ public class AssessmentsActivity extends AppCompatActivity {
             return insets;
         });
 
+        slideToActivity();
         if(!DataManager.getInstance().isProfileSelected()){
-            finish();
+            //finish();
             return;
         }
 
@@ -45,7 +50,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         helper.initiateSideMenu();
 
         if(!profile.hasSkolaOnline()){
-            finish();
+            //finish();
             return;
         }
 
@@ -60,6 +65,32 @@ public class AssessmentsActivity extends AppCompatActivity {
             });
         });
 
+    }
+
+    private void slideToActivity() {
+        ImageButton eventsIcon = findViewById(R.id.events_icon2);
+        eventsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Navigation", "Timetable Icon Clicked");
+                Intent intent = new Intent(AssessmentsActivity.this, EventsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
+
+        ImageButton assessmentsIcon = findViewById(R.id.assessments_icon2);
+        assessmentsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Navigation", "Timetable Icon Clicked");
+                Intent intent = new Intent(AssessmentsActivity.this, AssessmentsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
     }
 
     static class AssessmentEntryAdapter extends RecyclerView.Adapter<AssessmentEntryAdapter.ViewHolder> {

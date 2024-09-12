@@ -16,13 +16,14 @@
             android:title="@string/manage_profiles"
             android:id="@+id/side_menu_item_manage_profiles" />
 
-    <item
-            android:title="@string/log_out"
-            android:id="@+id/side_menu_item_log_out" />
+
 
     <item
             android:title="@string/manage_groups"
             android:id="@+id/side_menu_item_manage_groups" />
+    <item
+        android:title="@string/treasurer"
+        android:id="@+id/side_menu_item_treasurer" />
 
     <item
             android:title="@string/about_app"
@@ -31,5 +32,8 @@
     <item
             android:title="@string/settings"
             android:id="@+id/side_menu_item_settings" />
+    <item
+        android:title="@string/log_out"
+        android:id="@+id/side_menu_item_log_out" />
 
 </menu>

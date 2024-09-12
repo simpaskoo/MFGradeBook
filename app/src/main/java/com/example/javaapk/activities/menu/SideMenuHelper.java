@@ -60,6 +60,10 @@ public class SideMenuHelper {
                 Intent intent = new Intent(parent, AboutAppActivity.class);
                 parent.startActivity(intent);
             }
+            else if(id == R.id.side_menu_item_treasurer){
+                Intent intent = new Intent(parent, TreasureActivity.class);
+                parent.startActivity(intent);
+            }
             else{
                 return false;
             }
