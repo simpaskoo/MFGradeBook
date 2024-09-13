@@ -181,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:visibility="gone"
+        android:visibility="visible"
         app:menu="@menu/menu_side_drawer_menu"
         app:headerLayout="@menu/menu_side_drawer_header"
         tools:ignore="MissingConstraints" />
