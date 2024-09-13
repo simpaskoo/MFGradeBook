@@ -13,6 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.JavaAPK"
             android:usesCleartextTraffic="true"
+            android:enableOnBackInvokedCallback="true"
             tools:targetApi="31">
         <activity
             android:name=".activities.menu.TreasureActivity"

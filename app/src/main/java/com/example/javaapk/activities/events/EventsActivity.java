@@ -64,7 +64,6 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aaudalosti_design);
 
-
         //Side menu
         sideMenu = findViewById(R.id.sideMenu);
         sideMenu.post(() -> {
@@ -124,6 +123,18 @@ public class EventsActivity extends AppCompatActivity {
 
     private void slideToActivity() {
         ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
+
+        /*timeTableIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragmentTimeTable = new TimeTableFragment();
+
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.mainActivity, fragmentTimeTable).commit();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });*/
+
         timeTableIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +145,15 @@ public class EventsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+
+
+
+
+
+
 
         ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
         assessmentsIcon.setOnClickListener(new View.OnClickListener() {

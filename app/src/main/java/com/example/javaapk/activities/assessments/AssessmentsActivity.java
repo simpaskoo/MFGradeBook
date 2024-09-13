@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.javaapk.R;
 import com.example.javaapk.activities.events.EventsActivity;
 import com.example.javaapk.activities.menu.SideMenuHelper;
+import com.example.javaapk.activities.timetable.TimetableActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -80,12 +81,12 @@ public class AssessmentsActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton assessmentsIcon = findViewById(R.id.assessments_icon2);
-        assessmentsIcon.setOnClickListener(new View.OnClickListener() {
+        ImageButton timeTableIcon = findViewById(R.id.time_table_icon2);
+        timeTableIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Navigation", "Timetable Icon Clicked");
-                Intent intent = new Intent(AssessmentsActivity.this, AssessmentsActivity.class);
+                Intent intent = new Intent(AssessmentsActivity.this, TimetableActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
