@@ -7,15 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.javaapk.R;
+
 public class AssesstmentsFragment extends Fragment {
 
     public AssesstmentsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return null;
+        return inflater.inflate(R.layout.fragment_assesstments, container, false);
     }
+
 }

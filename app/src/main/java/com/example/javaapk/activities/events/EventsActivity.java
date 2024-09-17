@@ -1,12 +1,12 @@
 package com.example.javaapk.activities.events;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,15 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.javaapk.R;
-import com.example.javaapk.activities.assessments.AssessmentsActivity;
 import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.example.javaapk.activities.menu.SideMenuHelper;
-import com.example.javaapk.activities.timetable.TimetableActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -63,6 +65,7 @@ public class EventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aaudalosti_design);
+
 
         //Side menu
         sideMenu = findViewById(R.id.sideMenu);
@@ -117,12 +120,118 @@ public class EventsActivity extends AppCompatActivity {
         }
         Profile profile = DataManager.getInstance().getSelectedProfile();
 
-        slideToActivity();
+
+
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
+        ImageButton eventsIcon = findViewById(R.id.events_icon);
+        ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
+
+        // Set default fragment
+        //loadFragment(new TimeTableFragment());
+
+        // Set up listeners for your toolbar buttons
+        timeTableIcon.setOnClickListener(v -> loadFragment(new TimeTableFragment()));
+        eventsIcon.setOnClickListener(v -> returnToMainContent());
+        assessmentsIcon.setOnClickListener(v -> loadFragment(new AssesstmentsFragment()));
+
+        //slideToActivity();
         refresh();
     }
 
+    // Method to load fragments into the container
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.mainActivity, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    // Return to MainActivity content (no fragment)
+    private void returnToMainContent() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    @SuppressLint("ResourceType")
     private void slideToActivity() {
-        ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
+
+        //View contentView = findViewById(android.R.id.content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.timetable_fragment);
+        if (fragment instanceof AssesstmentsFragment){
+
+            ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
+            timeTableIcon.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("ResourceType")
+                @Override
+                public void onClick(View view) {
+
+
+                    Fragment timeTableFragment = new TimeTableFragment();
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    fragmentTransaction.setCustomAnimations(
+                            R.anim.slide_in_left,  // enter animation
+                            R.anim.slide_out_right, // exit animation
+                            R.anim.slide_in_left,  // pop enter animation (when back is pressed)
+                            R.anim.slide_out_right // pop exit animation (when back is pressed)
+                    );
+
+                    fragmentTransaction.replace(R.id.mainActivity, timeTableFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+
+            ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
+            assessmentsIcon.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("ResourceType")
+                @Override
+                public void onClick(View view) {
+
+
+                    Fragment assessmentsFragment = new AssesstmentsFragment();
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    fragmentTransaction.setCustomAnimations(
+                            R.anim.slide_in_left,  // enter animation
+                            R.anim.slide_out_right, // exit animation
+                            R.anim.slide_in_left,  // pop enter animation (when back is pressed)
+                            R.anim.slide_out_right // pop exit animation (when back is pressed)
+                    );
+
+                    fragmentTransaction.replace(R.id.mainActivity, assessmentsFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /*timeTableIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +244,7 @@ public class EventsActivity extends AppCompatActivity {
             }
         });*/
 
-        timeTableIcon.setOnClickListener(new View.OnClickListener() {
+        /*timeTableIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Navigation", "Timetable Icon Clicked");
@@ -144,18 +253,9 @@ public class EventsActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
-        });
+        });*/
 
-
-
-
-
-
-
-
-
-
-        ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
+        /*ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
         assessmentsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,7 +265,7 @@ public class EventsActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
             }
-        });
+        });*/
     }
 
     //Side menu
