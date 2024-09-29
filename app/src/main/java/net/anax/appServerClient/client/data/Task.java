@@ -14,10 +14,13 @@ import java.util.ArrayList;
 public class Task {
     int id;
     public long cachedDueTimestamp = 0;
+    public long cachedStartTimestamp = 0;
     public String cachedDescription = "";
+    public String cachedName = "";
     public int cachedType = TaskType.UNKNOWN.type;
     public int cachedGroupId = ID.UNKNOWN.id;
     public int cachedAmount = ID.UNKNOWN.id;
+
 
     ArrayList<Integer> cachedUserIds = new ArrayList<>();
     public Task(int id){
@@ -36,11 +39,15 @@ public class Task {
 
         RequestFailedException e = new RequestFailedException("response does not contain necessary data");
 
-        long dueTimestamp = JsonUtilities.extractInt(response, "dueTimestamp", e);
+        long dueTimestamp = JsonUtilities.extractLong(response, "dueTimestamp", e);
         String description = JsonUtilities.extractString(response, "description", e);
+        String name = JsonUtilities.extractString(response, "name", e);
         int type = JsonUtilities.extractInt(response, "type", e);
+        long startTimestamp = JsonUtilities.extractLong(response, "startTimestamp", e);
 
         this.cachedDueTimestamp = dueTimestamp;
+        this.cachedStartTimestamp = startTimestamp;
+        this.cachedName = name;
         this.cachedDescription = description;
         this.cachedType = type;
 
@@ -62,13 +69,15 @@ public class Task {
         }
     }
 
-    public static Task requestCreateTask(Token token, long dueTimestamp, String description, int type, int[] userIds, RemoteServer server) throws RequestFailedException, HttpErrorStatusException {
+    public static Task requestCreateTask(Token token, long dueTimestamp, long startTimestamp, String name, String description, int type, int[] userIds, RemoteServer server) throws RequestFailedException, HttpErrorStatusException {
         JSONObject data = new JSONObject();
         JSONArray userIdsJSONArray = new JSONArray();
         for(int userId : userIds){
             userIdsJSONArray.add(userId);
         }
         data.put("dueTimestamp", dueTimestamp);
+        data.put("startTimestamp", startTimestamp);
+        data.put("name", name);
         data.put("description", description);
         data.put("type", type);
         data.put("authorUserId", token.subject);

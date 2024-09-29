@@ -296,10 +296,13 @@ public class CreateNewEventActivity extends AppCompatActivity {
                 String description = descriptionText.getText().toString();
                 long dueTimestamp = selectedDatetime.getTimeInMillis();
 
+                long startTimestamp = dueTimestamp;
+                String name = description;
+
                 ActivityUtilities.runNetworkOperation(() -> {
                     try {
 
-                        Task t = Task.requestCreateTask(profile.mfGradeBookHandler.memoryManager.getClient().getToken(), dueTimestamp, description, taskType, userIds, DataManager.REMOTE_SERVER);
+                        Task t = Task.requestCreateTask(profile.mfGradeBookHandler.memoryManager.getClient().getToken(), dueTimestamp, startTimestamp, name,description, taskType, userIds, DataManager.REMOTE_SERVER);
                         if(groupId >= 0){
                             t.requestSetGroupId(profile.mfGradeBookHandler.memoryManager.getClient().getToken(), groupId, DataManager.REMOTE_SERVER);
                         }
