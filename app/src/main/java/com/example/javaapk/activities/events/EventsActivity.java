@@ -102,7 +102,7 @@ public class EventsActivity extends AppCompatActivity {
         profile = DataManager.getInstance().getSelectedProfile();
 
         // no navigation view inside aaudalosti_design.xml, cannot create side menu.
-        SideMenuHelper sideMenuHelper = new SideMenuHelper(findViewById(R.id.sideMenu), profile, this);
+        SideMenuHelper sideMenuHelper = new SideMenuHelper(sideMenu, profile, this);
         sideMenuHelper.initiateSideMenu();
 
         FloatingActionButton createNewEventButton = findViewById(R.id.button_create_new_event);
@@ -135,9 +135,9 @@ public class EventsActivity extends AppCompatActivity {
         //loadFragment(new TimeTableFragment());
 
         // Set up listeners for your toolbar buttons
-        timeTableIcon.setOnClickListener(v -> loadFragment(new TimeTableFragment()));
+        timeTableIcon.setOnClickListener(v -> loadFragment(new TimeTableFragment(EventsActivity.this)));
         eventsIcon.setOnClickListener(v -> returnToMainContent());
-        assessmentsIcon.setOnClickListener(v -> loadFragment(new AssesstmentsFragment()));
+        assessmentsIcon.setOnClickListener(v -> loadFragment(new AssessmentsFragment()));
 
         //slideToActivity();
         refresh();
@@ -163,7 +163,7 @@ public class EventsActivity extends AppCompatActivity {
 
         //View contentView = findViewById(android.R.id.content);
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.timetable_fragment);
-        if (fragment instanceof AssesstmentsFragment){
+        if (fragment instanceof AssessmentsFragment){
 
             ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
             timeTableIcon.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +172,7 @@ public class EventsActivity extends AppCompatActivity {
                 public void onClick(View view) {
 
 
-                    Fragment timeTableFragment = new TimeTableFragment();
+                    Fragment timeTableFragment = new TimeTableFragment(EventsActivity.this);
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -197,7 +197,7 @@ public class EventsActivity extends AppCompatActivity {
                 public void onClick(View view) {
 
 
-                    Fragment assessmentsFragment = new AssesstmentsFragment();
+                    Fragment assessmentsFragment = new AssessmentsFragment();
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

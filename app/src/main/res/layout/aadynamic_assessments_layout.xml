@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/assessment_value_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/aalogin_use_new_account_bg"
@@ -26,6 +27,7 @@
                 android:textColor="@color/white"
                 android:padding="5dp"/>
             <TextView
+                android:id="@+id/assessment_subject_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Matematika"
