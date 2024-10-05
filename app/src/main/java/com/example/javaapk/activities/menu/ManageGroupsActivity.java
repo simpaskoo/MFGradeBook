@@ -1,5 +1,6 @@
 package com.example.javaapk.activities.menu;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
     Profile profile;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

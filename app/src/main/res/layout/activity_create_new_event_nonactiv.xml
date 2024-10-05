@@ -36,28 +36,50 @@
             android:layout_marginStart="32dp" />
 
     <TextView
-            android:id="@+id/new_event_date_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_select_task_type"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="32dp" />
+        android:id="@+id/new_event_start_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startDate"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_select_task_type"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp" />
 
     <TextView
-            android:id="@+id/new_event_time_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_select_task_type"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toEndOf="@+id/new_event_date_text_view"
-            android:layout_marginStart="32dp" />
+        android:id="@+id/new_event_start_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startTime"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_select_task_type"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/new_event_start_date_text_view"
+        android:layout_marginStart="32dp" />
+
+    <TextView
+        android:id="@+id/new_event_end_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="endDate"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_select_task_type"
+        app:layout_constraintStart_toEndOf="@id/new_event_start_time_text_view"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp" />
+
+    <TextView
+        android:id="@+id/new_event_end_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="endTime"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_select_task_type"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/new_event_end_date_text_view"
+        android:layout_marginStart="32dp" />
 
     <Button
             android:id="@+id/new_event_select_users_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/new_event_date_text_view"
+            app:layout_constraintTop_toBottomOf="@id/new_event_end_time_text_view"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="32dp"
             android:layout_marginStart="32dp"

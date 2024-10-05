@@ -45,6 +45,10 @@ public class CreateNewEventActivity extends AppCompatActivity {
     //Dynamic price
     public LinearLayout cenaLiner;
     public TextView cenaText;
+    public TextView zacatekText;
+    public TextView ukonceniText;
+    public LinearLayout zacatekLinear;
+    public LinearLayout ukonceniLinear;
     private Spinner mySpinner;
     private List<String> optionsList;
     //Dynamic price
@@ -88,6 +92,10 @@ public class CreateNewEventActivity extends AppCompatActivity {
         // Find the Spinner and TextView by their IDs
         cenaLiner = findViewById(R.id.cena_linear);
         cenaText = findViewById(R.id.cena);
+        zacatekText = findViewById(R.id.zacatek);
+        ukonceniText = findViewById(R.id.ukonceni);
+        zacatekLinear = findViewById(R.id.zacatek_info);
+        ukonceniLinear = findViewById(R.id.ukonceni_info);
         mySpinner = findViewById(R.id.spinner_select_task_type);
 
         // Initialize the list of options for the Spinner
@@ -108,13 +116,66 @@ public class CreateNewEventActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Show the TextView only when "Payment" is selected
+
                 if (optionsList.get(position).equals("Payment")) {
+                    cenaText.setVisibility(View.VISIBLE);
+                    cenaLiner.setVisibility(View.VISIBLE);// Show the TextView
+                    zacatekText.setVisibility(View.GONE);
+                    zacatekLinear.setVisibility(View.GONE);
+                } else {
+                    cenaText.setVisibility(View.GONE);
+                    cenaLiner.setVisibility(View.GONE);// Hide the TextView for other selections
+                    zacatekText.setVisibility(View.VISIBLE);
+                    zacatekLinear.setVisibility(View.VISIBLE);
+                    if (optionsList.get(position).equals("Homework")) {
+                        zacatekText.setVisibility(View.GONE);
+                        zacatekLinear.setVisibility(View.GONE);
+                    } else {
+                        zacatekText.setVisibility(View.VISIBLE);
+                        zacatekLinear.setVisibility(View.VISIBLE);
+                        if (optionsList.get(position).equals("Task")) {
+                            zacatekText.setVisibility(View.GONE);
+                            zacatekLinear.setVisibility(View.GONE);
+                        } else {
+                            zacatekText.setVisibility(View.VISIBLE);
+                            zacatekLinear.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+
+                /*if (optionsList.get(position).equals("Task")) {
+                    zacatekText.setVisibility(View.GONE);
+                    zacatekLinear.setVisibility(View.GONE);
+                } else {
+                    zacatekText.setVisibility(View.VISIBLE);
+                    zacatekLinear.setVisibility(View.VISIBLE);
+                }
+
+                if (optionsList.get(position).equals("Homework")) {
+                    zacatekText.setVisibility(View.GONE);
+                    zacatekLinear.setVisibility(View.GONE);
+                } else {
+                    zacatekText.setVisibility(View.VISIBLE);
+                    zacatekLinear.setVisibility(View.VISIBLE);
+                }*/
+
+                /*if (optionsList.get(position).equals("Test")) {
                     cenaText.setVisibility(View.VISIBLE);
                     cenaLiner.setVisibility(View.VISIBLE);// Show the TextView
                 } else {
                     cenaText.setVisibility(View.GONE);
                     cenaLiner.setVisibility(View.GONE);// Hide the TextView for other selections
-                }
+                }*/
+
+
+
+                /*if (optionsList.get(position).equals("Event")) {
+                    cenaText.setVisibility(View.VISIBLE);
+                    cenaLiner.setVisibility(View.VISIBLE);// Show the TextView
+                } else {
+                    cenaText.setVisibility(View.GONE);
+                    cenaLiner.setVisibility(View.GONE);// Hide the TextView for other selections
+                }*/
             }
 
             @Override
@@ -176,12 +237,14 @@ public class CreateNewEventActivity extends AppCompatActivity {
             }
         });
 
-        TextView dateView = findViewById(R.id.new_event_date_text_view);
-        TextView timeView = findViewById(R.id.new_event_time_text_view);
+        TextView endDateView = findViewById(R.id.new_event_end_date_text_view);
+        TextView endTimeView = findViewById(R.id.new_event_end_time_text_view);
+        TextView startDateView = findViewById(R.id.new_event_start_date_text_view);
+        TextView startTimeView = findViewById(R.id.new_event_start_time_text_view);
         FloatingActionButton submitButton = findViewById(R.id.submit_create_event_button);
         Button addUsersButton = findViewById(R.id.new_event_select_users_button);
 
-        dateView.setOnClickListener(v -> {
+        endDateView.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     this,
                     (view, year, month, dayOfMonth) -> {
@@ -194,7 +257,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
             datePickerDialog.show();
         });
 
-        timeView.setOnClickListener(v -> {
+        endTimeView.setOnClickListener(v -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     this,
                     (view, hourOfDay, minute) -> {
@@ -208,6 +271,37 @@ public class CreateNewEventActivity extends AppCompatActivity {
             timePickerDialog.show();
 
         });
+
+
+        startDateView.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, year, month, dayOfMonth) -> {
+                        selectedDatetime.set(year, month, dayOfMonth);
+                        refreshDatetimeView();
+                    },
+                    selectedDatetime.get(Calendar.YEAR),
+                    selectedDatetime.get(Calendar.MONTH),
+                    selectedDatetime.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.show();
+        });
+
+        startTimeView.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    this,
+                    (view, hourOfDay, minute) -> {
+                        selectedDatetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        selectedDatetime.set(Calendar.MINUTE, minute);
+                        refreshDatetimeView();
+                    },
+                    selectedDatetime.get(Calendar.HOUR_OF_DAY),
+                    selectedDatetime.get(Calendar.MINUTE),
+                    true);
+            timePickerDialog.show();
+
+        });
+
+
 
         /*addUsersButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, SelectUsersActivity.class);
@@ -233,7 +327,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.add_users_toolbar);
         View vieww = findViewById(R.id.vieww);
-        ImageButton imageButton = findViewById(R.id.clear_btn3);
+        ImageButton imageButton = findViewById(R.id.clear_btn5);
 
         addUsersButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,22 +361,34 @@ public class CreateNewEventActivity extends AppCompatActivity {
         });
 
 
-        if(toolbar.getVisibility() == View.VISIBLE){
-            imageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (vieww.getVisibility() == View.VISIBLE) {
-                        vieww.setVisibility(View.GONE);
-                        toolbar.setVisibility(View.GONE);
-                        System.out.println("is VISIBLE");
-                    } else {
-                        vieww.setVisibility(View.VISIBLE);
-                        toolbar.setVisibility(View.VISIBLE);
-                    }
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (vieww.getVisibility() == View.VISIBLE) {
+                    vieww.setVisibility(View.GONE);
+                    toolbar.setVisibility(View.GONE);
 
+                    spinnerSelectTaskType.setEnabled(true);
+                    clearButton.setEnabled(true);
+                    popis.setEnabled(true);
+                    newEventDescribe.setEnabled(true);
+                    doSkupiny.setEnabled(true);
+                    selectTask.setEnabled(true);
+                    ucastnici.setEnabled(true);
+                    pocetUcastniku.setEnabled(true);
+                    selectUsersBtn.setEnabled(true);
+                    ukonceni.setEnabled(true);
+                    ukonceniInfo.setEnabled(true);
+                    cena.setEnabled(true);
+                    cenaInfo.setEnabled(true);
+                    submitNewEvent.setEnabled(true);
+                } else {
+                    vieww.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.VISIBLE);
                 }
-            });
-        }
+
+            }
+        });
 
 
         submitButton.setOnClickListener(v -> {
@@ -327,14 +433,18 @@ public class CreateNewEventActivity extends AppCompatActivity {
     }
 
     public void refreshDatetimeView(){
-        TextView dateView = findViewById(R.id.new_event_date_text_view);
-        TextView timeView = findViewById(R.id.new_event_time_text_view);
+        TextView endDateView = findViewById(R.id.new_event_end_date_text_view);
+        TextView endTimeView = findViewById(R.id.new_event_end_time_text_view);
+        TextView startDateView = findViewById(R.id.new_event_start_date_text_view);
+        TextView startTimeView = findViewById(R.id.new_event_start_time_text_view);
 
         String date = DateFormat.getDateInstance().format(selectedDatetime.getTime());
         String time = DateFormat.getTimeInstance().format(selectedDatetime.getTime());
 
-        dateView.setText(date);
-        timeView.setText(time);
+        endDateView.setText(date);
+        endTimeView.setText(time);
+        startDateView.setText(date);
+        startTimeView.setText(time);
     }
 
     public static class EntryWithId {

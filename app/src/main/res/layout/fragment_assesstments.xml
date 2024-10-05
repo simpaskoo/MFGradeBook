@@ -34,7 +34,7 @@
         android:paddingTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2">
+        app:layout_constraintTop_toBottomOf="@id/seradit_button">
         <LinearLayout
             android:id="@+id/assessments_linear_layout"
             android:layout_width="match_parent"

@@ -147,6 +147,12 @@ public class EventsActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(
+                R.anim.slide_in_right,  // Enter animation
+                R.anim.slide_out_left,  // Exit animation
+                R.anim.slide_in_left,   // Pop enter animation (when returning)
+                R.anim.slide_out_right  // Pop exit animation
+        );
         transaction.replace(R.id.mainActivity, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -156,6 +162,13 @@ public class EventsActivity extends AppCompatActivity {
     private void returnToMainContent() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        // Optional: If you want an animation for returning to the main content
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(
+                R.anim.slide_in_left,  // Pop enter animation
+                R.anim.slide_out_right // Pop exit animation
+        );
     }
 
     @SuppressLint("ResourceType")
