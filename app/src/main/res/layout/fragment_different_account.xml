@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/different_account_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d28300"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    tools:context=".activities.menu.ProfilesActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/jiny_ucet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="Jiný účet"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/back_to_login_btn"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="180dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:backgroundTint="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </LinearLayout>
+
+    <Toolbar
+        android:id="@+id/login_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/aalogin_use_new_account_bg"
+        android:translationZ="3dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="heslo"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_black"
+                android:textSize="20dp"
+                android:inputType="numberPassword"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="uživatelské jméno"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_black"
+                android:textSize="20dp"/>
+        </LinearLayout>
+    </Toolbar>
+    <Button
+        android:id="@+id/odeslatBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="3dp"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="@drawable/aauser_delete_bg"
+        android:text="přihlásit se"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_black"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_layout"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

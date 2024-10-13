@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -41,6 +42,8 @@ public class ManageGroupsActivity extends AppCompatActivity {
             }
         }
     };
+
+
 
     Profile profile;
 
@@ -92,6 +95,71 @@ public class ManageGroupsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        ImageButton backBtn = findViewById(R.id.clear_btn);
+        Button pripojitSe = findViewById(R.id.pripojit_se);
+        Button vytvoritSkupinu = findViewById(R.id.new_group_btn);
+        Button filter = findViewById(R.id.groups_filter);
+        ScrollView scrollView = findViewById(R.id.groups_scroll_view);
+        LinearLayout groupLinear = findViewById(R.id.group_linearlayout);
+
+        View blackOverlay = findViewById(R.id.groups_view);
+        LinearLayout topLinearLayout = findViewById(R.id.topLinearLayout);
+        //TextView kodSkupinyTextView = findViewById(R.id.kod_skupiny);
+        Toolbar pripojitSeToolBar = findViewById(R.id.pripojitSetoolbar);
+        LinearLayout pripojitLinearBtn = findViewById(R.id.pripojit_linear_btn);
+
+        Button pripojitSeBtn = findViewById(R.id.pripojit_se);
+        pripojitSeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(blackOverlay.getVisibility() == View.GONE) {
+                    blackOverlay.setVisibility(View.VISIBLE);
+                    topLinearLayout.setVisibility(View.VISIBLE);
+                    pripojitSeToolBar.setVisibility(View.VISIBLE);
+                    pripojitLinearBtn.setVisibility(View.VISIBLE);
+
+                    backBtn.setEnabled(false);
+                    pripojitSe.setEnabled(false);
+                    vytvoritSkupinu.setEnabled(false);
+                    filter.setEnabled(false);
+                    scrollView.setEnabled(false);
+                    groupLinear.setEnabled(false);
+
+                } else {
+                    blackOverlay.setVisibility(View.GONE);
+                    topLinearLayout.setVisibility(View.GONE);
+                    pripojitSeToolBar.setVisibility(View.GONE);
+                    pripojitLinearBtn.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        ImageButton close = findViewById(R.id.clear_btn9);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(blackOverlay.getVisibility() == View.VISIBLE) {
+                    blackOverlay.setVisibility(View.GONE);
+                    topLinearLayout.setVisibility(View.GONE);
+                    pripojitSeToolBar.setVisibility(View.GONE);
+                    pripojitLinearBtn.setVisibility(View.GONE);
+
+                    backBtn.setEnabled(true);
+                    pripojitSe.setEnabled(true);
+                    vytvoritSkupinu.setEnabled(true);
+                    filter.setEnabled(true);
+                    scrollView.setEnabled(true);
+                    groupLinear.setEnabled(true);
+
+                } else {
+                    blackOverlay.setVisibility(View.VISIBLE);
+                    topLinearLayout.setVisibility(View.VISIBLE);
+                    pripojitSeToolBar.setVisibility(View.VISIBLE);
+                    pripojitLinearBtn.setVisibility(View.VISIBLE);
+                }
             }
         });
 

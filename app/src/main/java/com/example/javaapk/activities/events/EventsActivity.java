@@ -1,5 +1,6 @@
 package com.example.javaapk.activities.events;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,14 +8,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -23,13 +27,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.javaapk.R;
+import com.example.javaapk.activities.aboutApp.AboutAppActivity;
+import com.example.javaapk.activities.menu.ManageGroupsActivity;
 import com.example.javaapk.activities.menu.ProfilesActivity;
-import com.example.javaapk.activities.menu.SideMenuHelper;
+import com.example.javaapk.activities.menu.SettingsActivity;
+import com.example.javaapk.activities.menu.TreasureActivity;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 
 import net.anax.appServerClient.client.data.ID;
 import net.anax.appServerClient.client.data.RequestFailedException;
@@ -45,8 +51,11 @@ import java.util.Objects;
 
 public class EventsActivity extends AppCompatActivity {
 
-    private NavigationView sideMenu;
-    private boolean isMenuOpen = false;  // To track whether the menu is open or not
+    private ConstraintLayout sideMenu;
+    private boolean isMenuOpen = false;
+
+    //private NavigationView sideMenu;
+    //private boolean isMenuOpen = false;  // To track whether the menu is open or not
     private float menuWidth;  // To store the width of the menu
     private static final String TAG = "MainActivity";
 
@@ -66,22 +75,211 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aaudalosti_design);
 
+        //Intent intenttt = new Intent(EventsActivity.this, NavigationFragment.class);
+        //startActivity(intenttt);
 
-        //Side menu
-        sideMenu = findViewById(R.id.sideMenu);
-        sideMenu.post(() -> {
-            menuWidth = sideMenu.getWidth();
-            sideMenu.setTranslationX(-menuWidth);  // Initially hide the side menu by moving it off screen
-        });
+        /*NavigationFragment navigationFragment = new NavigationFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, navigationFragment);
+        transaction.addToBackStack(null); // Optional: allows users to navigate back
+        transaction.commit();*/
 
-        // Button to toggle the side menu
-        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+        // ++side menu
+
+        sideMenu = findViewById(R.id.side_menu_constraint_layout);
+        TextView menuButton = findViewById(R.id.side_menu_button);
+        ImageButton exitButton = findViewById(R.id.exit_btn);
+        View sideMenuBg = findViewById(R.id.bg_view);
+
+
+
+        // Button to toggle the menu (external)
+        menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleMenu();
+                //sideMenuBg.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the TextView
+                        sideMenuBg.setVisibility(View.VISIBLE);
+                    }
+                }, 0);
             }
         });
-        //Side menu
+
+        // Button to close the menu (inside the side menu)
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slideOutMenu();
+                //sideMenuBg.setVisibility(View.GONE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the TextView
+                        sideMenuBg.setVisibility(View.GONE);
+                    }
+                }, 0);
+                isMenuOpen = false; // Update the menu state
+            }
+        });
+
+        sideMenuBg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                slideOutMenu();
+                //sideMenuBg.setVisibility(View.GONE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the TextView
+                        sideMenuBg.setVisibility(View.GONE);
+                    }
+                }, 0);
+                isMenuOpen = false; // Update the menu state
+            }
+        });
+
+        // --side menu
+
+        // ++menuButtons
+
+        android.widget.Toolbar spravaToolbar = findViewById(R.id.sprava_skupin_toolbar);
+        ImageView spravaImgView = findViewById(R.id.sprava_skupin_imgview);
+        TextView spravaTextView = findViewById(R.id.sprava_skupin_textview);
+
+        spravaToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, ManageGroupsActivity.class);
+                startActivity(intent);
+            }
+        });
+        spravaImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, ManageGroupsActivity.class);
+                startActivity(intent);
+            }
+        });
+        spravaTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, ManageGroupsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        android.widget.Toolbar pokladnikToolbar = findViewById(R.id.pokladnik_toolbar);
+        ImageView pokladnikImgView = findViewById(R.id.pokladnik_imgview);
+        TextView pokladnikTextView = findViewById(R.id.pokladnik_textview);
+
+        pokladnikToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, TreasureActivity.class);
+                startActivity(intent);
+            }
+        });
+        pokladnikImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, TreasureActivity.class);
+                startActivity(intent);
+            }
+        });
+        pokladnikTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, TreasureActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        android.widget.Toolbar infoToolbar = findViewById(R.id.info_toolbar);
+        ImageView infoImgView = findViewById(R.id.info_imgview);
+        TextView infoTextView = findViewById(R.id.info_textview);
+
+        infoToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
+        infoImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
+        infoTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        android.widget.Toolbar spravaProfiluToolbar = findViewById(R.id.sprava_profilu_toolbar);
+        ImageView spravaProfiluImgView = findViewById(R.id.sprava_profilu_imgview);
+        TextView spravaProfiluTextView = findViewById(R.id.sprava_profilu_textview);
+
+        spravaProfiluToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, ProfilesActivity.class);
+                startActivity(intent);
+            }
+        });
+        spravaProfiluImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, ProfilesActivity.class);
+                startActivity(intent);
+            }
+        });
+        spravaProfiluTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, ProfilesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        android.widget.Toolbar nastaveniToolbar = findViewById(R.id.nastaveni_toolbar);
+        ImageView nastaveniImgView = findViewById(R.id.nastaveni_imageview);
+        TextView nastaveniTextView = findViewById(R.id.nastaveni_textview);
+
+        nastaveniToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+        nastaveniImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+        nastaveniTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventsActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // --menuButtons
+
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainActivity), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -102,8 +300,8 @@ public class EventsActivity extends AppCompatActivity {
         profile = DataManager.getInstance().getSelectedProfile();
 
         // no navigation view inside aaudalosti_design.xml, cannot create side menu.
-        SideMenuHelper sideMenuHelper = new SideMenuHelper(sideMenu, profile, this);
-        sideMenuHelper.initiateSideMenu();
+        //SideMenuHelper sideMenuHelper = new SideMenuHelper(sideMenu, profile, this);
+        //sideMenuHelper.initiateSideMenu();
 
         FloatingActionButton createNewEventButton = findViewById(R.id.button_create_new_event);
 
@@ -134,19 +332,84 @@ public class EventsActivity extends AppCompatActivity {
         // Set default fragment
         //loadFragment(new TimeTableFragment());
 
+
+        timeTableIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragmentToLeft(new TimeTableFragment(EventsActivity.this));
+
+                timeTableIcon.setEnabled(false);
+                eventsIcon.setEnabled(true);
+                assessmentsIcon.setEnabled(true);
+            }
+        });
+
+        eventsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnToMainContent();
+
+                timeTableIcon.setEnabled(true);
+                assessmentsIcon.setEnabled(true);
+            }
+        });
+
+        assessmentsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragmentToRight(new AssessmentsFragment());
+                //loadFragment(new AssessmentsFragment());
+                assessmentsIcon.setEnabled(false);
+                timeTableIcon.setEnabled(true);
+                eventsIcon.setEnabled(true);
+            }
+        });
+
         // Set up listeners for your toolbar buttons
-        timeTableIcon.setOnClickListener(v -> loadFragment(new TimeTableFragment(EventsActivity.this)));
-        eventsIcon.setOnClickListener(v -> returnToMainContent());
-        assessmentsIcon.setOnClickListener(v -> loadFragment(new AssessmentsFragment()));
+        //timeTableIcon.setOnClickListener(v -> loadFragmentToLeft(new TimeTableFragment(EventsActivity.this)));
+        //eventsIcon.setOnClickListener(v -> returnToMainContent());
+        //assessmentsIcon.setOnClickListener(v -> loadFragmentToRight(new AssessmentsFragment()));
 
         //slideToActivity();
         refresh();
     }
 
+    // ++sideMenu
+    // Convert dp to pixels
+    private int dpToPx(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+    }
+
+    // Toggle menu open/close
+    private void toggleMenu() {
+        if (isMenuOpen) {
+            slideOutMenu();
+        } else {
+            slideInMenu();
+        }
+        isMenuOpen = !isMenuOpen;
+    }
+
+    // Slide the menu in (make it visible)
+    private void slideInMenu() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(sideMenu, "translationX", dpToPx(-450), 0);
+        animator.setDuration(300); // Duration in milliseconds
+        animator.start();
+    }
+
+    // Slide the menu out (hide it)
+    private void slideOutMenu() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(sideMenu, "translationX", 0, dpToPx(-450));
+        animator.setDuration(300); // Duration in milliseconds
+        animator.start();
+    }
+
+    // --sideMenu
+
     // Method to load fragments into the container
-    private void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+    private void loadFragmentToRight(Fragment fragment) {
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(
                 R.anim.slide_in_right,  // Enter animation
                 R.anim.slide_out_left,  // Exit animation
@@ -157,18 +420,37 @@ public class EventsActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+    private void loadFragmentToLeft(Fragment fragment) {
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(
+                R.anim.slide_in_left,  // Enter animation
+                R.anim.slide_out_right,  // Exit animation
+                R.anim.slide_in_right,   // Pop enter animation (when returning)
+                R.anim.slide_out_left  // Pop exit animation
+        );
+        transaction.replace(R.id.mainActivity, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
     // Return to MainActivity content (no fragment)
     private void returnToMainContent() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
 
         // Optional: If you want an animation for returning to the main content
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(
-                R.anim.slide_in_left,  // Pop enter animation
-                R.anim.slide_out_right // Pop exit animation
+                R.anim.slide_in_right,  // Pop enter animation
+                R.anim.slide_out_left// Pop exit animation
         );
+        //fragmentManager.popBackStackImmediate();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //@SuppressLint("ResourceType") Fragment mainFragment = new Fragment(R.id.mainActivity);
+        //transaction.replace(R.id.mainActivity, mainFragment);
+        // Commit the transaction for the animation to take effect
+        transaction.commit();
     }
 
     @SuppressLint("ResourceType")
@@ -282,7 +564,7 @@ public class EventsActivity extends AppCompatActivity {
     }
 
     //Side menu
-    private void toggleMenu() {
+    /*private void toggleMenu() {
         if (isMenuOpen) {
             closeMenu();
         } else {
@@ -297,7 +579,7 @@ public class EventsActivity extends AppCompatActivity {
 
     private void closeMenu() {
         sideMenu.animate().translationX(-menuWidth).setDuration(300);  // Slide the menu out
-    }
+    }*/
     //Side menu
 
 

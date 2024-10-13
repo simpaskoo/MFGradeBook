@@ -2,14 +2,19 @@ package com.example.javaapk.activities.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.javaapk.R;
 import com.example.javaapk.data.DataManager;
@@ -21,9 +26,9 @@ public class ProfilesActivity extends AppCompatActivity {
 
     //androidx.appcompat.widget.Toolbar useDifferentAccountBtn;
     public Toolbar differentAccount;
-    public Toolbar loginToolBar;
-    public Button odeslatBtn;
-    public View blackLoginOverlay;
+    public LinearLayout linearLay;
+    public ImageView imageView;
+    public TextView textView;
 
     Button addProfileButton;
     @Override
@@ -72,25 +77,26 @@ public class ProfilesActivity extends AppCompatActivity {
             }
         });*/
 
-        blackLoginOverlay = findViewById(R.id.login_view);
-        odeslatBtn = findViewById(R.id.odeslatBtn);
-        loginToolBar = findViewById(R.id.login_layout);
+        linearLay = findViewById(R.id.linearLay);
+        imageView = findViewById(R.id.imageView);
+        textView = findViewById(R.id.textViewJinyUcet);
         differentAccount = findViewById(R.id.puzit_jiny_ucet_btn);
-        differentAccount.setOnContextClickListener(new View.OnContextClickListener() {
-            @Override
-            public boolean onContextClick(View view) {
-                loginToolBar.setVisibility(View.VISIBLE);
-                odeslatBtn.setVisibility(View.VISIBLE);
-                blackLoginOverlay.setVisibility(View.VISIBLE);
-                return false;
-            }
-        });
-
-
+        differentAccount.setOnClickListener(v -> loadFragment(new DifferentAccountFragment()));
+        textView.setOnClickListener(v -> loadFragment(new DifferentAccountFragment()));
+        imageView.setOnClickListener(v -> loadFragment(new DifferentAccountFragment()));
+        linearLay.setOnClickListener(v -> loadFragment(new DifferentAccountFragment()));
 
         //TODO: remove this after debugging:
         addNewProfileAndSelect();
 
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.loginMain, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     void selectProfile(int profileIndex){

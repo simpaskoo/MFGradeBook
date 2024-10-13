@@ -3,6 +3,7 @@ package com.example.javaapk.activities.events;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -99,13 +102,68 @@ public class CreateNewEventActivity extends AppCompatActivity {
         mySpinner = findViewById(R.id.spinner_select_task_type);
 
         // Initialize the list of options for the Spinner
+        Typeface fontFamily = ResourcesCompat.getFont(this, R.font.roboto_black);
+        int textViewColor = ContextCompat.getColor(this, R.color.black);
+        TextView none = new TextView(this);
+        none.setText("None");
+        none.setTextColor(textViewColor);
+        none.setTextSize(20);
+        none.setTypeface(fontFamily);
+
+        TextView task = new TextView(this);
+        task.setText("Task");
+        task.setTextColor(textViewColor);
+        task.setTextSize(20);
+        task.setTypeface(fontFamily);
+
+        TextView homework = new TextView(this);
+        homework.setText("Homework");
+        homework.setTextColor(textViewColor);
+        homework.setTextSize(20);
+        homework.setTypeface(fontFamily);
+
+        TextView test = new TextView(this);
+        test.setText("Test");
+        test.setTextColor(textViewColor);
+        test.setTextSize(20);
+        test.setTypeface(fontFamily);
+
+        TextView payment = new TextView(this);
+        payment.setText("Payment");
+        payment.setTextColor(textViewColor);
+        payment.setTextSize(20);
+        payment.setTypeface(fontFamily);
+
+        TextView event = new TextView(this);
+        event.setText("Event");
+        event.setTextColor(textViewColor);
+        event.setTextSize(20);
+        event.setTypeface(fontFamily);
         optionsList = new ArrayList<>();
+        /*optionsList.add(none);
+        optionsList.add(task);
+        optionsList.add(homework);
+        optionsList.add(test);
+        optionsList.add(payment);  // The item we want to trigger visibility
+        optionsList.add(event);*/
         optionsList.add("None");
         optionsList.add("Task");
         optionsList.add("Homework");
         optionsList.add("Test");
         optionsList.add("Payment");  // The item we want to trigger visibility
         optionsList.add("Event");
+
+        /*Typeface font = Typeface.SANS_SERIF;
+        int textSize = 20;
+        int textColor = Color.GREEN;
+
+        for(String string : optionsList) {
+            string.setTypeface(font);       // Set font
+            string.setTextSize(textSize);       // Set text size
+            string.setTextColor(textColor);     // Set text color
+            layout.addView(textView);
+
+        }*/
 
         // Set up the ArrayAdapter for the Spinner
         ArrayAdapter<String> adapterr = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, optionsList);
@@ -312,16 +370,12 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         Spinner spinnerSelectTaskType = findViewById(R.id.spinner_select_task_type);
         ImageButton clearButton = findViewById(R.id.clear_btn);
-        TextView popis = findViewById(R.id.popis);
+        EditText newEventName = findViewById(R.id.new_event_name_edit_text);
         EditText newEventDescribe = findViewById(R.id.new_event_description_edit_text);
-        TextView doSkupiny = findViewById(R.id.do_skupiny);
         Spinner selectTask = findViewById(R.id.spinner_select_task_group);
-        TextView ucastnici = findViewById(R.id.ucastnici);
-        TextView pocetUcastniku = findViewById(R.id.pocet_ucastniku);
         Button selectUsersBtn = findViewById(R.id.new_event_select_users_button);
-        TextView ukonceni = findViewById(R.id.ukonceni);
         LinearLayout ukonceniInfo = findViewById(R.id.ukonceni_info);
-        TextView cena = findViewById(R.id.cena);
+        LinearLayout zacatekInfo = findViewById(R.id.zacatek_info);
         LinearLayout cenaInfo = findViewById(R.id.cena_linear);
         FloatingActionButton submitNewEvent = findViewById(R.id.submit_create_event_button);
 
@@ -338,16 +392,12 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
                     spinnerSelectTaskType.setEnabled(false);
                     clearButton.setEnabled(false);
-                    popis.setEnabled(false);
+                    newEventName.setEnabled(false);
                     newEventDescribe.setEnabled(false);
-                    doSkupiny.setEnabled(false);
                     selectTask.setEnabled(false);
-                    ucastnici.setEnabled(false);
-                    pocetUcastniku.setEnabled(false);
                     selectUsersBtn.setEnabled(false);
-                    ukonceni.setEnabled(false);
+                    zacatekInfo.setEnabled(false);
                     ukonceniInfo.setEnabled(false);
-                    cena.setEnabled(false);
                     cenaInfo.setEnabled(false);
                     submitNewEvent.setEnabled(false);
 
@@ -370,16 +420,12 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
                     spinnerSelectTaskType.setEnabled(true);
                     clearButton.setEnabled(true);
-                    popis.setEnabled(true);
+                    newEventName.setEnabled(true);
                     newEventDescribe.setEnabled(true);
-                    doSkupiny.setEnabled(true);
                     selectTask.setEnabled(true);
-                    ucastnici.setEnabled(true);
-                    pocetUcastniku.setEnabled(true);
                     selectUsersBtn.setEnabled(true);
-                    ukonceni.setEnabled(true);
+                    zacatekInfo.setEnabled(true);
                     ukonceniInfo.setEnabled(true);
-                    cena.setEnabled(true);
                     cenaInfo.setEnabled(true);
                     submitNewEvent.setEnabled(true);
                 } else {
@@ -395,11 +441,12 @@ public class CreateNewEventActivity extends AppCompatActivity {
             EntryWithId taskTypeEntry = (EntryWithId) taskTypeSpinner.getSelectedItem();
             EntryWithId groupEntry = (EntryWithId) groupSpinner.getSelectedItem();
             EditText descriptionText = findViewById(R.id.new_event_description_edit_text);
+            EditText nameText = findViewById(R.id.new_event_name_edit_text);
 
             if(taskTypeEntry != null && groupEntry != null){
                 int taskType = taskTypeEntry.id;
                 int groupId = groupEntry.id;
-                String description = descriptionText.getText().toString();
+                String description = nameText.getText().toString();
                 long dueTimestamp = selectedDatetime.getTimeInMillis();
 
                 long startTimestamp = dueTimestamp;

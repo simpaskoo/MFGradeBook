@@ -54,6 +54,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
+        android:translationZ="1dp"
         android:background="@drawable/aaudalosti_filter_button_bg"
         android:fontFamily="@font/roboto_black"
         android:text="Připojit se"
@@ -63,18 +64,19 @@
         app:layout_constraintEnd_toStartOf="@id/new_group_btn"
         app:layout_constraintTop_toBottomOf="@id/moje_skupiny"/>
 
-    <Spinner
+    <Button
         android:id="@+id/groups_filter"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
-        android:paddingStart="5dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="start"
-        android:background="@drawable/aanew_event_spinner_style"
+        android:background="@drawable/aaudalosti_filter_button_bg"
+        android:fontFamily="@font/roboto_black"
+        android:text="Filter"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/moje_skupiny"/>
 
@@ -118,5 +120,144 @@
 
         </LinearLayout>
     </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/topLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="3dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/pripojitSetoolbar"
+        app:layout_constraintBottom_toTopOf="@id/pripojitSetoolbar">
+        <TextView
+            android:id="@+id/kod_skupiny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="kód skupiny"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"
+            android:textSize="20dp" />
+        <LinearLayout
+            android:id="@+id/linear_layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/clear_btn9"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="170dp"
+                android:src="@drawable/aabaseline_clear_25"
+                android:layout_gravity="end"
+                android:clickable="true"
+                app:backgroundTint="@color/transparent"
+                app:layout_constraintEnd_toEndOf="@id/linear_layout2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/pripojit_linear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="3dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pripojitSetoolbar">
+        <Button
+            android:id="@+id/pripojit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="3dp"
+            android:layout_marginTop="25dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/aauser_delete_bg"
+            android:text="připojit se"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_black"
+            android:visibility="visible" />
+    </LinearLayout>
+
+
+    <Toolbar
+        android:id="@+id/pripojitSetoolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="3dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/aalogin_use_new_account_bg"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/number1"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/number2"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/number3"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/number4"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/number5"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/number6"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/number7"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+        </LinearLayout>
+    </Toolbar>
+
+
+
+    <View
+        android:id="@+id/groups_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semi_transparent_black"
+        android:translationZ="2dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

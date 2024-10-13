@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d28300"
-    tools:context=".activities.menu.ManageGroupsActivity">
+    tools:context=".activities.menu.ProfilesActivity">
 
     <ScrollView
         android:id="@+id/login_scroll_view"
@@ -98,7 +98,6 @@
         app:layout_constraintBottom_toBottomOf="parent">
     </Button>-->
 
-
     <Toolbar
         android:id="@+id/puzit_jiny_ucet_btn"
         android:layout_width="match_parent"
@@ -116,18 +115,21 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
+            android:id="@+id/linearLay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
             android:clickable="true">
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/aalogin_user_icone_bg"
                 android:src="@drawable/baseline_supervised_user_circle_24"
                 android:clickable="true"/>
             <TextView
+                android:id="@+id/textViewJinyUcet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Použít jiný účet"
@@ -216,10 +218,12 @@
         android:id="@+id/odeslatBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:translationZ="3dp"
+        android:translationZ="6dp"
         android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:background="@drawable/aalogin_odeslat_btn_bg"
-        android:text="odeslat"
+        android:text="přihlásit se"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_black"
         android:visibility="gone"

@@ -9,7 +9,7 @@
     tools:context=".activities.events.EventsActivity">
 
 
-    <Button
+    <!--<Button
         android:id="@+id/button2"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -20,9 +20,26 @@
         android:text="DŠ"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:translationZ="20dp"
+        android:translationZ="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/side_menu_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/aauser_name_icon_bg"
+        android:text="DŠ"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/white"
+        android:textSize="23dp"
+        android:translationZ="100dp"
+        android:gravity="center"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/flter_button"
@@ -36,6 +53,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:translationZ="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -43,29 +61,17 @@
         android:id="@+id/seradit_button"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/aaudalosti_filter_button_bg"
         android:fontFamily="@font/roboto_black"
         android:text="Seradit"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:translationZ="3dp"
         app:layout_constraintEnd_toStartOf="@id/flter_button"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <!--
-    <include
-        layout="@layout/aaloading_udalosti_design"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:paddingTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"/>
--->
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -79,9 +85,7 @@
         android:paddingTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2">
-
-
+        app:layout_constraintTop_toBottomOf="@id/side_menu_button">
 
         <LinearLayout
             android:id="@+id/events_linear_layout"
@@ -98,19 +102,6 @@
                 android:indeterminateTint="@color/FilterButton"
                 android:layout_gravity="center" />
 
-            <!--<include
-                layout="@layout/aadynamic_idk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>
-            <include
-                layout="@layout/aadynamic_idk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"/>-->
-
         </LinearLayout>
     </ScrollView>
 
@@ -120,9 +111,10 @@
         android:background="@drawable/aanavigation_btn_bg"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="30dp"
-        android:paddingEnd="25dp"
+        android:paddingEnd="20dp"
         android:paddingStart="0dp"
-        android:translationZ="20dp"
+        android:translationZ="100dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
@@ -165,6 +157,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:contentDescription="@string/fab_description"
+        android:translationZ="3dp"
         app:backgroundTint="@color/Plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +170,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"/>
 
-    <com.google.android.material.navigation.NavigationView
+    <!--<com.google.android.material.navigation.NavigationView
         android:id = "@+id/sideMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -185,6 +178,276 @@
         android:visibility="gone"
         app:menu="@menu/menu_side_drawer_menu"
         app:headerLayout="@menu/menu_side_drawer_header"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" />-->
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="50dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/side_menu_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationX="-450dp"
+        android:translationZ="150dp"
+        android:visibility="visible">
+
+        <Toolbar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/aaside_menu_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:id="@+id/side_menu_linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/exit_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:backgroundTint="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="-10dp"
+                    android:layout_marginEnd="45dp">
+                    <ImageView
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:src="@drawable/baseline_account_box_24"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="David Šimpach"
+                            android:textColor="@color/white"
+                            android:textSize="30dp"
+                            android:fontFamily="@font/roboto_black"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(Žák)"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/roboto_black"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Správa"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/roboto_black"/>
+                <Toolbar
+                    android:id="@+id/sprava_skupin_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/sprava_skupin_imgview"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/baseline_supervised_user_circle_24"
+                            android:background="@drawable/side_menu_icon_bg"
+                            android:padding="2dp"/>
+                        <TextView
+                            android:id="@+id/sprava_skupin_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Správa skupin"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/roboto_black"
+                            android:layout_gravity="center"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="15dp"/>
+                    </LinearLayout>
+                </Toolbar>
+                <Toolbar
+                    android:id="@+id/pokladnik_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/pokladnik_imgview"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/baseline_monetization_on_24"
+                            android:background="@drawable/side_menu_icon_bg"
+                            android:padding="2dp"/>
+                        <TextView
+                            android:id="@+id/pokladnik_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pokladník"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/roboto_black"
+                            android:layout_gravity="center"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="15dp"/>
+                    </LinearLayout>
+                </Toolbar>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:text="Aplikace"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/roboto_black"/>
+                <Toolbar
+                    android:id="@+id/info_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/info_imgview"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/baseline_info_24"
+                            android:background="@drawable/side_menu_icon_bg"
+                            android:padding="2dp"/>
+                        <TextView
+                            android:id="@+id/info_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Informace o aplikaci"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/roboto_black"
+                            android:layout_gravity="center"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="15dp"/>
+                    </LinearLayout>
+                </Toolbar>
+                <Toolbar
+                    android:id="@+id/sprava_profilu_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/sprava_profilu_imgview"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/baseline_account_circle_24"
+                            android:background="@drawable/side_menu_icon_bg"
+                            android:padding="2dp"/>
+                        <TextView
+                            android:id="@+id/sprava_profilu_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Správa profilů"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/roboto_black"
+                            android:layout_gravity="center"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="15dp"/>
+                    </LinearLayout>
+                </Toolbar>
+                <Toolbar
+                    android:id="@+id/nastaveni_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/nastaveni_imageview"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/baseline_settings_24"
+                            android:background="@drawable/side_menu_icon_red_bg"
+                            android:padding="2dp"/>
+                        <TextView
+                            android:id="@+id/nastaveni_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nastavení"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/roboto_black"
+                            android:layout_gravity="center"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="15dp"/>
+                    </LinearLayout>
+                </Toolbar>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:paddingStart="120dp"
+                    android:paddingBottom="20dp">
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/google_play"
+                        android:background="@color/transparent"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/instagram_icon"
+                        android:background="@color/transparent"/>
+                </LinearLayout>
+            </LinearLayout>
+        </Toolbar>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/bg_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/side_menu_bg"
+        android:translationZ="125dp"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

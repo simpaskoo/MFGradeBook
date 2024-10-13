@@ -39,17 +39,51 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/popis"
+        android:id="@+id/nazev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/roboto_black"
-        android:text="Popis"
+        android:text="Nazev"
         android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/task_type"
+        tools:layout_editor_absoluteY="168dp" />
+
+    <TextView
+        android:id="@+id/new_event_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="nazev"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:paddingEnd="20dp"
+        android:background="@drawable/aanew_event_popis_udalosti_bg"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_black"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/nazev"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/popis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="Popis"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_event_name_edit_text"
         tools:layout_editor_absoluteY="168dp" />
 
     <TextView
@@ -171,6 +205,56 @@
         android:background="@drawable/aanew_event_nazev_udalosti_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ukonceni">
+
+        <TextView
+            android:id="@+id/event_type_date_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Datum"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:fontFamily="@font/roboto_black"/>
+
+        <TextView
+            android:id="@+id/event_type_time_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Čas"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:fontFamily="@font/roboto_black"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/zacatek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Začátek"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_black"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/ukonceni_info"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <LinearLayout
+        android:id="@+id/zacatek_info"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/aanew_event_nazev_udalosti_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/zacatek">
 
         <TextView
             android:id="@+id/event_type_date_text_view"
@@ -443,7 +527,7 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -550,7 +634,7 @@
         android:layout_height="match_parent"
         android:background="@color/semi_transparent_black"
         android:translationZ="6dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

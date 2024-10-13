@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.javaapk.R;
-import com.example.javaapk.activities.menu.SideMenuHelper;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
-import com.google.android.material.navigation.NavigationView;
 
 public class TimeTableFragment extends Fragment {
     Activity parent;
@@ -27,9 +25,9 @@ public class TimeTableFragment extends Fragment {
 
         if(DataManager.getInstance().isProfileSelected()){
             Profile profile = DataManager.getInstance().getSelectedProfile();
-            NavigationView sideMenu = view.findViewById(R.id.sideMenu);
-            SideMenuHelper helper = new SideMenuHelper(sideMenu, profile, parent);
-            helper.initiateSideMenu(false);
+            //NavigationView sideMenu = view.findViewById(R.id.sideMenu);
+            //SideMenuHelper helper = new SideMenuHelper(sideMenu, profile, parent);
+            //helper.initiateSideMenu(false);
         }
 
         return view;

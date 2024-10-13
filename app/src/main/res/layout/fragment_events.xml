@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/events_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffbc4c"
+    tools:context=".activities.events.EventsActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/new_event_blue"
+        android:translationZ="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="events fragment"
+        android:textSize="50dp"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/white"
+        android:translationZ="21dp"
+        android:gravity="center"/>
+
+    <!--<Button
+        android:id="@+id/button2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/aauser_name_icon_bg"
+        android:fontFamily="@font/roboto_black"
+        android:text="DŠ"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:translationZ="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<TextView
+        android:id="@+id/side_menu_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/aauser_name_icon_bg"
+        android:text="DŠ"
+        android:fontFamily="@font/roboto_black"
+        android:textColor="@color/white"
+        android:textSize="23dp"
+        android:translationZ="10dp"
+        android:gravity="center"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>-->
+
+    <Button
+        android:id="@+id/flter_button"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/aaudalosti_filter_button_bg"
+        android:fontFamily="@font/roboto_black"
+        android:text="Filter"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:translationZ="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/seradit_button"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/aaudalosti_filter_button_bg"
+        android:fontFamily="@font/roboto_black"
+        android:text="Seradit"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:translationZ="3dp"
+        app:layout_constraintEnd_toStartOf="@id/flter_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/aaudalosti_scroll_view_bgstyle"
+        android:fontFamily="@font/roboto_black"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seradit_button">
+
+
+
+        <LinearLayout
+            android:id="@+id/events_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="300dp"
+                android:indeterminateTint="@color/FilterButton"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!--<Toolbar
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:background="@drawable/aanavigation_btn_bg"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="0dp"
+        android:translationZ="10dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/time_table_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="2dp"
+                android:src="@drawable/baseline_access_time_24"
+                android:background="@drawable/aanavigation_icon_btn_bg"/>
+            <ImageButton
+                android:id="@+id/events_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:padding="2dp"
+                android:src="@drawable/baseline_table_rows_24"
+                android:background="@drawable/aanavigation_icon_btn_bg"/>
+            <ImageButton
+                android:id="@+id/assessments_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
+                android:src="@drawable/baseline_notifications_none_24"
+                android:background="@drawable/aanavigation_icon_btn_bg"/>
+        </LinearLayout>
+    </Toolbar>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_create_new_event"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/fab_description"
+        android:translationZ="3dp"
+        app:backgroundTint="@color/Plus_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/aabaseline_add_24" />
+
+    <include
+        layout="@layout/aadynamic_udalosti_filter_layout"
+        android:id="@+id/filter_udalosti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id = "@+id/sideMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        app:menu="@menu/menu_side_drawer_menu"
+        app:headerLayout="@menu/menu_side_drawer_header"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

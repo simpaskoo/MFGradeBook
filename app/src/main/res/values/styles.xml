@@ -2,4 +2,11 @@
 <resources>
 
     <style name="ActionButtonShape"></style>
+
+    <style name="cusToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <!--default 4dp-->
+        <item name="titleMargin">0dp</item>
+        <!--default @dimen/abc_action_bar_content_inset_with_nav-->
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
 </resources>

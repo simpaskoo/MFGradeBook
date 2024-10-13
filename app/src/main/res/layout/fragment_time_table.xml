@@ -7,9 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d28300"
+    android:translationZ="9dp"
     tools:context=".activities.timetable.TimetableActivity">
-
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -82,14 +81,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <com.google.android.material.navigation.NavigationView
+    <!--<com.google.android.material.navigation.NavigationView
         android:id = "@+id/sideMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/menu_side_drawer_menu"
-        app:headerLayout="@menu/menu_side_drawer_header"
-        />
+        app:headerLayout="@menu/menu_side_drawer_header"/>-->
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
