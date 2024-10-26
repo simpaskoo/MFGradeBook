@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/flter_button"
+        android:id="@+id/filter_button"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/seradit_button"
         android:layout_width="120dp"
         android:layout_height="50dp"
@@ -71,7 +71,7 @@
         android:textSize="18dp"
         android:translationZ="3dp"
         app:layout_constraintEnd_toStartOf="@id/flter_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -102,10 +102,17 @@
                 android:indeterminateTint="@color/FilterButton"
                 android:layout_gravity="center" />
 
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:translationZ="50dp" />
+
         </LinearLayout>
     </ScrollView>
 
     <Toolbar
+        android:id="@+id/navigation"
         android:layout_width="180dp"
         android:layout_height="70dp"
         android:background="@drawable/aanavigation_btn_bg"
@@ -163,6 +170,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/aabaseline_add_24" />
 
+
     <include
         layout="@layout/aadynamic_udalosti_filter_layout"
         android:id="@+id/filter_udalosti"
@@ -179,12 +187,6 @@
         app:menu="@menu/menu_side_drawer_menu"
         app:headerLayout="@menu/menu_side_drawer_header"
         tools:ignore="MissingConstraints" />-->
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:translationZ="50dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

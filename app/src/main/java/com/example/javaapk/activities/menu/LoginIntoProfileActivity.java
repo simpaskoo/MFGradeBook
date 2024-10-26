@@ -73,6 +73,7 @@ public class LoginIntoProfileActivity extends AppCompatActivity {
 
                 String autocompleteUsername = DataManager.getInstance().profiles.get(profileIndex).username;
 
+
                 usernameText.setText(autocompleteUsername);
                 usernameText.setFocusable(false);
 

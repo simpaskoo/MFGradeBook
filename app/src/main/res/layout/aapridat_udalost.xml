@@ -12,17 +12,17 @@
         android:id="@+id/spinner_select_task_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/aanew_event_spinner_style"
+        android:gravity="start"
         android:paddingStart="5dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:gravity="start"
-        android:background="@drawable/aanew_event_spinner_style"
+        app:layout_constraintEnd_toStartOf="@id/clear_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/clear_btn"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/clear_btn"
@@ -33,7 +33,7 @@
         android:src="@drawable/aabaseline_clear_24"
         app:backgroundTint="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nazev"
@@ -54,19 +54,19 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:text="název"
+        android:background="@drawable/aanew_event_popis_udalosti_bg"
+        android:fontFamily="@font/roboto_black"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:paddingEnd="20dp"
-        android:background="@drawable/aanew_event_popis_udalosti_bg"
+        android:paddingBottom="10dp"
+        android:text="název"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/nazev"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nazev" />
 
     <TextView
         android:id="@+id/popis"
@@ -85,93 +85,156 @@
     <EditText
         android:id="@+id/new_event_description_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:text="popis"
+        android:background="@drawable/aanew_event_popis_udalosti_bg"
+        android:fontFamily="@font/roboto_black"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:paddingEnd="20dp"
-        android:background="@drawable/aanew_event_popis_udalosti_bg"
+        android:paddingBottom="10dp"
+        android:text="popis"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/popis"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popis" />
 
     <TextView
         android:id="@+id/do_skupiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Do skupiny"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
-        app:layout_constraintTop_toBottomOf="@id/new_event_description_edit_text"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_event_description_edit_text" />
 
     <Spinner
         android:id="@+id/spinner_select_task_group"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
-        android:paddingStart="5dp"
-        android:paddingEnd="100dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="start"
+        android:layout_marginTop="15dp"
         android:background="@drawable/aanew_event_spinner_style"
+        android:gravity="start"
+        android:paddingStart="5dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="100dp"
+        android:paddingBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/do_skupiny">
 
     </Spinner>
 
     <TextView
+        android:id="@+id/pocet_ucastniku"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
+        android:fontFamily="@font/roboto_black"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:text="15"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/upravit_ucastniky_skupiny_btn"
+        app:layout_constraintTop_toBottomOf="@+id/do_skupiny"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/upravit_ucastniky_skupiny_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
+        android:fontFamily="@font/roboto_black"
+        android:src="@drawable/aabaseline_add_24"
+        android:text="Upravit"
+        app:layout_constraintStart_toEndOf="@+id/do_skupiny_btn"
+        app:layout_constraintTop_toBottomOf="@+id/do_skupiny"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/do_skupiny_btn"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/aanew_event_spinner_style"
+        android:gravity="center"
+        android:text="x"
+        android:fontFamily="@font/roboto_black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@id/spinner_select_task_group"
+        app:layout_constraintTop_toBottomOf="@+id/do_skupiny"/>
+
+    <TextView
+        android:id="@+id/pro_jednotlivce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="Pro jednotlivce"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_select_task_group" />
+    <Button
+        android:id="@+id/pro_jednotlivce_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/aanew_event_spinner_style"
+        android:gravity="center"
+        android:text="pro jednotlivce"
+        android:fontFamily="@font/roboto_black"
+        android:textSize="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pro_jednotlivce"/>
+
+    <TextView
+        android:id="@+id/pocet_samostatnych_ucastniku"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
+        android:fontFamily="@font/roboto_black"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:text="15"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/pro_jednotlivce_btn"
+        app:layout_constraintTop_toBottomOf="@+id/pro_jednotlivce"
+        tools:ignore="MissingConstraints" />
+
+    <!--<TextView
         android:id="@+id/ucastnici"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="80dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Účastníci"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
-        app:layout_constraintTop_toBottomOf="@id/new_event_description_edit_text"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/pocet_ucastniku"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="5dp"
-        android:paddingTop="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="15"
-        android:fontFamily="@font/roboto_black"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        app:layout_constraintTop_toBottomOf="@id/do_skupiny"
-        app:layout_constraintEnd_toStartOf="@id/new_event_select_users_button"/>
-    <Button
-        android:id="@+id/new_event_select_users_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/aanew_event_pridat_ucastnika_btn_shape"
-        android:text="Přidat"
-        android:src="@drawable/aabaseline_add_24"
-        app:layout_constraintTop_toBottomOf="@id/ucastnici"
-        app:layout_constraintEnd_toEndOf="parent">
-    </Button>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_event_description_edit_text" />-->
 
     <!--<LinearLayout
         android:id="@+id/pridani_ucastnici"
@@ -273,22 +336,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Ukončení"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_select_task_group"
-        app:layout_constraintStart_toStartOf="@id/ukonceni_info"/>
+        app:layout_constraintStart_toStartOf="@id/ukonceni_info"
+        app:layout_constraintTop_toBottomOf="@id/pro_jednotlivce_btn" />
+
     <LinearLayout
         android:id="@+id/ukonceni_info"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="15dp"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/aanew_event_nazev_udalosti_bg"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ukonceni">
 
@@ -298,11 +362,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:text="Datum"
-            android:inputType="date"
             android:ems="10"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"/>
+            android:fontFamily="@font/roboto_black"
+            android:inputType="date"
+            android:text="Datum"
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/new_event_end_time_text_view"
@@ -310,11 +374,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:text="Čas"
-            android:inputType="time"
             android:ems="10"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"/>
+            android:fontFamily="@font/roboto_black"
+            android:inputType="time"
+            android:text="Čas"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <TextView
@@ -322,23 +386,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Začátek"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
         android:visibility="visible"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_select_task_group"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pro_jednotlivce_btn" />
+
     <LinearLayout
         android:id="@+id/zacatek_info"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:visibility="visible"
         android:background="@drawable/aanew_event_nazev_udalosti_bg"
+        android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/zacatek">
 
@@ -348,11 +413,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:text="Datum"
-            android:inputType="date"
             android:ems="10"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"/>
+            android:fontFamily="@font/roboto_black"
+            android:inputType="date"
+            android:text="Datum"
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/new_event_start_time_text_view"
@@ -360,11 +425,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:text="Čas"
-            android:inputType="time"
             android:ems="10"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"/>
+            android:fontFamily="@font/roboto_black"
+            android:inputType="time"
+            android:text="Čas"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <TextView
@@ -378,8 +443,8 @@
         android:textColor="@color/white"
         android:textSize="15dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/spinner_select_task_group"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pro_jednotlivce_btn" />
 
     <LinearLayout
         android:id="@+id/cena_linear"
@@ -397,20 +462,21 @@
             android:id="@+id/editTextPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingEnd="60dp"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/roboto_black"
             android:inputType="text"
+            android:paddingEnd="60dp"
             android:text="Cena"
             android:textColor="@color/white" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kč"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="@color/white"/>
+            android:text="Kč"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -423,15 +489,14 @@
         app:backgroundTint="@color/Plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/aabaseline_add_24"/>
+        app:srcCompat="@drawable/aabaseline_add_24" />
 
     <include
-        layout="@layout/aadynamic_add_user_layout"
         android:id="@+id/add_user_layout"
+        layout="@layout/aadynamic_add_user_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
-
+        android:visibility="gone" />
 
 
     <Toolbar
@@ -439,10 +504,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/aalight_blue_style"
-        android:translationZ="7dp"
+        android:paddingTop="10dp"
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:translationZ="7dp"
         android:visibility="gone"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -461,7 +526,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-
             <LinearLayout
                 android:id="@+id/linear_layout2"
                 android:layout_width="match_parent"
@@ -473,11 +537,11 @@
                     android:id="@+id/skupiny"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_black"
                     android:text="Ze skupiny"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/roboto_black"
                     android:textSize="15dp"
-                    app:layout_constraintStart_toStartOf="@id/linear_layout2"/>
+                    app:layout_constraintStart_toStartOf="@id/linear_layout2" />
 
                 <LinearLayout
                     android:id="@+id/linear_layout3"
@@ -485,15 +549,16 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:orientation="horizontal">
+
                     <ImageButton
                         android:id="@+id/clear_btn5"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:src="@drawable/aabaseline_clear_25"
                         android:layout_gravity="end"
                         android:clickable="true"
+                        android:src="@drawable/aabaseline_clear_25"
                         app:backgroundTint="@color/transparent"
-                        app:layout_constraintEnd_toEndOf="@id/linear_layout2"/>
+                        app:layout_constraintEnd_toEndOf="@id/linear_layout2" />
                 </LinearLayout>
 
 
@@ -545,14 +610,14 @@
                     android:id="@+id/zaci"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_black"
                     android:text="Žáci"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/roboto_black"
                     android:textSize="15dp"
-                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/linear_layout5"
                     app:layout_constraintStart_toStartOf="@id/linear_layout5"
-                    app:layout_constraintTop_toTopOf="@id/linear_layout5"
-                    app:layout_constraintBottom_toBottomOf="@id/linear_layout5"/>
+                    app:layout_constraintTop_toTopOf="@id/linear_layout5" />
 
                 <LinearLayout
                     android:id="@+id/linear_layout4"
@@ -560,51 +625,54 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:orientation="horizontal">
+
                     <SearchView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginStart="50dp"
                         android:background="@drawable/aanew_event_search_bar"
-                        app:layout_constraintEnd_toEndOf="@id/linear_layout4"/>
+                        app:layout_constraintEnd_toEndOf="@id/linear_layout4" />
                 </LinearLayout>
-
-
             </LinearLayout>
+
             <GridLayout
                 android:id="@+id/grid_layout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:columnCount="4"
-                android:rowCount="3"
+                android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:columnCount="4"
                 android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:rowCount="3">
 
                 <include
                     layout="@layout/aadynamic_new_event_pridat_ucastnika"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"/>
+                    android:layout_margin="2dp" />
+
                 <include
                     layout="@layout/aadynamic_new_event_pridat_ucastnika"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"/>
+                    android:layout_margin="2dp" />
             </GridLayout>
+
             <Button
                 android:id="@+id/add_users"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
-                android:text="Přidat: 8"
-                android:fontFamily="@font/roboto_black"
-                android:textSize="15dp"
                 android:background="@drawable/aanew_event_skupina_btn_bg"
-                app:layout_constraintEnd_toEndOf="@id/linear_layout"
-                app:layout_constraintBottom_toBottomOf="@id/linear_layout"/>
+                android:fontFamily="@font/roboto_black"
+                android:text="Přidat: 8"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@id/linear_layout"
+                app:layout_constraintEnd_toEndOf="@id/linear_layout" />
         </LinearLayout>
     </Toolbar>
+
     <View
         android:id="@+id/vieww"
         android:layout_width="match_parent"
@@ -616,9 +684,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
+    <include
+        android:id="@+id/select_group"
+        layout="@layout/aadynamic_select_group_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/edit_group_members"
+        layout="@layout/aadynamic_edit_group_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/add_user"
+        layout="@layout/aadynamic_select_user_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

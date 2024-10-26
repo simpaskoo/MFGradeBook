@@ -14,12 +14,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
@@ -300,7 +300,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
         TextView startDateView = findViewById(R.id.new_event_start_date_text_view);
         TextView startTimeView = findViewById(R.id.new_event_start_time_text_view);
         FloatingActionButton submitButton = findViewById(R.id.submit_create_event_button);
-        Button addUsersButton = findViewById(R.id.new_event_select_users_button);
+        //Button addUsersButton = findViewById(R.id.upravit_ucastniky_skupiny_btn);
 
         endDateView.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -368,7 +368,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         });*/
 
-        Spinner spinnerSelectTaskType = findViewById(R.id.spinner_select_task_type);
+        /*Spinner spinnerSelectTaskType = findViewById(R.id.spinner_select_task_type);
         ImageButton clearButton = findViewById(R.id.clear_btn);
         EditText newEventName = findViewById(R.id.new_event_name_edit_text);
         EditText newEventDescribe = findViewById(R.id.new_event_description_edit_text);
@@ -433,6 +433,114 @@ public class CreateNewEventActivity extends AppCompatActivity {
                     toolbar.setVisibility(View.VISIBLE);
                 }
 
+            }
+        });*/
+
+        Button selectGroupBtn = findViewById(R.id.do_skupiny_btn);
+        ConstraintLayout selectGroupLayout = findViewById(R.id.select_group);
+        View backgroundOverly = findViewById(R.id.black_background_overlay);
+        //ConstraintLayout mainLayout = findViewById(R.id.main);
+        selectGroupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectGroupLayout.getVisibility() == View.GONE) {
+                    selectGroupLayout.setVisibility(View.VISIBLE);
+                }else {
+                    selectGroupLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        if (backgroundOverly.getVisibility() == View.VISIBLE) {
+            backgroundOverly.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        ImageButton closeSelectGroupLayout = findViewById(R.id.close_select_group_layout);
+        closeSelectGroupLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectGroupLayout.getVisibility() == View.VISIBLE) {
+                    selectGroupLayout.setVisibility(View.GONE);
+                }else {
+                    selectGroupLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        Button editGroupBtn = findViewById(R.id.upravit_ucastniky_skupiny_btn);
+        ConstraintLayout editGroupLayout = findViewById(R.id.edit_group_members);
+        View editGroupBackgroundOverly = findViewById(R.id.edit_member_black_background_overlay);
+
+        editGroupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editGroupLayout.getVisibility() == View.GONE) {
+                    editGroupLayout.setVisibility(View.VISIBLE);
+                }else {
+                    editGroupLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        if (editGroupBackgroundOverly.getVisibility() == View.VISIBLE) {
+            editGroupBackgroundOverly.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        ImageButton closeEditGroupLayout = findViewById(R.id.close_edit_group_members_layout);
+        closeEditGroupLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editGroupLayout.getVisibility() == View.VISIBLE) {
+                    editGroupLayout.setVisibility(View.GONE);
+                }else {
+                    editGroupLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        Button addUserBtn = findViewById(R.id.pro_jednotlivce_btn);
+        ConstraintLayout addUserLayout = findViewById(R.id.add_user);
+        View addUserBackgroundOverly = findViewById(R.id.add_user_black_background_overlay);
+
+        addUserBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (addUserLayout.getVisibility() == View.GONE) {
+                    addUserLayout.setVisibility(View.VISIBLE);
+                }else {
+                    addUserLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        if (addUserBackgroundOverly.getVisibility() == View.VISIBLE) {
+            addUserBackgroundOverly.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        ImageButton closeAddUserLayout = findViewById(R.id.close_add_user_layout);
+        closeAddUserLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (addUserLayout.getVisibility() == View.VISIBLE) {
+                    addUserLayout.setVisibility(View.GONE);
+                }else {
+                    addUserLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
 

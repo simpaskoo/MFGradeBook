@@ -16,6 +16,8 @@ public class UdalostInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aaudalost_info);
 
+        String taskDescription = getIntent().getStringExtra("task_description");
+
         Button zaplatilBtn = findViewById(R.id.zaplatil_btn);
         Toolbar toolbar = findViewById(R.id.zaplatil_user_toolbar);
         View vieww2 = findViewById(R.id.vieww2);

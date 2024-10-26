@@ -1,7 +1,6 @@
 package com.example.javaapk.activities.events;
 
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +10,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ import com.example.javaapk.activities.menu.ManageGroupsActivity;
 import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.example.javaapk.activities.menu.SettingsActivity;
 import com.example.javaapk.activities.menu.TreasureActivity;
+import com.example.javaapk.activities.menu.UdalostInfo;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
@@ -318,8 +320,7 @@ public class EventsActivity extends AppCompatActivity {
         }
         Profile profile = DataManager.getInstance().getSelectedProfile();
 
-
-
+        // ++Filter btn
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -328,6 +329,68 @@ public class EventsActivity extends AppCompatActivity {
         ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
         ImageButton eventsIcon = findViewById(R.id.events_icon);
         ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
+
+
+        Button filterBtn = findViewById(R.id.filter_button);
+        ConstraintLayout filterLayout = findViewById(R.id.filter_udalosti);
+        TextView menuBtn = findViewById(R.id.side_menu_button);
+        ScrollView udalostiScrollView = findViewById(R.id.scrollView2);
+        FloatingActionButton createEventBtn = findViewById(R.id.button_create_new_event);
+
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (filterLayout.getVisibility() == View.GONE) {
+                    filterLayout.setVisibility(View.VISIBLE);
+                    filterBtn.setEnabled(false);
+                    menuBtn.setEnabled(false);
+                    udalostiScrollView.setEnabled(false);
+                    createEventBtn.setEnabled(false);
+                    timeTableIcon.setEnabled(false);
+                    eventsIcon.setEnabled(false);
+                    assessmentsIcon.setEnabled(false);
+                }else {
+                    filterLayout.setVisibility(View.GONE);
+                    filterBtn.setEnabled(true);
+                    menuBtn.setEnabled(true);
+                    udalostiScrollView.setEnabled(true);
+                    createEventBtn.setEnabled(true);
+                    timeTableIcon.setEnabled(true);
+                    eventsIcon.setEnabled(true);
+                    assessmentsIcon.setEnabled(true);
+                }
+            }
+        });
+
+        ConstraintLayout confirmFilterLayout = findViewById(R.id.close_filter_layout);
+        ImageButton closeFilterLayout = findViewById(R.id.close_filter_btn);
+
+        closeFilterLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (filterLayout.getVisibility() == View.VISIBLE) {
+                    filterLayout.setVisibility(View.GONE);
+                    filterBtn.setEnabled(true);
+                    menuBtn.setEnabled(true);
+                    udalostiScrollView.setEnabled(true);
+                    createEventBtn.setEnabled(true);
+                    timeTableIcon.setEnabled(true);
+                    eventsIcon.setEnabled(true);
+                    assessmentsIcon.setEnabled(true);
+                }else {
+                    filterLayout.setVisibility(View.VISIBLE);
+                    filterBtn.setEnabled(false);
+                    menuBtn.setEnabled(false);
+                    udalostiScrollView.setEnabled(false);
+                    createEventBtn.setEnabled(false);
+                    timeTableIcon.setEnabled(false);
+                    eventsIcon.setEnabled(false);
+                    assessmentsIcon.setEnabled(false);
+                }
+            }
+        });
+
+        // --Filter btn
 
         // Set default fragment
         //loadFragment(new TimeTableFragment());
@@ -453,139 +516,6 @@ public class EventsActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    @SuppressLint("ResourceType")
-    private void slideToActivity() {
-
-        //View contentView = findViewById(android.R.id.content);
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.timetable_fragment);
-        if (fragment instanceof AssessmentsFragment){
-
-            ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
-            timeTableIcon.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("ResourceType")
-                @Override
-                public void onClick(View view) {
-
-
-                    Fragment timeTableFragment = new TimeTableFragment(EventsActivity.this);
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                    fragmentTransaction.setCustomAnimations(
-                            R.anim.slide_in_left,  // enter animation
-                            R.anim.slide_out_right, // exit animation
-                            R.anim.slide_in_left,  // pop enter animation (when back is pressed)
-                            R.anim.slide_out_right // pop exit animation (when back is pressed)
-                    );
-
-                    fragmentTransaction.replace(R.id.mainActivity, timeTableFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            });
-
-            ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
-            assessmentsIcon.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("ResourceType")
-                @Override
-                public void onClick(View view) {
-
-
-                    Fragment assessmentsFragment = new AssessmentsFragment();
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                    fragmentTransaction.setCustomAnimations(
-                            R.anim.slide_in_left,  // enter animation
-                            R.anim.slide_out_right, // exit animation
-                            R.anim.slide_in_left,  // pop enter animation (when back is pressed)
-                            R.anim.slide_out_right // pop exit animation (when back is pressed)
-                    );
-
-                    fragmentTransaction.replace(R.id.mainActivity, assessmentsFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            });
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*timeTableIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragmentTimeTable = new TimeTableFragment();
-
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.mainActivity, fragmentTimeTable).commit();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            }
-        });*/
-
-        /*timeTableIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Navigation", "Timetable Icon Clicked");
-                Intent intent = new Intent(EventsActivity.this, TimetableActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
-            }
-        });*/
-
-        /*ImageButton assessmentsIcon = findViewById(R.id.assessments_icon);
-        assessmentsIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Navigation", "Timetable Icon Clicked");
-                Intent intent = new Intent(EventsActivity.this, AssessmentsActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-            }
-        });*/
-    }
-
-    //Side menu
-    /*private void toggleMenu() {
-        if (isMenuOpen) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-        isMenuOpen = !isMenuOpen;
-    }
-
-    private void openMenu() {
-        sideMenu.animate().translationX(0).setDuration(300);  // Slide the menu in
-    }
-
-    private void closeMenu() {
-        sideMenu.animate().translationX(-menuWidth).setDuration(300);  // Slide the menu out
-    }*/
-    //Side menu
-
-
-
-
-
     public void refresh(){
         ActivityUtilities.runNetworkOperation(() -> {
             TaskAssignment[] assignments = profile.getTaskAssignments();
@@ -654,8 +584,6 @@ public class EventsActivity extends AppCompatActivity {
                     //Price
 
 
-
-
                     if(isPayment && task.cachedAmount >= 0) {
                         amount.setText(format.format(task.cachedAmount / 100f) + String.valueOf(receivedNumber) + " ,-");
                         //amount.setText(receivedText + " ,-");
@@ -666,6 +594,16 @@ public class EventsActivity extends AppCompatActivity {
                     } else{
                         amount.setVisibility(View.INVISIBLE);
                     }
+
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent2 = new Intent(EventsActivity.this, UdalostInfo.class);
+                            intent.putExtra("task_description", task.cachedDescription);
+                            startActivity(intent2);
+                            System.out.println("fakči");
+                        }
+                    });
 
                     eventsLayout.addView(view);
 

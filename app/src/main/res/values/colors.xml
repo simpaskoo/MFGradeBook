@@ -38,5 +38,6 @@
 
     <color name="navigation">#ffdb9f</color>
     <color name="side_menu_bg">#ad000000</color>
+    <color name="edit_group_btn">#0D218C</color>
 
 </resources>

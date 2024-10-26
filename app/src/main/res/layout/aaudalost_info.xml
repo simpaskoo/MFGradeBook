@@ -527,7 +527,7 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:visibility="visible"
+        android:visibility="gone"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -634,7 +634,7 @@
         android:layout_height="match_parent"
         android:background="@color/semi_transparent_black"
         android:translationZ="6dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

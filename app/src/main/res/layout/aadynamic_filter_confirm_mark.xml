@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/close_filter_layout"
     android:translationZ="20dp">
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/close_filter_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/udalosti_zluta_bg"
+        android:translationZ="102dp"
         android:contentDescription="@string/fab_description"
         app:srcCompat="@drawable/aabaseline_check_24"
         app:backgroundTint="@color/udalosti_zluta_bg"
-        tools:ignore="MissingConstraints">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        tools:ignore="MissingConstraints"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
