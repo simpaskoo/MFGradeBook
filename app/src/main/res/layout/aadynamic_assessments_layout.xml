@@ -10,8 +10,10 @@
     <Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/aaudalosti_filter_button_bg">
+        android:background="@drawable/zzudalosti_filter_button_bg"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        tools:ignore="MissingConstraints">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,19 +22,20 @@
                 android:id="@+id/assessment_value_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/aalogin_use_new_account_bg"
+                android:background="@drawable/zzznamky_prumer_bg"
                 android:text="1,56"
                 android:fontFamily="@font/roboto_black"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textColor="@color/white"
-                android:padding="5dp"/>
+                android:padding="15dp"/>
             <TextView
                 android:id="@+id/assessment_subject_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Matematika"
                 android:fontFamily="@font/roboto_black"
-                android:textSize="30dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
                 android:textColor="@color/white"
                 android:paddingStart="10dp"/>
         </LinearLayout>

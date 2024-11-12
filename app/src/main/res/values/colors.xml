@@ -39,5 +39,16 @@
     <color name="navigation">#ffdb9f</color>
     <color name="side_menu_bg">#ad000000</color>
     <color name="edit_group_btn">#0D218C</color>
+    
+    <color name="tmave_pozadi0">#0a0010</color>
+    <color name="tmave_pozadi1">#170024</color>
+    <color name="kolonka_pozadi">#240039</color>
+    <color name="cena_pozadi">#3f0063</color>
+    <color name="navigace_pozadi">#570088</color>
+    <color name="navigace_button_pozadi">#bd00ce</color>
+    <color name="pridat_udalost_tlacitka">#6c00aa</color>
+    <color name="group_info_clr1">#58018a</color>
+    <color name="group_info_clr2">#170024</color>
+    <color name="color10"></color>
 
 </resources>

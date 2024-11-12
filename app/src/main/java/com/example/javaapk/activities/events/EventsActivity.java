@@ -9,7 +9,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,11 +36,9 @@ import com.example.javaapk.activities.menu.ManageGroupsActivity;
 import com.example.javaapk.activities.menu.ProfilesActivity;
 import com.example.javaapk.activities.menu.SettingsActivity;
 import com.example.javaapk.activities.menu.TreasureActivity;
-import com.example.javaapk.activities.menu.UdalostInfo;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.anax.appServerClient.client.data.ID;
 import net.anax.appServerClient.client.data.RequestFailedException;
@@ -53,6 +54,7 @@ import java.util.Objects;
 
 public class EventsActivity extends AppCompatActivity {
 
+    private GestureDetector gestureDetector;
     private ConstraintLayout sideMenu;
     private boolean isMenuOpen = false;
 
@@ -92,6 +94,47 @@ public class EventsActivity extends AppCompatActivity {
         TextView menuButton = findViewById(R.id.side_menu_button);
         ImageButton exitButton = findViewById(R.id.exit_btn);
         View sideMenuBg = findViewById(R.id.bg_view);
+
+
+
+
+        // Set up the toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Set up gesture detector
+        gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+
+            private static final int SWIPE_THRESHOLD = 100;
+            private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float diffX = e2.getX() - e1.getX();
+                float diffY = e2.getY() - e1.getY();
+
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                        if (diffX > 0) {
+                            // Swipe right to open the menu
+                            openMenu();
+                            sideMenuBg.setVisibility(View.VISIBLE);
+                        } else {
+                            // Swipe left to close the menu
+                            closeMenu();
+                            sideMenuBg.setVisibility(View.GONE);
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        findViewById(R.id.mainActivity).setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
+
+
+
 
 
 
@@ -305,7 +348,7 @@ public class EventsActivity extends AppCompatActivity {
         //SideMenuHelper sideMenuHelper = new SideMenuHelper(sideMenu, profile, this);
         //sideMenuHelper.initiateSideMenu();
 
-        FloatingActionButton createNewEventButton = findViewById(R.id.button_create_new_event);
+        ImageButton createNewEventButton = findViewById(R.id.button_create_new_event);
 
         createNewEventButton.setOnClickListener(V -> {
             Intent intent = new Intent(this, CreateNewEventActivity.class);
@@ -323,8 +366,8 @@ public class EventsActivity extends AppCompatActivity {
         // ++Filter btn
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbarr = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarr);
 
         ImageButton timeTableIcon = findViewById(R.id.time_table_icon);
         ImageButton eventsIcon = findViewById(R.id.events_icon);
@@ -335,7 +378,7 @@ public class EventsActivity extends AppCompatActivity {
         ConstraintLayout filterLayout = findViewById(R.id.filter_udalosti);
         TextView menuBtn = findViewById(R.id.side_menu_button);
         ScrollView udalostiScrollView = findViewById(R.id.scrollView2);
-        FloatingActionButton createEventBtn = findViewById(R.id.button_create_new_event);
+        ImageButton createEventBtn = findViewById(R.id.button_create_new_event);
 
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -438,6 +481,38 @@ public class EventsActivity extends AppCompatActivity {
     }
 
     // ++sideMenu
+    private void openMenu() {
+        if (!isMenuOpen) {
+            ViewPropertyAnimator animator = sideMenu.animate();
+            animator.translationX(0).setDuration(300); // Animate to bring menu fully on-screen
+            animator.start();
+            isMenuOpen = true;
+        }
+    }
+    private void closeMenu() {
+        if (isMenuOpen) {
+            ViewPropertyAnimator animator = sideMenu.animate();
+            animator.translationX(-sideMenu.getWidth()).setDuration(300); // Animate to move menu off-screen
+            animator.start();
+            isMenuOpen = false;
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        gestureDetector.onTouchEvent(ev); // Pass touch events to the gesture detector
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Close the menu if it’s open, otherwise perform the usual back press
+        if (isMenuOpen) {
+            closeMenu();
+        } else {
+            super.onBackPressed();
+        }
+    }
     // Convert dp to pixels
     private int dpToPx(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
@@ -594,16 +669,6 @@ public class EventsActivity extends AppCompatActivity {
                     } else{
                         amount.setVisibility(View.INVISIBLE);
                     }
-
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent2 = new Intent(EventsActivity.this, UdalostInfo.class);
-                            intent.putExtra("task_description", task.cachedDescription);
-                            startActivity(intent2);
-                            System.out.println("fakči");
-                        }
-                    });
 
                     eventsLayout.addView(view);
 

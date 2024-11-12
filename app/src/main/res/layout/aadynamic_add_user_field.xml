@@ -9,7 +9,7 @@
     <Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/aanew_event_group_bg"
+        android:background="@drawable/zznew_event_group_bg"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         tools:ignore="MissingConstraints">

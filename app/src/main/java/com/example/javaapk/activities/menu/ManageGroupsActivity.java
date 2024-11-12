@@ -82,7 +82,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
                     if(name.isEmpty()){return;}
 
                     profile.mfGradeBookHandler.createGroup(name);
-                    sendBroadcast(new Intent("GROUP_CHANGED"));
+                    sendBroadcast(new Intent("GROUP_CHANGED").setPackage(/* TODO: provide the application ID. For example: */ getPackageName()));
                 } catch (RequestFailedException | HttpErrorStatusException e) {
                     //TODO: handle unable to create group;
                 }
@@ -224,7 +224,7 @@ public class ManageGroupsActivity extends AppCompatActivity {
 
 
                     groupName.setText(g.cachedName);
-                    memberAmount.setText(" - " + g.userIds.size() + " members");
+                    memberAmount.setText(g.userIds.size() + " členů");
 
                     view.findViewById(R.id.group_toolbar).setOnClickListener(v -> {
                         ;;;System.out.println("HERE 354643543,5");

@@ -5,7 +5,7 @@
     android:id="@+id/mainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffbc4c"
+    android:background="@color/tmave_pozadi0"
     tools:context=".activities.events.EventsActivity">
 
 
@@ -23,99 +23,100 @@
         android:translationZ="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
-
-    <TextView
-        android:id="@+id/side_menu_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:background="@drawable/aauser_name_icon_bg"
-        android:text="DŠ"
-        android:fontFamily="@font/roboto_black"
-        android:textColor="@color/white"
-        android:textSize="23dp"
-        android:translationZ="100dp"
-        android:gravity="center"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/filter_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/aaudalosti_filter_button_bg"
-        android:fontFamily="@font/roboto_black"
-        android:text="Filter"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:translationZ="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <!--<Button
-        android:id="@+id/seradit_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/aaudalosti_filter_button_bg"
-        android:fontFamily="@font/roboto_black"
-        android:text="Seradit"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:translationZ="3dp"
-        app:layout_constraintEnd_toStartOf="@id/flter_button"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/aaudalosti_scroll_view_bgstyle"
-        android:fontFamily="@font/roboto_black"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:paddingTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/side_menu_button">
-
+        android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/events_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/side_menu_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/zzprofile_menu_btn"
+                android:text="DŠ"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@color/white"
+                android:textSize="23dp"
+                android:translationZ="100dp"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="300dp"
-                android:indeterminateTint="@color/FilterButton"
-                android:layout_gravity="center" />
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/filter_button"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/zzudalosti_fliter_btn"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="Filter"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:translationZ="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:translationZ="50dp" />
 
         </LinearLayout>
-    </ScrollView>
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/zzudalosti_scroll_view_bg"
+            android:fontFamily="@font/roboto_black"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_button">
+
+            <LinearLayout
+                android:id="@+id/events_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="300dp"
+                    android:indeterminateTint="@color/FilterButton" />
+
+                <FrameLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:translationZ="50dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
 
     <Toolbar
         android:id="@+id/navigation"
         android:layout_width="180dp"
         android:layout_height="70dp"
-        android:background="@drawable/aanavigation_btn_bg"
+        android:background="@drawable/zznavigation_btn_bg"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="30dp"
         android:paddingEnd="20dp"
@@ -157,18 +158,17 @@
         </LinearLayout>
     </Toolbar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/button_create_new_event"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
-        android:contentDescription="@string/fab_description"
+        android:background="@drawable/zznavigation_btn_bg"
         android:translationZ="3dp"
-        app:backgroundTint="@color/Plus_button"
+        android:src="@drawable/aabaseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/aabaseline_add_24" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <include
@@ -265,7 +265,7 @@
                     android:layout_height="70dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    android:background="@drawable/zzudalosti_filter_button_bg">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -296,7 +296,7 @@
                     android:layout_height="70dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    android:background="@drawable/zzudalosti_filter_button_bg">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -335,7 +335,7 @@
                     android:layout_height="70dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    android:background="@drawable/zzudalosti_filter_button_bg">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -366,7 +366,7 @@
                     android:layout_height="70dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    android:background="@drawable/zzudalosti_filter_button_bg">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -397,7 +397,7 @@
                     android:layout_height="70dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/aaudalosti_filter_button_bg">
+                    android:background="@drawable/zzudalosti_filter_button_bg">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

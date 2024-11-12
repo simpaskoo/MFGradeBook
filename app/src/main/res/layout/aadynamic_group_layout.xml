@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:clickable="true"
-        android:background="@drawable/aaudalosti_filter_button_bg"
+        android:background="@drawable/zzgroups_colum_layout"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -31,12 +31,13 @@
             android:id="@+id/member_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" - 8 členů"
+            android:layout_marginEnd="30dp"
+            android:text="8 členů"
             android:clickable="true"
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_black"
             android:textSize="20dp"
-            app:layout_constraintStart_toEndOf="@id/group_name"/>
+            android:layout_gravity="end"/>
 
     </Toolbar>
 

@@ -9,21 +9,28 @@
     <Toolbar
         android:id="@+id/user_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="15dp"
         android:translationZ="1dp"
-        android:background="@drawable/aaudalosti_filter_button_bg"
+        android:background="@drawable/zzgroup_user_colum"
         tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User1"
+            android:text="Jméno člena"
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_black"
-            android:textSize="20dp"
+            android:textSize="25dp"
             app:layout_constraintStart_toStartOf="@id/group_toolbar"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_expand_more_24"
+            android:background="@color/transparent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"/>
 
     </Toolbar>
     <include

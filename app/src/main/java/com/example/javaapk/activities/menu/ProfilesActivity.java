@@ -121,5 +121,4 @@ public class ProfilesActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 }

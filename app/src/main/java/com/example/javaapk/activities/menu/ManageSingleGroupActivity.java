@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.window.OnBackInvokedDispatcher;
@@ -21,6 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.javaapk.R;
 import com.example.javaapk.data.DataManager;
@@ -28,13 +32,11 @@ import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
 
 import net.anax.appServerClient.client.data.Group;
-import net.anax.appServerClient.client.data.ID;
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.data.User;
 import net.anax.appServerClient.client.http.HttpErrorStatusException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class ManageSingleGroupActivity extends AppCompatActivity {
@@ -63,6 +65,8 @@ public class ManageSingleGroupActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        showGroupsFragment(new ClenoveFragment());
 
         Intent intent = getIntent();
         groupId = intent.getIntExtra("groupId", -1);
@@ -98,8 +102,55 @@ public class ManageSingleGroupActivity extends AppCompatActivity {
             }
         });
 
+        Button clenoveBtn = findViewById(R.id.clenove_btn);
+        Button zpravyBtn = findViewById(R.id.zpravy_btn);
+        LinearLayout zpravyLinear = findViewById(R.id.zpravy_linear);
+        LinearLayout clenoveLinear = findViewById(R.id.clenove_linear);
+
+        clenoveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showGroupsFragment(new ClenoveFragment());
+                clenoveLinear.setTranslationZ(4);
+                clenoveBtn.setBackground(getDrawable(R.drawable.zzgroup_clenove_btn_shape));
+                zpravyLinear.setTranslationZ(1);
+                zpravyBtn.setBackground(getDrawable(R.drawable.zzgroup_zpravy_btn_shape));
+
+            }
+        });
+
+
+        zpravyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showGroupsFragment(new ZpravyFragment());
+                zpravyLinear.setTranslationZ(4);
+                zpravyBtn.setBackground(getDrawable(R.drawable.zzgroup_clenove_btn_shape));
+                clenoveLinear.setTranslationZ(1);
+                clenoveBtn.setBackground(getDrawable(R.drawable.zzgroup_zpravy_btn_shape));
+
+            }
+        });
+
+        ImageButton leaveBtn = findViewById(R.id.leave_btn);
+        leaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         refresh();
 
+    }
+
+    private void showGroupsFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainActivity_groups_info, fragment);
+        fragmentTransaction.addToBackStack(null);  // Allows the user to navigate back
+        fragmentTransaction.commit();
     }
 
     public void refresh(){

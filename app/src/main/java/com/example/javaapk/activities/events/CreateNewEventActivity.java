@@ -1,10 +1,14 @@
 package com.example.javaapk.activities.events;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +34,6 @@ import com.example.javaapk.R;
 import com.example.javaapk.data.DataManager;
 import com.example.javaapk.data.Profile;
 import com.example.javaapk.util.ActivityUtilities;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.anax.appServerClient.client.data.RequestFailedException;
 import net.anax.appServerClient.client.data.Task;
@@ -54,6 +57,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
     public LinearLayout ukonceniLinear;
     private Spinner mySpinner;
     private List<String> optionsList;
+    private boolean isOpen = false;
     //Dynamic price
 
     @Override
@@ -63,7 +67,72 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         //Price
         EditText editText = findViewById(R.id.editTextPrice);
-        FloatingActionButton button = findViewById(R.id.submit_create_event_button);
+        ImageButton button = findViewById(R.id.rrrr);
+        ImageButton confirmBtn = findViewById(R.id.send);
+
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Convert 80dp to pixels
+                float translationX = TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics()
+                );
+
+                // Determine target position and icon based on the toggle state
+                float targetTranslationX = isOpen ? 0 : -translationX;
+                int targetDrawable = isOpen ? R.drawable.baseline_check_mark : R.drawable.baseline_close;
+
+                // Create and start the animation
+                ObjectAnimator animator = ObjectAnimator.ofFloat(confirmBtn, "translationX", targetTranslationX);
+                animator.setDuration(300); // 300 milliseconds
+
+                // Change the icon at the start of the animation
+                animator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        confirmBtn.setImageDrawable(ContextCompat.getDrawable(CreateNewEventActivity.this, targetDrawable));
+                    }
+                });
+
+                // Start the animation
+                animator.start();
+
+                // Toggle the state
+                isOpen = !isOpen;
+            }
+        });
+
+
+
+
+        /*if(isopened == false) {
+            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Convert 80dp to pixels for animation
+                    float translationX = TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
+
+                    // Create ObjectAnimator to move the button to the left
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(confirmBtn, "translationX", -translationX);
+                    animator.setDuration(300); // Duration in milliseconds
+
+
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            // Change to the new icon at the start of the animation
+                            confirmBtn.setImageDrawable(ContextCompat.getDrawable(CreateNewEventActivity.this, R.drawable.baseline_close));
+                        }
+                    });
+
+                    animator.start();
+                    isopened = true;
+                }
+            });
+        }*/
+
+
 
         // Set onClickListener for the button
         button.setOnClickListener(new View.OnClickListener() {
@@ -299,7 +368,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
         TextView endTimeView = findViewById(R.id.new_event_end_time_text_view);
         TextView startDateView = findViewById(R.id.new_event_start_date_text_view);
         TextView startTimeView = findViewById(R.id.new_event_start_time_text_view);
-        FloatingActionButton submitButton = findViewById(R.id.submit_create_event_button);
+        ImageButton submitButton = findViewById(R.id.rrrr);
         //Button addUsersButton = findViewById(R.id.upravit_ucastniky_skupiny_btn);
 
         endDateView.setOnClickListener(v -> {

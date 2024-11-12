@@ -5,7 +5,7 @@
     android:id="@+id/mainActivity_groups_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d28300"
+    android:background="@color/tmave_pozadi0"
     tools:context=".activities.menu.ManageSingleGroupActivity">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginStart="15dp"
         android:fontFamily="@font/roboto_black"
         android:text="Název skupiny"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
-        android:id="@+id/clear_btn"
+        android:id="@+id/leave_btn"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
@@ -50,7 +50,7 @@
         android:text="Přihlašovací kód:"
         android:fontFamily="@font/roboto_black"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/cena_pozadi"
         android:layout_marginStart="15dp"
         android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,27 +62,72 @@
         android:text="a5d8rr6f2dr6g"
         android:fontFamily="@font/roboto_black"
         android:textSize="15dp"
-        android:textColor="@color/black"
+        android:textColor="@color/cena_pozadi"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toEndOf="@id/access_code"
         app:layout_constraintTop_toBottomOf="@id/nazev_skupiny" />
+    <LinearLayout
+        android:id="@+id/zpravy_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/code">
+
+        <Button
+            android:id="@+id/zpravy_btn"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/zzgroup_zpravy_btn_shape"
+            android:fontFamily="@font/roboto_black"
+            android:text="zprávy"
+            android:textAlignment="textEnd"
+            android:paddingEnd="35dp"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:translationZ="1dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/clenove_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/code"
+        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/clenove_btn"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/zzgroup_clenove_btn_shape"
+            android:text="členové"
+            android:textAlignment="textStart"
+            android:paddingStart="35dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"
+            android:textSize="20dp"
+            android:translationZ="2dp"/>
+
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="110dp"
-        android:background="@drawable/aagroups_scroll_view_bgstyle"
+        android:layout_marginTop="155dp"
+        android:background="@drawable/zzgroup_info_scroll_view_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/access_code">
+        app:layout_constraintTop_toBottomOf="@id/clenove_linear">
         <LinearLayout
             android:id="@+id/group_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             app:layout_constraintStart_toStartOf="parent"
