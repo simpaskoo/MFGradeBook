@@ -14,19 +14,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
             <include
-                layout="@layout/lesson_field"
+                layout="@layout/lesson_classic_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"/>
             <include
-                layout="@layout/lesson_field"
+                layout="@layout/lesson_zmena_tridy_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"/>
             <include
-                layout="@layout/zzvolna_hodina_field"
+                layout="@layout/lesson_supl_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+            <include
+                layout="@layout/lesson_zrusena_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+            <include
+                layout="@layout/lesson_volna_hodina_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+            <include
+                layout="@layout/lesson_akce_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+            <include
+                layout="@layout/lesson_double_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+            <include
+                layout="@layout/lesson_classic_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+            <include
+                layout="@layout/lesson_classic_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"/>

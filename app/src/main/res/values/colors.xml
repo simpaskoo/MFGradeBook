@@ -52,5 +52,9 @@
     <color name="check_box">#0a9e48</color>
     <color name="supl">#c20075</color>
     <color name="zmena_tridy">#c30eff</color>
+    <color name="zrusena">#1d0013</color>
+    <color name="zrusena_text">#776671</color>
+    <color name="zrusena_text2">#942020</color>
+    <color name="akce_field">#fc9014</color>
 
 </resources>
