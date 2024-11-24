@@ -49,6 +49,8 @@
     <color name="pridat_udalost_tlacitka">#6c00aa</color>
     <color name="group_info_clr1">#58018a</color>
     <color name="group_info_clr2">#170024</color>
-    <color name="color10"></color>
+    <color name="check_box">#0a9e48</color>
+    <color name="supl">#c20075</color>
+    <color name="zmena_tridy">#c30eff</color>
 
 </resources>

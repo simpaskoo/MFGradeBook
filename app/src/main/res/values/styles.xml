@@ -9,4 +9,9 @@
         <!--default @dimen/abc_action_bar_content_inset_with_nav-->
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
+
+    <style name="CheckBoxColor" parent="Theme.AppCompat.DayNight">
+        <item name="colorAccent">@color/check_box</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
 </resources>
